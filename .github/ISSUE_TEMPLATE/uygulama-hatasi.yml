@@ -1,0 +1,36 @@
+name: 🐞 Uygulama hatası
+description: Türkçesi Var çalışmıyor, Türkçe kurulmuyor ya da oyun açılmıyorsa bildir.
+title: "[Hata] "
+labels: ["hata"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Oyun açılmıyorsa önce uygulamada **Türkçeyi kaldır**'ı dene. Olmazsa Steam'de oyuna sağ tıkla → Özellikler → Yüklü Dosyalar → **Oyun dosyalarının bütünlüğünü doğrula**.
+  - type: textarea
+    id: ne
+    attributes:
+      label: Ne oldu?
+      placeholder: "ör. Türkçe yap'a bastım, 'Dosya kullanımda' dedi."
+    validations:
+      required: true
+  - type: input
+    id: oyun
+    attributes:
+      label: Hangi oyun ve hangi platform?
+      placeholder: "ör. Metro 2033 Redux, Steam"
+  - type: input
+    id: surum
+    attributes:
+      label: Türkçesi Var sürümü
+      description: Uygulamada sol altta yazar.
+      placeholder: "ör. 0.3.4"
+  - type: input
+    id: windows
+    attributes:
+      label: Windows sürümü
+      placeholder: "ör. Windows 11"
+  - type: textarea
+    id: ekran
+    attributes:
+      label: Ekran görüntüsü (isteğe bağlı)

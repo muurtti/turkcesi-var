@@ -1,0 +1,41 @@
+TÜRKÇESİ VAR — Oyunlara güvenli, ücretsiz Türkçe
+==================================================
+
+KURULUM
+-------
+1. Bu klasördeki "TurkcesiVar-Kurulum.exe" dosyasına çift tıkla.
+2. Windows "Bilgisayarınız korundu" derse: "Ek bilgi"ye, sonra "Yine de çalıştır"a bas.
+   (Uygulama henüz dijital imzalı olmadığı için bu uyarı çıkabilir.)
+3. Kullanım koşullarını oku, "Kabul Ediyorum"a bas, kurulum yerini seç ve "Kur"a bas.
+   Yönetici izni gerekmez; masaüstüne "Türkçesi Var" kısayolu gelir.
+
+KULLANIM
+--------
+1. Türkçesi Var'ı aç. Steam ve Epic Games'te kurulu oyunların kendiliğinden bulunur.
+2. "Türkçesi hazır" bölümünden oyununu seç ve "Türkçe yap"a bas. Birkaç saniye sürer.
+3. Oyunu her zamanki gibi aç. Oyunun dil ayarını English bırak; altyazıları aç.
+
+Oyun listede yoksa: "Klasör seç" ile oyunun klasörünü göster.
+Geri almak için: aynı yerde "Türkçeyi kaldır". Oyun birebir eski hâline döner.
+Yeni kurduğun oyunlar için: "Yenile".
+
+GÜVENLİ Mİ?
+-----------
+- Kurmadan önce oyunun değişecek dosyalarının yedeğini alır.
+- Oyuna program ya da DLL eklemez; yalnızca oyunun kendi metin ve yazı tipi dosyaları değişir.
+- Hile koruması olan çevrimiçi oyunlara asla dokunmaz.
+- Steam oyunu güncellerse uygulamayı açman yeter; Türkçe kendiliğinden yeniden kurulur.
+- Uygulama kendini de otomatik günceller.
+
+ÖNEMLİ: Uygulamayı Windows'tan kaldırmak oyundaki Türkçeyi kaldırmaz.
+Önce uygulamada "Türkçeyi kaldır"a bas, sonra uygulamayı kaldır.
+
+BAĞLANTILAR
+-----------
+Resmi sayfa ve indirme : https://github.com/turkcesivar/turkcesi-var
+Oyun iste             : https://github.com/turkcesivar/turkcesi-var/issues/new?template=oyun-istegi.yml
+Çeviri hatası bildir  : https://github.com/turkcesivar/turkcesi-var/issues/new?template=ceviri-hatasi.yml
+
+Türkçesi Var yalnızca yukarıdaki GitHub sayfasından resmi olarak yayımlanır.
+Başka bir yerden indirdiğin dosyanın resmi olduğundan emin olmak için sürüm notlarındaki
+SHA-256 koduyla karşılaştırabilirsin (PowerShell: Get-FileHash TurkcesiVar-Kurulum.exe).

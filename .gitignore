@@ -1,0 +1,13 @@
+node_modules/
+.superpowers/
+ornekler/
+cikti/
+*.vfs*
+*.vfx
+out/
+dist/
+dist-yeni/
+
+# Gizli çeviri motoru ve logo kaynak klasörü bu klasörün içinde tutulabilir; ASLA herkese açık depoya girmez.
+turkcesi-var-motor/
+Türkçesi Var Logo/

@@ -1,0 +1,44 @@
+name: ✏️ Çeviri hatası
+description: Yanlış, eksik ya da garip bir Türkçe satır gördüysen bildir.
+title: "[Çeviri hatası] "
+labels: ["çeviri hatası"]
+body:
+  - type: dropdown
+    id: oyun
+    attributes:
+      label: Oyun
+      options:
+        - Metro 2033 Redux
+    validations:
+      required: true
+  - type: input
+    id: yer
+    attributes:
+      label: Oyunda nerede gördün?
+      description: Bölüm, menü, ipucu, not, altyazı…
+      placeholder: "ör. 2. bölüm (Hunter), Khan'ın konuşması"
+    validations:
+      required: true
+  - type: textarea
+    id: simdiki
+    attributes:
+      label: Şu anki Türkçe metin
+      placeholder: Ekranda yazanı olduğu gibi yaz.
+    validations:
+      required: true
+  - type: textarea
+    id: oneri
+    attributes:
+      label: Önerin
+      placeholder: Nasıl olması gerektiğini düşünüyorsun?
+  - type: textarea
+    id: ekran
+    attributes:
+      label: Ekran görüntüsü (isteğe bağlı)
+      description: Görüntüyü buraya sürükleyip bırakabilirsin.
+  - type: input
+    id: surum
+    attributes:
+      label: Türkçesi Var sürümü
+      description: Uygulamada sol altta yazar.
+      placeholder: "ör. 0.3.4"

@@ -1,0 +1,43 @@
+// Güvenli köprü: arayüze yalnızca tipli `window.tv` API'si açılır (Node erişimi yok).
+
+import { contextBridge, ipcRenderer } from "electron";
+import type { GuncellemeDurumu, TvApi } from "../../src/servis/api.js";
+import type { Ilerleme } from "../../src/servis/tipler.js";
+
+let sayac = 0;
+const dinleyiciler = new Map<number, (i: Ilerleme) => void>();
+ipcRenderer.on("tv:ilerleme", (_e, kimlik: number, i: Ilerleme) => dinleyiciler.get(kimlik)?.(i));
+
+const guncellemeDinleyicileri = new Set<(d: GuncellemeDurumu) => void>();
+ipcRenderer.on("tv:guncelleme", (_e, d: GuncellemeDurumu) => guncellemeDinleyicileri.forEach((f) => f(d)));
+
+async function cagir<T>(yontem: string, argumanlar: unknown[], ilerleme?: (i: Ilerleme) => void): Promise<T> {
+  const kimlik = ilerleme ? ++sayac : undefined;
+  if (kimlik !== undefined) dinleyiciler.set(kimlik, ilerleme!);
+  try {
+    return (await ipcRenderer.invoke("tv:cagir", yontem, argumanlar, kimlik)) as T;
+  } finally {
+    if (kimlik !== undefined) dinleyiciler.delete(kimlik);
+  }
+}
+
+const tv: TvApi = {
+  oyunlariTara: () => ipcRenderer.invoke("tv:oyunlariTara"),
+  klasorSec: (k) => ipcRenderer.invoke("tv:klasorSec", k),
+  oyunDurumu: (k, klasor) => cagir("oyunDurumu", [k, klasor]),
+  turkceYap: (k, klasor, il) => cagir("turkceYap", [k, klasor], il),
+  kaldir: (k, klasor) => cagir("kaldir", [k, klasor]),
+  klasoruAc: (k, klasor) => ipcRenderer.invoke("tv:klasoruAc", k, klasor),
+  guncellemeDurumu: () => ipcRenderer.invoke("tv:guncellemeDurumu"),
+  guncellemeDinle: (f) => {
+    guncellemeDinleyicileri.add(f);
+    return () => guncellemeDinleyicileri.delete(f);
+  },
+  guncellemeKur: () => ipcRenderer.invoke("tv:guncellemeKur"),
+  guncellemeIndir: () => ipcRenderer.invoke("tv:guncellemeIndir"),
+  guncellemeDenetle: () => ipcRenderer.invoke("tv:guncellemeDenetle"),
+  disBaglanti: (url) => ipcRenderer.invoke("tv:disBaglanti", url),
+  surum: () => ipcRenderer.invoke("tv:surum"),
+};
+
+contextBridge.exposeInMainWorld("tv", tv);

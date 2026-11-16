@@ -1,0 +1,47 @@
+name: 🎮 Oyun isteği
+description: Türkçesi Var'a eklenmesini istediğin oyunu yaz.
+title: "[Oyun isteği] "
+labels: ["oyun isteği"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Teşekkürler! İstekler toplanıyor; en çok istenen oyunlar önce çevrilir.
+        Önce [mevcut isteklere](https://github.com/turkcesivar/turkcesi-var/issues?q=label%3A%22oyun+iste%C4%9Fi%22) bak; oyunun zaten varsa yeni kayıt açma, o kayda 👍 bırak.
+  - type: input
+    id: oyun
+    attributes:
+      label: Oyunun adı
+      placeholder: "ör. Metro Exodus"
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Hangi platformda oynuyorsun?
+      multiple: true
+      options:
+        - Steam
+        - Epic Games
+        - Diğer
+    validations:
+      required: true
+  - type: input
+    id: magaza
+    attributes:
+      label: Mağaza bağlantısı (isteğe bağlı)
+      placeholder: "https://store.steampowered.com/app/..."
+  - type: dropdown
+    id: cevrimici
+    attributes:
+      label: Oyun çevrimiçi/çok oyunculu mu?
+      description: Hile koruması (anti-cheat) olan çevrimiçi oyunlara güvenlik için dokunulmaz.
+      options:
+        - Hayır, tek oyunculu
+        - Hem tek hem çok oyunculu
+        - Evet, yalnızca çevrimiçi
+  - type: textarea
+    id: not
+    attributes:
+      label: Eklemek istediğin bir şey var mı?
+      placeholder: "ör. altyazıları çok önemli, hikâyesi uzun…"

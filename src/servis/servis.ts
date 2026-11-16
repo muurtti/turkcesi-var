@@ -1,0 +1,164 @@
+// Oyuncu uygulamasının iş mantığı: hazır Türkçe paketle oyunun durumunu söyler, Türkçeyi kurar ve kaldırır.
+// Oyun klasörüne yalnızca src/ortak/yedek.ts yazar.
+
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { join } from "node:path";
+import { bosDepo, depoOku, uygulanabilirCeviriler, type CeviriDeposu } from "../ceviri/depo.js";
+import { ceviriSorunlari } from "../ceviri/dogrula.js";
+import { paketiDepoyaAl, type CeviriPaketi } from "../ceviri/paket.js";
+import { kaynakOzeti, type CeviriSatiri } from "../ceviri/satirlar.js";
+import type { OyunTanimi } from "../oyunlar/tanim.js";
+import { DegismisHatasi, geriYukle, uygula, yamaDurumu, yamayiUnut, yedekKlasoruSec } from "../ortak/yedek.js";
+import type { Ilerleme, OyunDurumu } from "./tipler.js";
+
+export interface ServisSecenekleri {
+  uygulamaKlasoru: string;
+  /** Oyunun süreç adıyla çalışıp çalışmadığı (Windows'ta tasklist). */
+  oyunAcikMi?: (surecAdi: string) => boolean;
+  /** Uygulamayla gelen hazır çeviri paketlerinin klasörü (`<kimlik>.tr.json`). */
+  paketKlasoru?: string;
+}
+
+const sha256 = (b: Buffer) => createHash("sha256").update(b).digest("hex");
+const OYUN_ACIK = "Oyun şu an açık. Lütfen önce oyunu kapatın, sonra tekrar deneyin.";
+/** Yedek klasöründe, oyuna en son hangi hazır paketin kurulduğunu tutan not. */
+const KURULU_PAKET = "kurulu-paket.json";
+
+interface Kaynak {
+  satirlar: CeviriSatiri[];
+  kullanilabilir: Set<string>;
+  vfx: Buffer;
+}
+
+export class Servis {
+  private kaynakOnbellegi = new Map<string, Kaynak>();
+  private paketOnbellegi = new Map<string, CeviriPaketi | null>();
+
+  constructor(private readonly s: ServisSecenekleri) {}
+
+  /** Bu kurulumun yedek klasörü (aynı oyunun Steam ve Epic kurulumları ayrı yedeklenir). */
+  private yedek(t: OyunTanimi, klasor: string) {
+    return yedekKlasoruSec(join(this.s.uygulamaKlasoru, "yedekler", t.kimlik), klasor);
+  }
+
+  /** Uygulamayla gelen hazır paket (yoksa undefined). */
+  private hazirPaket(t: OyunTanimi): CeviriPaketi | undefined {
+    if (!this.s.paketKlasoru) return undefined;
+    if (!this.paketOnbellegi.has(t.kimlik)) {
+      const y = join(this.s.paketKlasoru, `${t.kimlik}.tr.json`);
+      let p: CeviriPaketi | null = null;
+      if (existsSync(y)) {
+        p = JSON.parse(readFileSync(y, "utf8")) as CeviriPaketi;
+        if (p.oyun !== t.kimlik) p = null;
+      }
+      this.paketOnbellegi.set(t.kimlik, p);
+    }
+    return this.paketOnbellegi.get(t.kimlik) ?? undefined;
+  }
+
+  /**
+   * Oyuna konacak çeviriler: hazır paket; bu bilgisayarda geliştiricinin çeviri deposu varsa
+   * (`%APPDATA%\turkcesi-var\ceviriler`) oradaki satırlar paketin önüne geçer. Oyuncuda depo yoktur.
+   */
+  private kurulacakDepo(t: OyunTanimi): CeviriDeposu {
+    const yerel = depoOku(join(this.s.uygulamaKlasoru, "ceviriler", t.kimlik)) ?? bosDepo(t.kimlik, "");
+    const p = this.hazirPaket(t);
+    if (!p) return yerel;
+    const d = paketiDepoyaAl(p);
+    for (const [a, x] of Object.entries(yerel.satirlar)) if (x.tr.trim() !== "") d.satirlar[a] = x;
+    return d;
+  }
+
+  private oyunKapaliOlmali(t: OyunTanimi) {
+    if (this.s.oyunAcikMi?.(t.surecAdi)) throw new Error(OYUN_ACIK);
+  }
+
+  /** Kaynak metin her zaman ORİJİNAL dizinden (yama kuruluysa yedekten) okunur; özetle önbelleğe alınır. */
+  private kaynak(t: OyunTanimi, klasor: string): Kaynak {
+    const yedekte = join(this.yedek(t, klasor), "orijinal", "content.vfx");
+    const vfx = readFileSync(existsSync(yedekte) ? yedekte : join(klasor, "content.vfx"));
+    const anahtar = `${t.kimlik}|${klasor}|${sha256(vfx)}`;
+    let k = this.kaynakOnbellegi.get(anahtar);
+    if (!k) {
+      k = { ...t.kaynak(klasor, vfx), vfx };
+      this.kaynakOnbellegi.set(anahtar, k);
+    }
+    return k;
+  }
+
+  oyunDurumu(t: OyunTanimi, klasor: string): OyunDurumu {
+    const { satirlar, kullanilabilir } = this.kaynak(t, klasor);
+    const d = this.kurulacakDepo(t);
+    const sec = uygulanabilirCeviriler(d, satirlar, kullanilabilir);
+    const p = this.hazirPaket(t);
+    let cevrili = 0;
+    let sorunlu = 0;
+    for (const s of satirlar) {
+      const x = d.satirlar[s.anahtar];
+      if (!x || x.kaynakOzeti !== kaynakOzeti(s.en) || x.tr.trim() === "") continue;
+      cevrili++;
+      if (x.not || ceviriSorunlari(s, x.tr, kullanilabilir).length > 0) sorunlu++;
+    }
+    const yama = yamaDurumu(klasor, this.yedek(t, klasor));
+    return {
+      tanim: { kimlik: t.kimlik, ad: t.ad },
+      klasor,
+      yama,
+      ceviri: { toplam: satirlar.length, cevrili, sorunlu, uygulanabilir: sec.ceviriler.size },
+      ...(p ? { paket: { tarih: p.tarih, satir: Object.keys(p.satirlar).length } } : {}),
+      ...(p && yama === "kurulu" && this.kuruluPaketTarihi(t, klasor) !== p.tarih ? { ceviriEski: true } : {}),
+    };
+  }
+
+  /** Oyuna en son kurulan hazır paketin tarihi (not yoksa — ör. 0.4.0 ile kurulmuşsa — undefined). */
+  private kuruluPaketTarihi(t: OyunTanimi, klasor: string): string | undefined {
+    try {
+      return (JSON.parse(readFileSync(join(this.yedek(t, klasor), KURULU_PAKET), "utf8")) as { tarih?: string }).tarih;
+    } catch {
+      return undefined;
+    }
+  }
+
+  async turkceYap(t: OyunTanimi, klasor: string, ilerleme: (i: Ilerleme) => void): Promise<void> {
+    this.oyunKapaliOlmali(t);
+    // Yama bozulduysa (Steam güncellemesi ya da yarım kalan kurulum) önce onar; kaynak metin ondan sonra okunur
+    // ki yeni oyun sürümüne eski sürümün dizininden yama yapılmasın.
+    if (yamaDurumu(klasor, this.yedek(t, klasor)) === "degismis") {
+      ilerleme({ tur: "yuzde", deger: 5, metin: "Oyun güncellenmiş; eski yama temizleniyor…" });
+      try {
+        await geriYukle(klasor, this.yedek(t, klasor));
+      } catch (e) {
+        if (!(e instanceof DegismisHatasi)) throw e;
+        await yamayiUnut(klasor, this.yedek(t, klasor)); // Steam yeni dosyaları koymuş: yalnızca yamanın artıkları silinir
+      }
+    }
+    const { satirlar, kullanilabilir, vfx } = this.kaynak(t, klasor);
+    const sec = uygulanabilirCeviriler(this.kurulacakDepo(t), satirlar, kullanilabilir);
+    if (sec.ceviriler.size === 0) throw new Error("Bu oyun için Türkçe çeviri bulunamadı. Uygulamayı güncelleyip tekrar deneyin.");
+    ilerleme({ tur: "yuzde", deger: 10, metin: `${sec.ceviriler.size.toLocaleString("tr")} satır hazırlanıyor…` });
+    const y = t.yamaHazirla(klasor, sec.ceviriler, vfx);
+    ilerleme({ tur: "yuzde", deger: 80, metin: "Oyun dosyaları yedeklenip yazılıyor…" });
+    this.oyunKapaliOlmali(t); // hazırlık birkaç saniye sürdü: oyun bu arada açılmış olabilir
+    await uygula(klasor, this.yedek(t, klasor), y.degisecek, y.eklenecek);
+    const p = this.hazirPaket(t);
+    if (p) writeFileSync(join(this.yedek(t, klasor), KURULU_PAKET), JSON.stringify({ tarih: p.tarih }), "utf8");
+    ilerleme({ tur: "yuzde", deger: 100, metin: "Türkçe yama kuruldu." });
+  }
+
+  async kaldir(t: OyunTanimi, klasor: string): Promise<void> {
+    this.oyunKapaliOlmali(t);
+    try {
+      await geriYukle(klasor, this.yedek(t, klasor));
+    } catch (e) {
+      // Steam oyunu güncellemiş: oyun dosyaları zaten Steam'in yeni sürümü; yalnızca yamanın artıkları silinir.
+      if (!(e instanceof DegismisHatasi)) throw e;
+      await yamayiUnut(klasor, this.yedek(t, klasor));
+    }
+  }
+
+  async unut(t: OyunTanimi, klasor: string): Promise<void> {
+    this.oyunKapaliOlmali(t);
+    await yamayiUnut(klasor, this.yedek(t, klasor));
+  }
+}

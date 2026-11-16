@@ -1,0 +1,127 @@
+{
+  "name": "turkcesi-var",
+  "version": "0.4.3",
+  "private": true,
+  "description": "Oyunlara güvenli, açık kaynak Türkçe altyazı.",
+  "license": "GPL-3.0-only",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "tip": "tsc --noEmit",
+    "deneme": "tsx scripts/deneme.ts",
+    "uygulama": "electron-vite dev",
+    "uygulama:derle": "electron-vite build",
+    "uygulama:onizle": "electron-vite preview",
+    "exe": "node scripts/kosullar-txt.mjs && electron-vite build && electron-builder --win nsis --x64 --publish never && node scripts/zip-yap.mjs"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "electron": "^45.3.1",
+    "electron-builder": "^26.18.0",
+    "electron-vite": "^6.0.0",
+    "jsdom": "^31.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.11",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "main": "out/main/index.js",
+  "productName": "Türkçesi Var",
+  "author": "turkcesivar",
+  "build": {
+    "appId": "com.turkcesivar.uygulama",
+    "productName": "Türkçesi Var",
+    "executableName": "TurkcesiVar",
+    "directories": {
+      "output": "dist/${version}",
+      "buildResources": "build"
+    },
+    "files": [
+      "out/**",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "paketler",
+        "to": "paketler",
+        "filter": [
+          "*.tr.json",
+          "LICENSE",
+          "OKU-BENI.md"
+        ]
+      },
+      {
+        "from": "LICENSE",
+        "to": "LICENSE.txt"
+      },
+      {
+        "from": "EK-SARTLAR.md",
+        "to": "EK-SARTLAR.md"
+      },
+      {
+        "from": "MARKA.md",
+        "to": "MARKA.md"
+      },
+      {
+        "from": "build/simge.ico",
+        "to": "simge.ico"
+      },
+      {
+        "from": "KULLANIM-KOSULLARI.md",
+        "to": "KULLANIM-KOSULLARI.md"
+      }
+    ],
+    "asar": false,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/simge.ico",
+      "artifactName": "TurkcesiVar-Kurulum.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "installerLanguages": [
+        "tr_TR"
+      ],
+      "language": "1055",
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "Türkçesi Var",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false,
+      "installerIcon": "build/simge.ico",
+      "uninstallerIcon": "build/simge.ico",
+      "installerHeaderIcon": "build/simge.ico",
+      "uninstallDisplayName": "Türkçesi Var",
+      "allowToChangeInstallationDirectory": true,
+      "license": "build/kosullar.txt"
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "https://github.com/turkcesivar/turkcesi-var/releases/latest/download"
+      }
+    ]
+  },
+  "homepage": "https://github.com/turkcesivar/turkcesi-var",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/turkcesivar/turkcesi-var.git"
+  }
+}

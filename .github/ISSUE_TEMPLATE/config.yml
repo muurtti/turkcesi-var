@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📥 Türkçesi Var'ı indir
+    url: https://github.com/turkcesivar/turkcesi-var/releases/latest
+    about: Kurulum dosyası her zaman buradan, resmi olarak indirilir.
