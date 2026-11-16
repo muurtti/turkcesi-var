@@ -8,7 +8,7 @@ export const TURKCE_YUVALAR = { ğ: 176, Ğ: 177, ş: 178, Ş: 179, ı: 180, İ:
 export type TurkceHarf = keyof typeof TURKCE_YUVALAR;
 export type TurkceYuvalar = Record<TurkceHarf, number>;
 /** Metro Exodus: us karakter tablosundaki kullanılmayan \x01–\x06 yuvaları 105–110'dur. */
-export const TURKCE_YUVALAR_EXODUS: TurkceYuvalar = { ğ: 105, Ğ: 106, ş: 107, Ş: 108, ı: 109, İ: 110 };
+export const TURKCE_YUVALAR_EXODUS: TurkceYuvalar = { ğ: 105, Ğ: 106, ş: 107, Ş: 108, ı: 109, İ: Number(process.env.TV_EXODUS_I_YUVASI ?? 110) };
 
 /**
  * Exodus menüdeki kâğıt etiketleri yazmadan önce metni İngilizce kurallarla büyük harfe çevirir ve bu sırada
