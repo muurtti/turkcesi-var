@@ -1,4 +1,4 @@
-// 4A Engine (Metro Redux) "content.vfx" dizin dosyası.
+// 4A Engine "content.vfx" dizin dosyası (Metro Redux sürüm 1, Metro Exodus sürüm 3).
 // Biçim: docs/notlar/4a-vfx-bicimi.md
 
 import { IkiliOkuyucu, IkiliYazici } from "../../ortak/ikili.js";
@@ -42,7 +42,10 @@ export interface VfxKopya {
 }
 
 export interface VfxDizin {
+  /** Redux: [1, 1]. Exodus: [3, sıkıştırma türü (1 = LZ4)]. */
   surum: [number, number];
+  /** Yalnızca sürüm 3 (Exodus): "src_521776-shdr_521776-script_521776" gibi içerik sürümü. */
+  icerikSurumu?: string;
   guid: Buffer;
   paketler: VfxPaket[];
   /** Dosyadaki sırasıyla bütün kayıtlar (klasör + dosya). */
@@ -66,6 +69,7 @@ function adCoz(o: IkiliOkuyucu, uzunluk: number, anahtar: number): string {
 export function vfxOku(buf: Buffer): VfxDizin {
   const o = new IkiliOkuyucu(buf);
   const surum: [number, number] = [o.u32(), o.u32()];
+  const icerikSurumu = surum[0] >= 3 ? o.cstr() : undefined;
   const guid = Buffer.from(o.bayt(16));
   const paketSayisi = o.u32();
   const kayitSayisi = o.u32();
@@ -117,7 +121,7 @@ export function vfxOku(buf: Buffer): VfxDizin {
 
   yollariKur(kayitlar);
   const dosyalar = kayitlar.filter((k): k is VfxGirdi => k.tur === "dosya");
-  return { surum, guid, paketler, kayitlar, dosyalar, kopyalar, sonek };
+  return { surum, ...(icerikSurumu !== undefined && { icerikSurumu }), guid, paketler, kayitlar, dosyalar, kopyalar, sonek };
 }
 
 function yollariKur(kayitlar: (VfxKlasor | VfxGirdi)[]): void {
@@ -149,6 +153,7 @@ export function vfxYaz(d: VfxDizin): Buffer {
   const y = new IkiliYazici();
   y.u32(d.surum[0]);
   y.u32(d.surum[1]);
+  if (d.surum[0] >= 3) y.cstr(d.icerikSurumu ?? "");
   y.bayt(d.guid);
   y.u32(d.paketler.length);
   y.u32(d.kayitlar.length);
