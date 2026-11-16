@@ -202,8 +202,20 @@ export function turkceHarfEkle(
   // fontta, ör. Exodus jenerik başlıkları) Ä'nın sol noktası.
   const aNoktasi = (): { nokta: Parca; noktaBosluk: number } => {
     const iki = zorunlu("Ä noktaları", satirKes(parca("Ä"), -1000, buyukUst - 1));
-    const sol: Parca = { ...iki, gen: Math.floor(iki.gen / 2), rgba: Buffer.alloc(Math.floor(iki.gen / 2) * iki.yuk * 4) };
-    for (let y = 0; y < iki.yuk; y++) iki.rgba.copy(sol.rgba, y * sol.gen * 4, y * iki.gen * 4, (y * iki.gen + sol.gen) * 4);
+    // Soldaki noktayı bütün olarak al: dolgu sütunlarının ilk kesintisiz bölümü (+ dış çizgi için 2 piksel pay).
+    // Noktalar harfin ortasında olmayabilir (el yazısı fontta sağ üstte); yarıdan kesmek noktayı bölebilir.
+    const doluSutun = Array.from({ length: iki.gen }, (_, x) => {
+      for (let y = 0; y < iki.yuk; y++) if (parlaklik(iki.rgba, (y * iki.gen + x) * 4) > DOLGU) return true;
+      return false;
+    });
+    const ilk = doluSutun.indexOf(true);
+    let son = ilk;
+    while (son + 1 < iki.gen && doluSutun[son + 1]) son++;
+    const ayrik = ilk >= 0 && doluSutun.slice(son + 1).includes(true); // iki ayrı nokta bulundu
+    const solBas = ayrik ? Math.max(0, ilk - 2) : 0;
+    const solGen = ayrik ? Math.min(iki.gen, son + 3) - solBas : Math.floor(iki.gen / 2);
+    const sol: Parca = { ...iki, x: iki.x + solBas, gen: solGen, rgba: Buffer.alloc(solGen * iki.yuk * 4) };
+    for (let y = 0; y < iki.yuk; y++) iki.rgba.copy(sol.rgba, y * solGen * 4, (y * iki.gen + solBas) * 4, (y * iki.gen + solBas + solGen) * 4);
     const n = zorunlu("nokta", satirKes(sol, -1000, 1000));
     return { nokta: n, noktaBosluk: buyukUst - (n.y + n.yuk) };
   };

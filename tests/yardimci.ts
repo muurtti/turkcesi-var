@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
@@ -31,6 +31,9 @@ export const exodusYok = !EXODUS_DIR || !existsSync(join(EXODUS_DIR, "content.vf
 export function exodusVfx(): Buffer {
   if (exodusYok) return Buffer.alloc(0);
   const appdata = process.env.APPDATA ?? join(homedir(), "AppData", "Roaming");
-  const yedek = join(appdata, "turkcesi-var", "yedekler", "metroexodus", "orijinal", "content.vfx");
-  return readFileSync(existsSync(yedek) ? yedek : join(EXODUS_DIR, "content.vfx"));
+  // Yedek klasörü kuruluma göre "metroexodus" ya da "metroexodus@<özet>" adını alır (yedekKlasoruSec).
+  const yedekler = join(appdata, "turkcesi-var", "yedekler");
+  const adaylar = existsSync(yedekler) ? readdirSync(yedekler).filter((a) => a === "metroexodus" || a.startsWith("metroexodus@")) : [];
+  const yedek = adaylar.map((a) => join(yedekler, a, "orijinal", "content.vfx")).find((y) => existsSync(y));
+  return readFileSync(yedek ?? join(EXODUS_DIR, "content.vfx"));
 }

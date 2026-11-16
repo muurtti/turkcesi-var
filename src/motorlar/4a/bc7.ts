@@ -312,8 +312,34 @@ function yariya(rgba: Buffer, gen: number): Buffer {
 }
 
 /**
+ * Oyunun küçük mip seviyeleri basit küçültmeyle değil, fontun o boyutta yeniden çizilmesiyle üretilmiş: harfler
+ * küçüldükçe görece kalınlaşır (dış çizgi piksel kalınlığı sabit). Bunu taklit etmek için aynı dokunun orijinal
+ * seviyelerinden kanal başına bir ton tablosu öğrenilir: "2×2 ortalama değeri → oyunun gerçek değeri".
+ * (Ölçüm: docs/notlar/4a-font.md; hata ~yarıya iner, ince işaretler — ğ şapkası, İ noktası — uzakta kaybolmaz.)
+ */
+function tonTablosu(oncekiEski: Buffer, oncekiGen: number, eski: Buffer): Uint8Array[] {
+  const ort = yariya(oncekiEski, oncekiGen);
+  return [0, 1, 2, 3].map((c) => {
+    const t = new Float64Array(256), n = new Float64Array(256);
+    for (let i = 0; i < ort.length / 4; i++) {
+      const k = ort[i * 4 + c]!;
+      t[k] = t[k]! + eski[i * 4 + c]!;
+      n[k] = n[k]! + 1;
+    }
+    const lut = new Uint8Array(256);
+    let son = 0;
+    for (let k = 0; k < 256; k++) {
+      if (n[k]! > 0) son = Math.round(t[k]! / n[k]!);
+      lut[k] = n[k]! > 0 ? son : Math.max(son, k); // görülmemiş değerde en az kendisi
+    }
+    lut[0] = 0; // boşluk boş kalır
+    return lut;
+  });
+}
+
+/**
  * Değişmiş dokuyu parçalarına geri yazar. Yalnız değişen bloklar yeniden kodlanır; küçük mip seviyelerinde de
- * yalnız değişen bölgenin altındaki bloklar yeniden üretilir. Diğer bütün bloklar orijinal baytlarıyla kalır.
+ * yalnız değişen bölgenin altındaki bloklar yeniden üretilir (ton tablosuyla). Diğer bütün bloklar orijinal kalır.
  */
 export function exodusDokuYaz(yeni: Doku, parcalar: ExodusParca[]): Buffer[] {
   // Seviye zinciri: her parçadaki her mip, büyükten küçüğe.
@@ -333,14 +359,23 @@ export function exodusDokuYaz(yeni: Doku, parcalar: ExodusParca[]): Buffer[] {
 
   let hedef = yeni.rgba; // bu seviyenin olması gereken görüntüsü
   let kirli: Set<number> | undefined; // bir önceki seviyede değişen bloklar
+  let oncekiEski: Buffer | undefined; // bir önceki seviyenin orijinal görüntüsü
   const degisenParca = new Set<number>();
   for (const [s, sv] of seviyeler.entries()) {
     const bc7 = acik[sv.parca]!;
     const bx = Math.max(1, Math.ceil(sv.gen / 4));
     const eski = bc7SeviyeCoz(bc7, sv.ofset, sv.gen, sv.gen);
+    if (s > 0 && kirli!.size === 0) {
+      // Üst seviyede değişiklik yoksa bu ve sonraki seviyeler aynen kalır.
+      oncekiEski = eski;
+      continue;
+    }
     if (s > 0) {
-      // Önceki seviyenin değişen bölgesini yarıya indirerek bu seviyenin hedefini kur; diğer yerler eski kalır.
+      // Önceki seviyenin değişen bölgesini yarıya indirip ton tablosundan geçirerek bu seviyenin hedefini kur;
+      // diğer yerler eski kalır.
+      const lut = tonTablosu(oncekiEski!, seviyeler[s - 1]!.gen, eski);
       const ust = yariya(hedef, seviyeler[s - 1]!.gen);
+      for (let i = 0; i < ust.length; i++) ust[i] = lut[i & 3]![ust[i]!]!;
       hedef = Buffer.from(eski);
       const yeniKirli = new Set<number>();
       const onceBx = Math.max(1, Math.ceil(seviyeler[s - 1]!.gen / 4));
@@ -377,6 +412,7 @@ export function exodusDokuYaz(yeni: Doku, parcalar: ExodusParca[]): Buffer[] {
         degisenParca.add(sv.parca);
       }
     }
+    oncekiEski = eski;
   }
   return parcalar.map((p, i) => (degisenParca.has(i) ? lz4BlokSikistir(acik[i]!) : p.veri));
 }
