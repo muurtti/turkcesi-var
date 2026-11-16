@@ -3,11 +3,11 @@
 //   npm run deneme -- geri-al  → oyunu orijinal haline döndürür
 //   npm run deneme -- durum    → yama kurulu mu, content.vfx temiz mi
 //   npm run deneme -- unut     → (Steam güncellemesinden sonra) yalnızca eklenen dosyaları siler, yamayı unutur
-// METRO_DIR verilmezse Steam varsayılan konumu kullanılır.
+// Oyun: OYUN_KIMLIK=metroexodus (varsayılan metro2033redux). Klasör verilmezse Steam varsayılan konumu kullanılır.
 
 import { denemeYamasiHazirla } from "../src/fizibilite.js";
 import { geriYukle, uygula, yamayiUnut } from "../src/ortak/yedek.js";
-import { OYUN, YEDEK, durum, oyunKapaliOlmali, orijinalVfx } from "./ortak.js";
+import { OYUN, TANIM, YEDEK, durum, oyunKapaliOlmali, orijinalVfx } from "./ortak.js";
 
 async function main(): Promise<void> {
   const komut = process.argv[2];
@@ -16,7 +16,7 @@ async function main(): Promise<void> {
 
   if (komut === "uygula") {
     console.log("Yama hazırlanıyor (oyun dosyaları okunuyor)...");
-    const y = denemeYamasiHazirla(OYUN, { vfx: orijinalVfx() });
+    const y = denemeYamasiHazirla(OYUN, { vfx: orijinalVfx() }, TANIM.kimlik);
     console.log(`Türkçe harf eklenen fontlar: ${y.yamalananFontlar.join(", ")}`);
     for (const a of y.atlananFontlar) console.log(`  atlandı: ${a.font} — ${a.neden}`);
     const kayit = await uygula(OYUN, YEDEK, y.degisecek, y.eklenecek);
