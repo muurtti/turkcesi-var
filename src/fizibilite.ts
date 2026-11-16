@@ -46,6 +46,15 @@ DENEME_SATIRLARI["metroexodus-tani"] = [
   ["$load_game", "aİa ağa"],
   ...DENEME_SATIRLARI.metroexodus!.filter(([a]) => a === "intro"),
 ];
+// Tanı 2: etiket önbelleği mi, dönüşüm mü? Bütün metinler öncekilerden farklı; İ'nin yanında orijinal Ä/Ö noktaları.
+DENEME_SATIRLARI["metroexodus-tani2"] = [
+  ["$new_game", "YENİ OYUN"],
+  ["$continue_menu", "İÄİ ÖİÖ"],
+  ["$options", "AYARLAR İ"],
+  ["$load_main_menu", "YÜKLE İ"],
+  ["$load", "YÜKLE İ"],
+  ...DENEME_SATIRLARI.metroexodus!.filter(([a]) => a === "intro"),
+];
 
 export type DenemeYamasi = TurkceYama;
 export type { HazirlamaSecenekleri };
