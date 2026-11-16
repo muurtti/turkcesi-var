@@ -38,6 +38,15 @@ export const DENEME_SATIRLARI: Record<string, [string, DenemeMetni][]> = {
   ],
 };
 
+// Tanı: 3D menü etiketlerinde hangi karakterin hangi glife dönüştüğünü görmek için harfleri numaralı yazar.
+DENEME_SATIRLARI["metroexodus-tani"] = [
+  ["$new_game", "1ğ 2Ğ 3ş 4Ş"],
+  ["$continue_menu", "5ı 6İ 7i 8I"],
+  ["$options", "9ç Ç ö Ö ü Ü"],
+  ["$load_game", "aİa ağa"],
+  ...DENEME_SATIRLARI.metroexodus!.filter(([a]) => a === "intro"),
+];
+
 export type DenemeYamasi = TurkceYama;
 export type { HazirlamaSecenekleri };
 

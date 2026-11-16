@@ -16,7 +16,7 @@ async function main(): Promise<void> {
 
   if (komut === "uygula") {
     console.log("Yama hazırlanıyor (oyun dosyaları okunuyor)...");
-    const y = denemeYamasiHazirla(OYUN, { vfx: orijinalVfx() }, TANIM.kimlik);
+    const y = denemeYamasiHazirla(OYUN, { vfx: orijinalVfx() }, process.env.DENEME_SATIRLARI ?? TANIM.kimlik);
     console.log(`Türkçe harf eklenen fontlar: ${y.yamalananFontlar.join(", ")}`);
     for (const a of y.atlananFontlar) console.log(`  atlandı: ${a.font} — ${a.neden}`);
     const kayit = await uygula(OYUN, YEDEK, y.degisecek, y.eklenecek);
