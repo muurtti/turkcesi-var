@@ -8,7 +8,9 @@ export const TURKCE_YUVALAR = { ğ: 176, Ğ: 177, ş: 178, Ş: 179, ı: 180, İ:
 export type TurkceHarf = keyof typeof TURKCE_YUVALAR;
 export type TurkceYuvalar = Record<TurkceHarf, number>;
 /** Metro Exodus: us karakter tablosundaki kullanılmayan \x01–\x06 yuvaları 105–110'dur. */
-export const TURKCE_YUVALAR_EXODUS: TurkceYuvalar = { ğ: 105, Ğ: 106, ş: 107, Ş: 108, ı: 109, İ: Number(process.env.TV_EXODUS_I_YUVASI ?? 110) };
+// İ, 110 (\x06) yerine 111'de (\x07, o da kullanılmıyor): menü etiketi denemelerinde 110'un sorunsuz olduğu
+// kanıtlanamadı; 111 aynı derecede güvenli.
+export const TURKCE_YUVALAR_EXODUS: TurkceYuvalar = { ğ: 105, Ğ: 106, ş: 107, Ş: 108, ı: 109, İ: 111 };
 
 /**
  * Exodus menüdeki kâğıt etiketleri yazmadan önce metni İngilizce kurallarla büyük harfe çevirir ve bu sırada
@@ -122,6 +124,11 @@ function birlestir(parcalar: Parca[]): Parca {
 }
 
 const DOLGU = 150; // harfin parlak iç dolgusu (kenar çizgisi daha koyu)
+/**
+ * Ä'dan alınan tek noktanın büyütme oranı. Exodus el yazısı fontunda ölçüldü: 1,7'de nokta 512/256/128 mip
+ * seviyelerinde Ä'nın noktaları kadar güçlü kalır (uzaktaki 3D menü etiketlerinde kaybolmaz).
+ */
+const NOKTA_BUYUTME = 1.7;
 
 /**
  * 'i' glifini nokta ve gövde olarak ayırır. Kesim, parlak dolgu satırlarında nokta ile gövde arasındaki
@@ -224,7 +231,12 @@ export function turkceHarfEkle(
     const solGen = ayrik ? Math.min(iki.gen, son + 3) - solBas : Math.floor(iki.gen / 2);
     const sol: Parca = { ...iki, x: iki.x + solBas, gen: solGen, rgba: Buffer.alloc(solGen * iki.yuk * 4) };
     for (let y = 0; y < iki.yuk; y++) iki.rgba.copy(sol.rgba, y * solGen * 4, (y * iki.gen + solBas) * 4, (y * iki.gen + solBas + solGen) * 4);
-    const n = zorunlu("nokta", satirKes(sol, -1000, 1000));
+    const kesik = zorunlu("nokta", satirKes(sol, -1000, 1000));
+    // Tek nokta, Ä'nın iki noktasının yarı ağırlığındadır; küçük mip seviyelerinde (uzaktaki 3D etiketler)
+    // kaybolmasın diye biraz büyütülür. Alt kenarı yerinde kalır (harfle arası değişmez).
+    const gen = Math.max(kesik.gen, Math.round(kesik.gen * NOKTA_BUYUTME));
+    const yuk = Math.max(kesik.yuk, Math.round(kesik.yuk * NOKTA_BUYUTME));
+    const n = { ...olcekle(kesik, gen, yuk), x: kesik.x - Math.round((gen - kesik.gen) / 2), y: kesik.y + kesik.yuk - yuk };
     return { nokta: n, noktaBosluk: buyukUst - (n.y + n.yuk) };
   };
   let nokta: Parca;

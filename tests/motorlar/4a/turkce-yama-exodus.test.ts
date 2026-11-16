@@ -52,7 +52,8 @@ describe.skipIf(exodusYok)("Türkçe yama (gerçek Metro Exodus, yalnız bellekt
     const t = metinTablosuOku(cikar("localization/stable_us.lng"));
     const metin = t.satirlar.find((s) => s.anahtar === anahtar)?.metin;
     expect(metin).toBe("Ağır şişe, ılık İçki: ÇĞİÖŞÜ çğıöşü".replaceAll("İ", EXODUS_I_KODU));
-    expect(t.karakterler.slice(105, 111).join("")).toBe("ğĞşŞı" + EXODUS_I_KODU);
+    // 110 (\x06) boş kalır; İ 111'de.
+    expect(t.karakterler.slice(105, 112).join("")).toBe("ğĞşŞı\u0006" + EXODUS_I_KODU);
   });
 
   it("yamalı oyuna ikinci kez hazırlanırsa 'zaten yamalı' hatası verir", () => {
