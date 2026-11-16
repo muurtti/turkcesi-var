@@ -5,6 +5,7 @@ import { join } from "node:path";
 import type { CeviriSatiri } from "../ceviri/satirlar.js";
 import type { TurkceYama } from "../motorlar/4a/turkce-yama.js";
 import { METRO_2033_REDUX } from "./metro2033redux.js";
+import { METRO_EXODUS } from "./metroexodus.js";
 
 export interface OyunTanimi {
   /** Dosya ve klasör adlarında kullanılan kimlik ("metro2033redux"). */
@@ -26,7 +27,7 @@ export interface OyunTanimi {
   yamaHazirla(oyunKlasoru: string, ceviriler: Map<string, string>, orijinalVfx: Buffer): TurkceYama;
 }
 
-export const OYUNLAR: OyunTanimi[] = [METRO_2033_REDUX];
+export const OYUNLAR: OyunTanimi[] = [METRO_2033_REDUX, METRO_EXODUS];
 
 export function tanimBul(appId: number | undefined, klasorAdi: string): OyunTanimi | undefined {
   return OYUNLAR.find((t) => (appId !== undefined && t.steamAppId === appId) || t.klasorAdi.toLowerCase() === klasorAdi.toLowerCase());

@@ -2,6 +2,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { hileKorumaliMi } from "../../src/oyunlar/hile-korumali.js";
 import { METRO_2033_REDUX } from "../../src/oyunlar/metro2033redux.js";
+import { METRO_EXODUS } from "../../src/oyunlar/metroexodus.js";
 import { OYUNLAR, depoKlasoru, tanimBul, uygulamaKlasoru, yedekKlasoru } from "../../src/oyunlar/tanim.js";
 import { METRO_DIR, METRO_VFX, metroYok } from "../yardimci.js";
 
@@ -19,6 +20,14 @@ describe("oyun tanımları", () => {
     expect(tanimBul(286690, "x")).toBe(METRO_2033_REDUX);
     expect(tanimBul(undefined, "Metro 2033 Redux")).toBe(METRO_2033_REDUX);
     expect(tanimBul(730, "Counter-Strike Global Offensive")).toBeUndefined();
+  });
+
+  it("Metro Exodus Enhanced Edition tanımı; normal sürüm (412020) denenmediği için tanınmaz", () => {
+    expect(METRO_EXODUS).toMatchObject({ kimlik: "metroexodus", ad: "Metro Exodus Enhanced Edition", steamAppId: 1449560, surecAdi: "MetroExodus.exe" });
+    expect(OYUNLAR).toContain(METRO_EXODUS);
+    expect(tanimBul(1449560, "x")).toBe(METRO_EXODUS);
+    expect(tanimBul(undefined, "Metro Exodus Enhanced Edition")).toBe(METRO_EXODUS);
+    expect(tanimBul(412020, "Metro Exodus")).toBeUndefined();
   });
 
   it("hile korumalı oyunları tanır", () => {

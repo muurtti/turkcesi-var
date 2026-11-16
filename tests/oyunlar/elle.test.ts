@@ -52,6 +52,18 @@ describe("elle klasör seçimi", () => {
     expect(klasorTani(join(k, "Oyunlarim"))?.tanim.kimlik).toBe("metro2033redux");
   });
 
+  it("Metro Exodus klasörü tanınır; Metro 2033 ile karışmaz; normal sürümün Steam kimliği reddedilir", () => {
+    const ex = join(k, "Epic", "MetroExodusEnhanced");
+    mkdirSync(ex, { recursive: true });
+    writeFileSync(join(ex, "MetroExodus.exe"), "");
+    writeFileSync(join(ex, "content.vfx"), "");
+    metroYap(join(k, "Epic", "Metro2033Redux"));
+    expect(klasorTani(ex)?.tanim.kimlik).toBe("metroexodus");
+    expect(klasorTani(join(k, "Epic", "Metro2033Redux"))?.tanim.kimlik).toBe("metro2033redux");
+    writeFileSync(join(ex, "steam_appid.txt"), "412020");
+    expect(klasorTani(ex)).toBeUndefined();
+  });
+
   it("seçilen klasörler kaydedilir, aynısı iki kez eklenmez", () => {
     const uyg = join(k, "uyg");
     elleKlasorEkle(uyg, { kimlik: "metro2033redux", klasor: "D:/Oyunlar/Metro" });

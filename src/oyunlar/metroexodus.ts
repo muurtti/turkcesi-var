@@ -1,4 +1,6 @@
-// Metro Exodus (4A Engine, content.vfx sürüm 3) tanımı. Steam: Enhanced Edition (1449560) ve normal sürüm (412020).
+// Metro Exodus Enhanced Edition (4A Engine, content.vfx sürüm 3) tanımı. Steam 1449560.
+// Normal sürüm (412020) gerçek oyunla denenmediği için Steam'de tanınmaz; elle/Epic klasöründe yama önce
+// bellekte hazırlanır, dosyalar uymazsa hata verir ve oyuna hiçbir şey yazmaz.
 // Biçim farkları: docs/notlar/4a-vfx-bicimi.md, docs/notlar/4a-font.md ("Metro Exodus").
 
 import { cevrilecekSatirlar } from "../ceviri/satirlar.js";
@@ -11,7 +13,7 @@ import type { OyunTanimi } from "./tanim.js";
 
 export const METRO_EXODUS: OyunTanimi = {
   kimlik: "metroexodus",
-  ad: "Metro Exodus",
+  ad: "Metro Exodus Enhanced Edition",
   steamAppId: 1449560,
   klasorAdi: "Metro Exodus Enhanced Edition",
   motor: "4a",
