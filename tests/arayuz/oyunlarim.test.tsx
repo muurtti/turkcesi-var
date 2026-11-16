@@ -48,6 +48,16 @@ describe("Oyunlarım", () => {
     expect(ortak.onSec).toHaveBeenCalledWith(METRO);
   });
 
+  it("diğer oyunlarda uygulamanın kendi başına çevirmediğini söyler ve oyun isteği formunu açar", () => {
+    const disBaglanti = vi.fn(() => Promise.resolve());
+    (window as unknown as { tv: unknown }).tv = { disBaglanti };
+    render(<Oyunlarim {...ortak} oyunlar={[METRO, oyun("GodOfWar", "desteklenmiyor")]} durumlar={{}} />);
+    const diger = screen.getByRole("region", { name: "Diğer oyunlar" });
+    expect(within(diger).getByText(/kendi başına çevirmez/)).toBeTruthy();
+    fireEvent.click(within(diger).getByRole("button", { name: "Oyun iste" }));
+    expect(disBaglanti).toHaveBeenCalledWith("https://github.com/turkcesivar/turkcesi-var/issues/new?template=oyun-istegi.yml");
+  });
+
   it("desteklenen oyun bulunamazsa hangi dosyaların aranacağını gösterir ve klasör seçtirir", () => {
     render(<Oyunlarim {...ortak} oyunlar={[]} durumlar={{}} steamBulundu={false} />);
     const kart = screen.getByRole("group", { name: /Metro 2033 Redux — bilgisayarında bulunamadı/ });

@@ -5,6 +5,7 @@ import type { ArayuzOyunu, DesteklenenOyun } from "../../../src/servis/api.js";
 import type { OyunDurumu } from "../../../src/servis/tipler.js";
 import { Simge, type SimgeAdi } from "../bilesenler/Simge.js";
 import { Dugme, Iskelet, Kapak, Rozet, sirayla, type RozetTuru } from "../bilesenler/temel.js";
+import { OYUN_ISTEK_ADRESI } from "../sabitler.js";
 
 export function rozetBul(o: ArayuzOyunu, d: OyunDurumu | undefined): { metin: string; tur: RozetTuru; simge?: SimgeAdi } {
   if (o.durum === "hile-korumali") return { metin: "Hile korumalı", tur: "tehlike", simge: "kalkan" };
@@ -230,7 +231,11 @@ export function Oyunlarim(p: {
             Diğer oyunlar <span className="sayac">{diger.length}</span>
           </h2>
           <p className="soluk bolum-aciklama">
-            Bu oyunların Türkçesi henüz yok ya da hile koruması olduğu için dokunulmuyor. Yeni oyunlar uygulama güncellendikçe eklenir.
+            Türkçesi Var oyunları kendi başına çevirmez; yalnızca Türkçesi hazırlanmış oyunlara yama kurar. Bu oyunların Türkçesi henüz yok
+            ya da hile koruması olduğu için dokunulmuyor. Yeni oyunlar uygulama güncellendikçe eklenir; en çok istenenler önce gelir.{" "}
+            <Dugme tur="sade" onClick={() => void window.tv.disBaglanti(OYUN_ISTEK_ADRESI)}>
+              Oyun iste
+            </Dugme>
           </p>
           <div className="izgara izgara-soluk">
             {diger.map((o, i) => (
