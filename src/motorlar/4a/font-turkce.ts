@@ -6,6 +6,9 @@ import type { Doku, FontKaydi, Glif } from "./font.js";
 /** Karakter tablosunda Türkçe harflerin yerleşeceği (kullanılmayan \x01–\x06) yuvalar. */
 export const TURKCE_YUVALAR = { ğ: 176, Ğ: 177, ş: 178, Ş: 179, ı: 180, İ: 181 } as const;
 export type TurkceHarf = keyof typeof TURKCE_YUVALAR;
+export type TurkceYuvalar = Record<TurkceHarf, number>;
+/** Metro Exodus: us karakter tablosundaki kullanılmayan \x01–\x06 yuvaları 105–110'dur. */
+export const TURKCE_YUVALAR_EXODUS: TurkceYuvalar = { ğ: 105, Ğ: 106, ş: 107, Ş: 108, ı: 109, İ: 110 };
 
 /** Kalem uzayında (xOfset/yOfset koordinatları) RGBA bir resim parçası. */
 interface Parca {
@@ -164,6 +167,7 @@ export function turkceHarfEkle(
   font: FontKaydi,
   doku: Doku,
   karakterler: string[],
+  yuvalar: TurkceYuvalar = TURKCE_YUVALAR,
 ): { glifler: Map<number, Glif>; doku: Doku } {
   const glif = (c: string): Glif => {
     const i = karakterler.indexOf(c);
@@ -194,20 +198,27 @@ export function turkceHarfEkle(
   };
   const G = parca("G"), S = parca("S"), I = parca("I");
 
-  // Nokta: küçük harfli fontta i'nin noktası; büyük harfli fontta Ä'nın sol noktası.
-  let nokta: Parca;
-  let noktaBosluk: number;
-  if (buyukHarfli) {
+  // Nokta: küçük harfli fontta i'nin noktası; büyük harfli fontta (ya da i'si noktasız "küçük büyük harfli"
+  // fontta, ör. Exodus jenerik başlıkları) Ä'nın sol noktası.
+  const aNoktasi = (): { nokta: Parca; noktaBosluk: number } => {
     const iki = zorunlu("Ä noktaları", satirKes(parca("Ä"), -1000, buyukUst - 1));
     const sol: Parca = { ...iki, gen: Math.floor(iki.gen / 2), rgba: Buffer.alloc(Math.floor(iki.gen / 2) * iki.yuk * 4) };
     for (let y = 0; y < iki.yuk; y++) iki.rgba.copy(sol.rgba, y * sol.gen * 4, y * iki.gen * 4, (y * iki.gen + sol.gen) * 4);
-    nokta = zorunlu("nokta", satirKes(sol, -1000, 1000));
-    noktaBosluk = buyukUst - (nokta.y + nokta.yuk);
+    const n = zorunlu("nokta", satirKes(sol, -1000, 1000));
+    return { nokta: n, noktaBosluk: buyukUst - (n.y + n.yuk) };
+  };
+  let nokta: Parca;
+  let noktaBosluk: number;
+  let noktasizI = false; // küçük i'nin zaten noktası yok (küçük büyük harfli font)
+  const iKesimi = noktaKesimi(parca("i")) ?? xYuksekligiUst - 1;
+  const iNoktasi = buyukHarfli ? undefined : satirKes(parca("i"), -1000, iKesimi);
+  const iGovdesi = buyukHarfli ? undefined : satirKes(parca("i"), iKesimi, 1000);
+  if (iNoktasi && iGovdesi) {
+    nokta = iNoktasi;
+    noktaBosluk = iGovdesi.y - (nokta.y + nokta.yuk);
   } else {
-    const kesim = noktaKesimi(parca("i")) ?? xYuksekligiUst - 1;
-    nokta = zorunlu("nokta", satirKes(parca("i"), -1000, kesim));
-    const govde = zorunlu("i gövdesi", satirKes(parca("i"), kesim, 1000));
-    noktaBosluk = govde.y - (nokta.y + nokta.yuk);
+    ({ nokta, noktaBosluk } = aNoktasi());
+    noktasizI = !buyukHarfli;
   }
 
   const cizilecek: Partial<Record<TurkceHarf, { resim: Parca; temel: Glif }>> = {
@@ -218,8 +229,11 @@ export function turkceHarfEkle(
   if (!buyukHarfli) {
     const g = parca("g"), s = parca("s");
     const kucukCengel = zorunlu("küçük çengel", satirKes(parca("ç"), tabanAlti("c") - 1, 1000));
-    const kucukSapka = zorunlu("küçük şapka", satirKes(parca("š"), -1000, xYuksekligiUst - 1)); // ˇ yerini/boyunu verir
-    const govde = zorunlu("i gövdesi", satirKes(parca("i"), noktaKesimi(parca("i")) ?? xYuksekligiUst - 1, 1000));
+    // ˇ (š) ya da o yoksa ^ (â) yalnızca küçük şapkanın yerini/boyunu verir; çizilen şekil u'dan türetilir.
+    const sapkali = karakterler.includes("š") ? "š" : "â";
+    const kucukSapka = zorunlu("küçük şapka", satirKes(parca(sapkali), -1000, xYuksekligiUst - 1));
+    // ı: i'nin gövdesi; i zaten noktasızsa i'nin kendisi.
+    const govde = noktasizI ? zorunlu("i", satirKes(parca("i"), -1000, 1000)) : zorunlu("i gövdesi", iGovdesi);
     cizilecek.ğ = { resim: birlestir([g, kisa(g, kucukSapka)]), temel: glif("g") };
     cizilecek.ş = { resim: birlestir([s, hizala(kucukCengel, s, kucukCengel.y)]), temel: glif("s") };
     cizilecek.ı = { resim: tasi(govde, govde.x, govde.y), temel: glif("i") };
@@ -232,7 +246,7 @@ export function turkceHarfEkle(
   });
   const rgba = Buffer.from(doku.rgba);
   const glifler = new Map<number, Glif>();
-  for (const [harf, { resim, temel }] of Object.entries(cizilecek) as [TurkceHarf, { resim: Parca; temel: Glif }][]) {
+  const yerlestir = (resim: Parca, temel: Glif): Glif => {
     const yer = yerBul(dolu, doku.gen, doku.yuk, resim.gen, resim.yuk);
     for (let y = 0; y < resim.yuk; y++) {
       for (let x = 0; x < resim.gen; x++) {
@@ -253,15 +267,24 @@ export function turkceHarfEkle(
       ilerleme: temel.ilerleme,
     };
     isaretle(dolu, doku.gen, doku.yuk, yeniGlif, 2);
-    glifler.set(TURKCE_YUVALAR[harf], yeniGlif);
+    return yeniGlif;
+  };
+  for (const [harf, { resim, temel }] of Object.entries(cizilecek) as [TurkceHarf, { resim: Parca; temel: Glif }][]) {
+    glifler.set(yuvalar[harf], yerlestir(resim, temel));
+  }
+  if (noktasizI) {
+    // Küçük büyük harfli fontta küçük i noktasız çizilmiş; Türkçede i noktalı olmalı (ı ayrı yuvada).
+    const iP = zorunlu("i", satirKes(parca("i"), -1000, 1000));
+    const resim = birlestir([iP, hizala(nokta, iP, iP.y - noktaBosluk - nokta.yuk)]);
+    glifler.set(karakterler.indexOf("i"), yerlestir(resim, glif("i")));
   }
 
   if (buyukHarfli) {
     // Büyük harfli fontta küçük harfler büyük çizilir; Türkçede i'nin büyüğü İ, ı'nınki I'dır.
-    glifler.set(TURKCE_YUVALAR.ğ, glifler.get(TURKCE_YUVALAR.Ğ)!);
-    glifler.set(TURKCE_YUVALAR.ş, glifler.get(TURKCE_YUVALAR.Ş)!);
-    glifler.set(TURKCE_YUVALAR.ı, { ...glif("I") });
-    glifler.set(karakterler.indexOf("i"), glifler.get(TURKCE_YUVALAR.İ)!);
+    glifler.set(yuvalar.ğ, glifler.get(yuvalar.Ğ)!);
+    glifler.set(yuvalar.ş, glifler.get(yuvalar.Ş)!);
+    glifler.set(yuvalar.ı, { ...glif("I") });
+    glifler.set(karakterler.indexOf("i"), glifler.get(yuvalar.İ)!);
   }
   return { glifler, doku: { ...doku, rgba } };
 }

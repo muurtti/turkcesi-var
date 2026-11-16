@@ -1,10 +1,13 @@
-// Metro 2033 Redux için Türkçe yamayı bellekte hazırlar (oyun klasörüne YAZMAZ; uygulama: src/ortak/yedek.ts).
+// 4A Engine oyunları (Metro 2033 Redux, Metro Exodus) için Türkçe yamayı bellekte hazırlar
+// (oyun klasörüne YAZMAZ; uygulama: src/ortak/yedek.ts).
 // Verilen satırlar Türkçeleşir, bütün metin fontlarına ğ Ğ ş Ş ı İ eklenir, değişenler yeni bir pakete konur.
+// Oyun, content.vfx sürümünden anlaşılır: 1 = Redux (BC1 dokular), 3 = Exodus (LZ4 + BC7 dokular).
 
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { bolunmusDokuOku, bolunmusDokuYaz, dokuBilgisiOku, fontlariOku, glifYaz, type Glif } from "./font.js";
-import { TURKCE_YUVALAR, turkceHarfEkle } from "./font-turkce.js";
+import { exodusDokuOku, exodusDokuYaz } from "./bc7.js";
+import { bolunmusDokuOku, bolunmusDokuYaz, dokuBilgisiOku, fontlariOku, glifYaz, type Doku, type Glif } from "./font.js";
+import { TURKCE_YUVALAR, TURKCE_YUVALAR_EXODUS, turkceHarfEkle, type TurkceYuvalar } from "./font-turkce.js";
 import { benzersizAnahtarlar, metinTablosuOku, metinTablosuYaz } from "./metin-tablosu.js";
 import { dosyaCikar } from "./vfs.js";
 import { girdiBul, vfxOku } from "./vfx.js";
@@ -38,6 +41,8 @@ export function turkceYamaHazirla(
   secenekler: HazirlamaSecenekleri = {},
 ): TurkceYama {
   const d = vfxOku(secenekler.vfx ?? readFileSync(join(oyunKlasoru, "content.vfx")));
+  const exodus = d.surum[0] >= 3;
+  const yuvaHaritasi: TurkceYuvalar = exodus ? TURKCE_YUVALAR_EXODUS : TURKCE_YUVALAR;
   const paketKlasorleri = [...(secenekler.ekPaketKlasorleri ?? []), oyunKlasoru];
   const bul = (yol: string) => {
     const g = girdiBul(d, yol)[0];
@@ -50,12 +55,12 @@ export function turkceYamaHazirla(
   // 1) Metin tablosu.
   const lngYolu = bul("localization/stable_us.lng").yol;
   const t = metinTablosuOku(cikar(lngYolu));
-  const yuvalar = Object.values(TURKCE_YUVALAR) as number[];
-  if (yuvalar.some((i) => Object.hasOwn(TURKCE_YUVALAR, t.karakterler[i] ?? ""))) throw new Error(ZATEN_YAMALI);
+  const yuvalar = Object.values(yuvaHaritasi);
+  if (yuvalar.some((i) => Object.hasOwn(yuvaHaritasi, t.karakterler[i] ?? ""))) throw new Error(ZATEN_YAMALI);
   if (t.kodlu.some((b) => b.some((x) => yuvalar.includes(x)))) {
     throw new Error("Türkçe harfler için ayrılan karakter yuvaları metinlerde kullanılıyor; yöntem bu sürümde çalışmaz.");
   }
-  for (const [harf, sira] of Object.entries(TURKCE_YUVALAR)) t.karakterler[sira] = harf;
+  for (const [harf, sira] of Object.entries(yuvaHaritasi)) t.karakterler[sira] = harf;
   // Tekrarlanan anahtarlar "k#2" biçiminde ayrı ele alınır (bkz. benzersizAnahtarlar).
   const anahtarlar = benzersizAnahtarlar(t);
   const satirlar = new Map(t.satirlar.map((s, i) => [anahtarlar[i]!, s]));
@@ -72,6 +77,7 @@ export function turkceYamaHazirla(
   const yamalananFontlar: string[] = [];
   const atlananFontlar: { font: string; neden: string }[] = [];
   const islenenDokular = new Map<string, { glifler: Map<number, Glif>; kaynak: string }>();
+  const dokusuzlar: ReturnType<typeof fontlariOku> = [];
 
   for (const f of fontlariOku(config, "us")) {
     if (f.glifler.length !== t.karakterler.length) continue; // ızgara/simge fontları
@@ -80,7 +86,7 @@ export function turkceYamaHazirla(
       .filter((g) => /\.(512|1024|2048|4096)$/.test(g.yol) && g.yol.toLowerCase().startsWith(taban + "."))
       .sort((a, b) => boyutu(b.yol) - boyutu(a.yol)); // büyükten küçüğe
     if (parcalar.length === 0) {
-      atlananFontlar.push({ font: `${f.rol} (${f.dokuAdi})`, neden: "doku dosyası yok" });
+      dokusuzlar.push(f); // sonra: ölçüleri birebir aynı bir fontun yeni glifleri yazılabilir
       continue;
     }
     const onceki = islenenDokular.get(taban);
@@ -93,14 +99,38 @@ export function turkceYamaHazirla(
       }
       yeniGlifler = onceki.glifler;
     } else {
-      const bilgi = dokuBilgisiOku(cikar(`${taban}.bin`));
       const hamlar = parcalar.map((g) => dosyaCikar(paketKlasorleri, d, g));
-      const sonuc = turkceHarfEkle(f, bolunmusDokuOku(hamlar, bilgi.gen, bilgi.yuk), t.karakterler);
-      bolunmusDokuYaz(sonuc.doku, hamlar).forEach((b, i) => degisenler.set(parcalar[i]!.yol, b));
+      let doku: Doku;
+      let yaz: (yeni: Doku) => Buffer[];
+      if (exodus) {
+        const ep = parcalar.map((g, i) => ({ yol: g.yol, veri: hamlar[i]! }));
+        doku = exodusDokuOku(ep).doku;
+        yaz = (yeni) => exodusDokuYaz(yeni, ep);
+      } else {
+        const bilgi = dokuBilgisiOku(cikar(`${taban}.bin`));
+        doku = bolunmusDokuOku(hamlar, bilgi.gen, bilgi.yuk);
+        yaz = (yeni) => bolunmusDokuYaz(yeni, hamlar);
+      }
+      const sonuc = turkceHarfEkle(f, doku, t.karakterler, yuvaHaritasi);
+      yaz(sonuc.doku).forEach((b, i) => {
+        if (b !== hamlar[i]) degisenler.set(parcalar[i]!.yol, b); // değişmeyen parça pakete konmaz
+      });
       yeniGlifler = sonuc.glifler;
       islenenDokular.set(taban, { glifler: yeniGlifler, kaynak: JSON.stringify(f.glifler) });
     }
     for (const [sira, g] of yeniGlifler) glifYaz(config, f, sira, g);
+    yamalananFontlar.push(f.dokuAdi);
+  }
+  // Dokusu arşivde olmayan font (Exodus'ta main_menu → font_metro_2034_font_2_us): glif ölçüleri başka bir fontla
+  // birebir aynıysa oyun o dokuyu kullanıyordur; aynı yeni glifler yazılır.
+  for (const f of dokusuzlar) {
+    const kaynak = JSON.stringify(f.glifler);
+    const es = [...islenenDokular.values()].find((x) => x.kaynak === kaynak);
+    if (!es) {
+      atlananFontlar.push({ font: `${f.rol} (${f.dokuAdi})`, neden: "doku dosyası yok" });
+      continue;
+    }
+    for (const [sira, g] of es.glifler) glifYaz(config, f, sira, g);
     yamalananFontlar.push(f.dokuAdi);
   }
   degisenler.set(configYolu, config);

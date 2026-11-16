@@ -20,13 +20,26 @@ function sonrakiPaketAdi(d: VfxDizin): string {
 }
 
 /**
+ * Exodus (sürüm 3): paket kaydının son alanı bayt boyutu değil grup numarasıdır (content_03.vfs0/1/2 → 3).
+ * Yama paketi yeni bir grup olur: content_<N>.vfs0, grup N, klasörler değişen dosyanın paketininkiyle aynı
+ * (ör. "m3\000": temel içerikle birlikte her zaman yüklenir).
+ */
+function exodusPaketi(d: VfxDizin, ilkDegisen: VfxGirdi): { ad: string; grup: number; klasorler: string[] } {
+  const grup = Math.max(...d.paketler.map((p) => p.boyut)) + 1;
+  return { ad: `content_${String(grup).padStart(2, "0")}.vfs0`, grup, klasorler: [...(d.paketler[ilkDegisen.paketNo]?.klasorler ?? [])] };
+}
+
+/**
  * `degisenler`: dizindeki yol ("content/localization/stable_us.lng") → yeni (açık) içerik.
  * Dosyalar sıkıştırılmadan saklanır (boyut = sıkıştırılmış boyut; oyun küçük dosyaları da böyle okur).
  */
 export function yamaPaketiOlustur(d: VfxDizin, degisenler: Map<string, Buffer>): YamaPaketi {
   const yollar = new Map(d.dosyalar.map((g) => [g.yol.toLowerCase(), g]));
   const paketNo = d.paketler.length;
-  const paketAdi = sonrakiPaketAdi(d);
+  const ilkYol = degisenler.keys().next().value;
+  const ilkDegisen = ilkYol === undefined ? undefined : yollar.get(ilkYol.toLowerCase().replaceAll("\\", "/"));
+  const exodus = d.surum[0] >= 3 && ilkDegisen ? exodusPaketi(d, ilkDegisen) : undefined;
+  const paketAdi = exodus?.ad ?? sonrakiPaketAdi(d);
 
   const veri = new IkiliYazici();
   veri.u32(0);
@@ -54,7 +67,10 @@ export function yamaPaketiOlustur(d: VfxDizin, degisenler: Map<string, Buffer>):
     const yeni = yeniKonum.get(k.kayitSirasi);
     return yeni ? { ...k, paketNo, ofset: yeni.ofset, boyut: yeni.boyut, sikistirilmisBoyut: yeni.boyut } : k;
   });
-  const paketler = [...d.paketler, { ad: paketAdi, klasorler: [...(d.paketler[0]?.klasorler ?? [])], boyut: paketIcerik.length }];
+  const yeniPaket = exodus
+    ? { ad: paketAdi, klasorler: exodus.klasorler, boyut: exodus.grup }
+    : { ad: paketAdi, klasorler: [...(d.paketler[0]?.klasorler ?? [])], boyut: paketIcerik.length };
+  const paketler = [...d.paketler, yeniPaket];
 
   const yeniVfx = vfxYaz({
     ...d,
