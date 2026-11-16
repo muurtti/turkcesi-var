@@ -10,6 +10,14 @@ export type TurkceYuvalar = Record<TurkceHarf, number>;
 /** Metro Exodus: us karakter tablosundaki kullanılmayan \x01–\x06 yuvaları 105–110'dur. */
 export const TURKCE_YUVALAR_EXODUS: TurkceYuvalar = { ğ: 105, Ğ: 106, ş: 107, Ş: 108, ı: 109, İ: 110 };
 
+/**
+ * Exodus menüdeki kâğıt etiketleri yazmadan önce metni İngilizce kurallarla büyük harfe çevirir ve bu sırada
+ * "İ"yi "I"ya dönüştürür (oyunda doğrulandı, 16 Kasım 2026). Bu yüzden İ, karakter tablosunda büyük/küçük harf
+ * dönüşümünden etkilenmeyen bir özel kullanım alanı karakteriyle temsil edilir; glifi yine noktalı İ'dir.
+ * Metne yazarken bütün "İ"ler bu karaktere çevrilir.
+ */
+export const EXODUS_I_KODU = "";
+
 /** Kalem uzayında (xOfset/yOfset koordinatları) RGBA bir resim parçası. */
 interface Parca {
   x: number; // kalem uzayında sol

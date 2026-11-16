@@ -7,7 +7,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { exodusDokuOku, exodusDokuYaz } from "./bc7.js";
 import { bolunmusDokuOku, bolunmusDokuYaz, dokuBilgisiOku, fontlariOku, glifYaz, type Doku, type Glif } from "./font.js";
-import { TURKCE_YUVALAR, TURKCE_YUVALAR_EXODUS, turkceHarfEkle, type TurkceYuvalar } from "./font-turkce.js";
+import { EXODUS_I_KODU, TURKCE_YUVALAR, TURKCE_YUVALAR_EXODUS, turkceHarfEkle, type TurkceYuvalar } from "./font-turkce.js";
 import { benzersizAnahtarlar, metinTablosuOku, metinTablosuYaz } from "./metin-tablosu.js";
 import { dosyaCikar } from "./vfs.js";
 import { girdiBul, vfxOku } from "./vfx.js";
@@ -56,18 +56,22 @@ export function turkceYamaHazirla(
   const lngYolu = bul("localization/stable_us.lng").yol;
   const t = metinTablosuOku(cikar(lngYolu));
   const yuvalar = Object.values(yuvaHaritasi);
-  if (yuvalar.some((i) => Object.hasOwn(yuvaHaritasi, t.karakterler[i] ?? ""))) throw new Error(ZATEN_YAMALI);
+  const yamaliMi = (c: string | undefined) => c !== undefined && (Object.hasOwn(yuvaHaritasi, c) || c === EXODUS_I_KODU);
+  if (yuvalar.some((i) => yamaliMi(t.karakterler[i]))) throw new Error(ZATEN_YAMALI);
   if (t.kodlu.some((b) => b.some((x) => yuvalar.includes(x)))) {
     throw new Error("Türkçe harfler için ayrılan karakter yuvaları metinlerde kullanılıyor; yöntem bu sürümde çalışmaz.");
   }
   for (const [harf, sira] of Object.entries(yuvaHaritasi)) t.karakterler[sira] = harf;
+  // Exodus: İ, büyük harf dönüşümünden etkilenmeyen özel karakterle temsil edilir (bkz. EXODUS_I_KODU).
+  const metniHazirla = exodus ? (m: string) => m.replaceAll("İ", EXODUS_I_KODU) : (m: string) => m;
+  if (exodus) t.karakterler[yuvaHaritasi.İ] = EXODUS_I_KODU;
   // Tekrarlanan anahtarlar "k#2" biçiminde ayrı ele alınır (bkz. benzersizAnahtarlar).
   const anahtarlar = benzersizAnahtarlar(t);
   const satirlar = new Map(t.satirlar.map((s, i) => [anahtarlar[i]!, s]));
   for (const [anahtar, metin] of ceviriler) {
     const s = satirlar.get(anahtar);
     if (!s) throw new Error(`Metin satırı bulunamadı: ${anahtar}`);
-    s.metin = metin;
+    s.metin = metniHazirla(metin);
   }
   degisenler.set(lngYolu, metinTablosuYaz(t));
 

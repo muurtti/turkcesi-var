@@ -1,7 +1,7 @@
 import { beforeAll, describe, expect, it } from "vitest";
 import { exodusDokuOku } from "../../../src/motorlar/4a/bc7.js";
 import { fontlariOku } from "../../../src/motorlar/4a/font.js";
-import { TURKCE_YUVALAR_EXODUS } from "../../../src/motorlar/4a/font-turkce.js";
+import { EXODUS_I_KODU, TURKCE_YUVALAR_EXODUS } from "../../../src/motorlar/4a/font-turkce.js";
 import { metinTablosuOku } from "../../../src/motorlar/4a/metin-tablosu.js";
 import { turkceYamaHazirla, type TurkceYama } from "../../../src/motorlar/4a/turkce-yama.js";
 import { dosyaCikar } from "../../../src/motorlar/4a/vfs.js";
@@ -48,10 +48,15 @@ describe.skipIf(exodusYok)("Türkçe yama (gerçek Metro Exodus, yalnız bellekt
     expect(p.subarray(p.length - 16).equals(d.guid)).toBe(true);
   });
 
-  it("Türkçe satır yeni karakter tablosuyla okunur", () => {
+  it("Türkçe satır yeni karakter tablosuyla okunur (İ, büyük harf dönüşümünden korunan özel karakterle)", () => {
     const t = metinTablosuOku(cikar("localization/stable_us.lng"));
-    expect(t.satirlar.find((s) => s.anahtar === anahtar)?.metin).toBe("Ağır şişe, ılık İçki: ÇĞİÖŞÜ çğıöşü");
-    expect(t.karakterler.slice(105, 111).join("")).toBe("ğĞşŞıİ");
+    const metin = t.satirlar.find((s) => s.anahtar === anahtar)?.metin;
+    expect(metin).toBe("Ağır şişe, ılık İçki: ÇĞİÖŞÜ çğıöşü".replaceAll("İ", EXODUS_I_KODU));
+    expect(t.karakterler.slice(105, 111).join("")).toBe("ğĞşŞı" + EXODUS_I_KODU);
+  });
+
+  it("yamalı oyuna ikinci kez hazırlanırsa 'zaten yamalı' hatası verir", () => {
+    expect(() => turkceYamaHazirla(EXODUS_DIR, new Map(), { vfx: y.degisecek["content.vfx"]!, ekPaketKlasorleri: [] })).toThrow();
   });
 
   it("her metin fontunda Türkçe yuvalar dolu ve glifler dokuda çizili", () => {
