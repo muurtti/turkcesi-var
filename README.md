@@ -10,6 +10,8 @@
   <a href="https://github.com/turkcesivar/turkcesi-var/releases/latest/download/TurkcesiVar-Kurulum.zip">ZIP olarak indir</a>
   &nbsp;·&nbsp;
   <a href="https://github.com/turkcesivar/turkcesi-var/issues/new?template=oyun-istegi.yml"><b>🎮 Oyun iste</b></a>
+  &nbsp;·&nbsp;
+  <a href="https://discord.gg/nnNUCMUBJx"><b>💬 Discord</b></a>
 </p>
 
 <p align="center">
@@ -52,8 +54,9 @@ Yeni oyunlar eklendikçe uygulama kendini günceller; ayrıca bir şey indirmen 
 
 Sıradaki oyunları sen seçiyorsun. [Oyun isteği formunu](https://github.com/turkcesivar/turkcesi-var/issues/new?template=oyun-istegi.yml)
 doldur; oyun [zaten istenmişse](https://github.com/turkcesivar/turkcesi-var/issues?q=label%3A%22oyun+iste%C4%9Fi%22)
-o kayda 👍 bırakman yeterli. En çok istenen oyunlar önce çevrilir. (Hile koruması olan çevrimiçi
-oyunlar güvenlik için çevrilmez.)
+o kayda 👍 bırakman yeterli. GitHub hesabın yoksa [Discord sunucumuzdaki](https://discord.gg/nnNUCMUBJx) **oyun-istekleri**
+kanalına yaz ya da var olan isteğe 👍 bırak. En çok istenen oyunlar önce çevrilir. (Hile koruması
+olan çevrimiçi oyunlar güvenlik için çevrilmez.)
 
 ## Nasıl kullanılır?
 
@@ -88,6 +91,7 @@ Resimli anlatım: [Steam rehberi: Metro 2033 Redux'u tamamen Türkçe yapma](htt
 - **Kayıtlarına dokunmaz.** Oyun kayıtların Steam'in kendi klasöründedir; Türkçe kurup
   kaldırmak onları etkilemez.
 - **Açık kaynak.** Uygulamanın ne yaptığını bu depoda satır satır görebilirsin.
+- **Virüs taraması temiz.** 0.5.0 kurulum dosyası [VirusTotal'da 0/68](https://www.virustotal.com/gui/file/c836873409c6987be6fc971728d1b76b75614df4c11c503016fd50beeba957be): hiçbir antivirüs işaretlemedi.
 
 ## Güncellemeler
 
@@ -129,6 +133,7 @@ Hayır. Türkçesi Var ücretsizdir ve öyle kalacak. Katkı vermek istersen: [D
 
 [Çeviri hatası formunu](https://github.com/turkcesivar/turkcesi-var/issues/new?template=ceviri-hatasi.yml) doldur. Form şunları sorar:
 oyunun adı, satırın oyundaki yeri (bölüm, menü, ipucu…), şu anki Türkçe metin ve önerin.
+GitHub hesabın yoksa [Discord sunucumuzdaki](https://discord.gg/nnNUCMUBJx) **çeviri-hataları** kanalına ekran görüntüsüyle yaz.
 Düzeltmeler bir sonraki sürümle herkese gelir.
 
 ## 💛 Destek ol
