@@ -1,3 +1,4 @@
+import { readdirSync } from "node:fs";
 import { beforeAll, describe, expect, it } from "vitest";
 import { EXODUS_I_KODU, TURKCE_YUVALAR_EXODUS, exodusYuvalari } from "../../../src/motorlar/4a/font-turkce.js";
 import { metinTablosuOku } from "../../../src/motorlar/4a/metin-tablosu.js";
@@ -5,6 +6,7 @@ import { turkceYamaHazirla, type TurkceYama } from "../../../src/motorlar/4a/tur
 import { dosyaCikar } from "../../../src/motorlar/4a/vfs.js";
 import { girdiBul, vfxOku, type VfxDizin } from "../../../src/motorlar/4a/vfx.js";
 import { METRO_EXODUS_NORMAL } from "../../../src/oyunlar/metroexodus.js";
+import { katmanSirala } from "../../../src/oyunlar/tanim.js";
 import { EXODUS_NORMAL_DIR, exodusNormalOrijinal, exodusNormalYok } from "../../yardimci.js";
 
 describe("Exodus Türkçe harf yuvaları", () => {
@@ -23,7 +25,10 @@ describe.skipIf(exodusNormalYok)("Türkçe yama (gerçek Metro Exodus normal sü
   let y: TurkceYama;
   let anahtar: string;
   const katmanlar = () =>
-    METRO_EXODUS_NORMAL.katmanlar!.map((ad) => ({ ad, vfx: exodusNormalOrijinal(ad) }));
+    katmanSirala(readdirSync(EXODUS_NORMAL_DIR).filter((ad) => METRO_EXODUS_NORMAL.katmanDeseni!.test(ad))).map((ad) => ({
+      ad,
+      vfx: exodusNormalOrijinal(ad),
+    }));
   /** Yeni dizindeki dosyayı okur: yeni paket bellekte, diğerleri oyun klasöründe. */
   const oku = (d: VfxDizin, yol: string) => {
     const g = girdiBul(d, yol)[0]!;

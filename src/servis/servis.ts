@@ -1,14 +1,14 @@
 // Oyuncu uygulamasının iş mantığı: hazır Türkçe paketle oyunun durumunu söyler, Türkçeyi kurar ve kaldırır.
 // Oyun klasörüne yalnızca src/ortak/yedek.ts yazar.
 
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join } from "node:path";
 import { bosDepo, depoOku, uygulanabilirCeviriler, type CeviriDeposu } from "../ceviri/depo.js";
 import { ceviriSorunlari } from "../ceviri/dogrula.js";
 import { paketiDepoyaAl, type CeviriPaketi } from "../ceviri/paket.js";
 import { kaynakOzeti, type CeviriSatiri } from "../ceviri/satirlar.js";
-import { paketKimligi, type Katman, type OyunTanimi } from "../oyunlar/tanim.js";
+import { katmanSirala, paketKimligi, type Katman, type OyunTanimi } from "../oyunlar/tanim.js";
 import { DegismisHatasi, geriYukle, uygula, yamaDurumu, yamayiUnut, yedekKlasoruSec } from "../ortak/yedek.js";
 import type { Ilerleme, OyunDurumu } from "./tipler.js";
 
@@ -105,9 +105,10 @@ export class Servis {
       return existsSync(yedekte) ? yedekte : join(klasor, ad);
     };
     const vfx = readFileSync(orijinal("content.vfx"));
-    const katmanlar: Katman[] = (t.katmanlar ?? [])
-      .filter((ad) => existsSync(orijinal(ad)))
-      .map((ad) => ({ ad, vfx: readFileSync(orijinal(ad)) }));
+    const desen = t.katmanDeseni;
+    const katmanlar: Katman[] = desen
+      ? katmanSirala(readdirSync(klasor).filter((ad) => desen.test(ad))).map((ad) => ({ ad, vfx: readFileSync(orijinal(ad)) }))
+      : [];
     const anahtar = [t.kimlik, klasor, sha256(vfx), ...katmanlar.map((k) => sha256(k.vfx))].join("|");
     let k = this.kaynakOnbellegi.get(anahtar);
     if (!k) {

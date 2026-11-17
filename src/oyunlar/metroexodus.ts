@@ -49,8 +49,6 @@ export const METRO_EXODUS: OyunTanimi = {
   },
 };
 
-/** Normal sürümün güncelleme dizinleri, yüklenme sırasıyla (sonraki öncekini ezer). */
-const NORMAL_KATMANLAR = ["patch_00.vfx", "patch_01.vfx", "patch_01_shared.vfx", "patch_02.vfx", "patch_03.vfx", "patch_04.vfx"];
 
 export const METRO_EXODUS_NORMAL: OyunTanimi = {
   kimlik: "metroexodus-normal",
@@ -61,7 +59,8 @@ export const METRO_EXODUS_NORMAL: OyunTanimi = {
   motor: "4a",
   surecAdi: "MetroExodus.exe",
   tanimaDosyalari: ["MetroExodus.exe", "content.vfx", "patch_04.vfx"],
-  katmanlar: NORMAL_KATMANLAR,
+  // patch_00.vfx … patch_04.vfx, patch_01_shared.vfx; ada göre sıralanınca yüklenme sırası (sonraki öncekini ezer).
+  katmanDeseni: /^patch_\d+(_[a-z]+)?\.vfx$/i,
 
   kaynak(oyunKlasoru, orijinalVfx, katmanlar) {
     return kaynakOku(oyunKlasoru, orijinalVfx, katmanlar);

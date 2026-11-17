@@ -22,10 +22,11 @@ export interface OyunTanimi {
   /** Steam'deki temiz content.vfx özeti (bilgi amaçlı). */
   temizDizinOzeti?: string;
   /**
-   * content.vfx'in üstüne yüklenen güncelleme dizinleri, eskiden yeniye (Metro Exodus normal sürüm: patch_00…04).
-   * Yama bunlara da yazabilir; servis orijinallerini (kuruluysa yedekten) okuyup verir.
+   * content.vfx'in üstüne yüklenen güncelleme dizinlerinin ad deseni (Metro Exodus normal sürüm: patch_NN*.vfx).
+   * Servis oyun klasöründeki eşleşen dizinleri ada göre sıralar (eskiden yeniye; Steam yeni bir güncelleme dizini
+   * eklerse kendiliğinden hesaba katılır), orijinallerini (kuruluysa yedekten) okuyup tanıma verir.
    */
-  katmanlar?: string[];
+  katmanDeseni?: RegExp;
   /** Hazır çeviri paketi başka bir tanımınkiyse onun kimliği (aynı oyunun farklı sürümleri tek paketi paylaşır). */
   paketKimligi?: string;
   /** Çevrilecek satırlar ve oyunun gösterebildiği karakterler (orijinal dizinden). */
@@ -38,6 +39,15 @@ export interface OyunTanimi {
 export interface Katman {
   ad: string;
   vfx: Buffer;
+}
+
+/**
+ * Güncelleme dizini adlarını yüklenme sırasına dizer: uzantısız ada göre karakter karakter
+ * (patch_00 < patch_01 < patch_01_shared < patch_02 …; dil kurallı sıralama "_" ile "."yı karıştırır).
+ */
+export function katmanSirala(adlar: string[]): string[] {
+  const kok = (a: string) => a.toLowerCase().replace(/\.vfx$/, "");
+  return [...adlar].sort((a, b) => (kok(a) < kok(b) ? -1 : kok(a) > kok(b) ? 1 : 0));
 }
 
 /** Çeviri paketinin ve geliştirici deposunun kimliği. */

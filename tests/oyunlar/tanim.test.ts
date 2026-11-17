@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { hileKorumaliMi } from "../../src/oyunlar/hile-korumali.js";
 import { METRO_2033_REDUX } from "../../src/oyunlar/metro2033redux.js";
 import { METRO_EXODUS, METRO_EXODUS_NORMAL } from "../../src/oyunlar/metroexodus.js";
-import { OYUNLAR, depoKlasoru, paketKimligi, tanimBul, uygulamaKlasoru, yedekKlasoru } from "../../src/oyunlar/tanim.js";
+import { OYUNLAR, depoKlasoru, katmanSirala, paketKimligi, tanimBul, uygulamaKlasoru, yedekKlasoru } from "../../src/oyunlar/tanim.js";
 import { METRO_DIR, METRO_VFX, metroYok } from "../yardimci.js";
 
 describe("oyun tanımları", () => {
@@ -37,7 +37,11 @@ describe("oyun tanımları", () => {
     expect(paketKimligi(METRO_EXODUS_NORMAL)).toBe("metroexodus");
     expect(depoKlasoru(METRO_EXODUS_NORMAL)).toBe(depoKlasoru(METRO_EXODUS));
     expect(yedekKlasoru(METRO_EXODUS_NORMAL)).not.toBe(yedekKlasoru(METRO_EXODUS));
-    expect(METRO_EXODUS_NORMAL.katmanlar?.at(-1)).toBe("patch_04.vfx");
+    const desen = METRO_EXODUS_NORMAL.katmanDeseni!;
+    const adlar = ["patch_04.vfx", "content.vfx", "patch_01_shared.vfx", "patch.vfx0", "patch_00.vfx", "patch_01.vfx", "patch_05.vfx", "patch_04.vfs0"];
+    expect(katmanSirala(adlar.filter((a) => desen.test(a)))).toEqual(
+      ["patch_00.vfx", "patch_01.vfx", "patch_01_shared.vfx", "patch_04.vfx", "patch_05.vfx"],
+    );
   });
 
   it("hile korumalı oyunları tanır", () => {
