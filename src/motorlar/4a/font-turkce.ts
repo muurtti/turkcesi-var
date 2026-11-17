@@ -20,6 +20,24 @@ export const TURKCE_YUVALAR_EXODUS: TurkceYuvalar = { ğ: 105, Ğ: 106, ş: 107,
  */
 export const EXODUS_I_KODU = "";
 
+/** Exodus'ta Türkçe harflerin konduğu, metinlerde kullanılmayan kontrol karakterleri (EE'de 105–109 ve 111). */
+const EXODUS_KONTROL: Record<TurkceHarf, string> = { ğ: "\x01", Ğ: "\x02", ş: "\x03", Ş: "\x04", ı: "\x05", İ: "\x07" };
+
+/**
+ * Exodus karakter tablosunda Türkçe harflerin yuvaları. Sürümden sürüme tablo sırası değiştiği için (EE ile normal
+ * sürüm farklı) yuvalar sabit sayı değil, bu kontrol karakterlerinin tablodaki yerinden bulunur.
+ * Tablo zaten yamalıysa ya da karakterlerden biri yoksa undefined.
+ */
+export function exodusYuvalari(karakterler: string[]): TurkceYuvalar | undefined {
+  const y = {} as TurkceYuvalar;
+  for (const [harf, kontrol] of Object.entries(EXODUS_KONTROL) as [TurkceHarf, string][]) {
+    const i = karakterler.indexOf(kontrol);
+    if (i < 0) return undefined;
+    y[harf] = i;
+  }
+  return y;
+}
+
 /** Kalem uzayında (xOfset/yOfset koordinatları) RGBA bir resim parçası. */
 interface Parca {
   x: number; // kalem uzayında sol

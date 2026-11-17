@@ -5,7 +5,7 @@ import { join } from "node:path";
 import type { CeviriSatiri } from "../ceviri/satirlar.js";
 import type { TurkceYama } from "../motorlar/4a/turkce-yama.js";
 import { METRO_2033_REDUX } from "./metro2033redux.js";
-import { METRO_EXODUS } from "./metroexodus.js";
+import { METRO_EXODUS, METRO_EXODUS_NORMAL } from "./metroexodus.js";
 
 export interface OyunTanimi {
   /** Dosya ve klasör adlarında kullanılan kimlik ("metro2033redux"). */
@@ -21,13 +21,30 @@ export interface OyunTanimi {
   surecAdi: string;
   /** Steam'deki temiz content.vfx özeti (bilgi amaçlı). */
   temizDizinOzeti?: string;
+  /**
+   * content.vfx'in üstüne yüklenen güncelleme dizinleri, eskiden yeniye (Metro Exodus normal sürüm: patch_00…04).
+   * Yama bunlara da yazabilir; servis orijinallerini (kuruluysa yedekten) okuyup verir.
+   */
+  katmanlar?: string[];
+  /** Hazır çeviri paketi başka bir tanımınkiyse onun kimliği (aynı oyunun farklı sürümleri tek paketi paylaşır). */
+  paketKimligi?: string;
   /** Çevrilecek satırlar ve oyunun gösterebildiği karakterler (orijinal dizinden). */
-  kaynak(oyunKlasoru: string, orijinalVfx: Buffer): { satirlar: CeviriSatiri[]; kullanilabilir: Set<string> };
+  kaynak(oyunKlasoru: string, orijinalVfx: Buffer, katmanlar?: Katman[]): { satirlar: CeviriSatiri[]; kullanilabilir: Set<string> };
   /** Verilen çevirilerle Türkçe yamayı bellekte hazırlar (oyuna yazmaz). */
-  yamaHazirla(oyunKlasoru: string, ceviriler: Map<string, string>, orijinalVfx: Buffer): TurkceYama;
+  yamaHazirla(oyunKlasoru: string, ceviriler: Map<string, string>, orijinalVfx: Buffer, katmanlar?: Katman[]): TurkceYama;
 }
 
-export const OYUNLAR: OyunTanimi[] = [METRO_2033_REDUX, METRO_EXODUS];
+/** Bir güncelleme dizininin adı ve orijinal içeriği. */
+export interface Katman {
+  ad: string;
+  vfx: Buffer;
+}
+
+/** Çeviri paketinin ve geliştirici deposunun kimliği. */
+export const paketKimligi = (t: OyunTanimi) => t.paketKimligi ?? t.kimlik;
+
+// Normal Exodus, EE'den önce: elle seçilen klasörde ikisinin de dosyaları var, patch_04.vfx normal sürümü ayırır.
+export const OYUNLAR: OyunTanimi[] = [METRO_2033_REDUX, METRO_EXODUS_NORMAL, METRO_EXODUS];
 
 export function tanimBul(appId: number | undefined, klasorAdi: string): OyunTanimi | undefined {
   return OYUNLAR.find((t) => (appId !== undefined && t.steamAppId === appId) || t.klasorAdi.toLowerCase() === klasorAdi.toLowerCase());
@@ -37,5 +54,5 @@ export function uygulamaKlasoru(): string {
   return join(process.env.APPDATA ?? join(homedir(), "AppData", "Roaming"), "turkcesi-var");
 }
 export const yedekKlasoru = (t: OyunTanimi) => join(uygulamaKlasoru(), "yedekler", t.kimlik);
-export const depoKlasoru = (t: OyunTanimi) => join(uygulamaKlasoru(), "ceviriler", t.kimlik);
+export const depoKlasoru = (t: OyunTanimi) => join(uygulamaKlasoru(), "ceviriler", paketKimligi(t));
 export const ortakBellekYolu = () => join(uygulamaKlasoru(), "ortak-bellek.json");

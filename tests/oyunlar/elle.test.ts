@@ -61,7 +61,18 @@ describe("elle klasör seçimi", () => {
     expect(klasorTani(ex)?.tanim.kimlik).toBe("metroexodus");
     expect(klasorTani(join(k, "Epic", "Metro2033Redux"))?.tanim.kimlik).toBe("metro2033redux");
     writeFileSync(join(ex, "steam_appid.txt"), "412020");
-    expect(klasorTani(ex)).toBeUndefined();
+    expect(klasorTani(ex)).toBeUndefined(); // 412020 ama güncelleme dizini yok: ikisi de değil
+  });
+
+  it("Metro Exodus normal sürüm, patch_04.vfx'ten tanınır; EE ile karışmaz", () => {
+    const n = join(k, "Steam", "Metro Exodus");
+    mkdirSync(n, { recursive: true });
+    for (const d of ["MetroExodus.exe", "content.vfx", "patch_04.vfx"]) writeFileSync(join(n, d), "");
+    expect(klasorTani(n)?.tanim.kimlik).toBe("metroexodus-normal");
+    writeFileSync(join(n, "steam_appid.txt"), "412020");
+    expect(klasorTani(n)?.tanim.kimlik).toBe("metroexodus-normal");
+    writeFileSync(join(n, "steam_appid.txt"), "1449560");
+    expect(klasorTani(n)?.tanim.kimlik).toBe("metroexodus");
   });
 
   it("seçilen klasörler kaydedilir, aynısı iki kez eklenmez", () => {

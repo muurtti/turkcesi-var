@@ -37,3 +37,19 @@ export function exodusVfx(): Buffer {
   const yedek = adaylar.map((a) => join(yedekler, a, "orijinal", "content.vfx")).find((y) => existsSync(y));
   return readFileSync(yedek ?? join(EXODUS_DIR, "content.vfx"));
 }
+
+const EXODUS_NORMAL_VARSAYILAN = "C:/Program Files (x86)/Steam/steamapps/common/Metro Exodus";
+/** Metro Exodus normal sürüm (Steam 412020) klasörü; yoksa bu testler atlanır. Testler buraya ASLA yazmaz. */
+export const EXODUS_NORMAL_DIR =
+  process.env.EXODUS_NORMAL_DIR ?? (existsSync(EXODUS_NORMAL_VARSAYILAN) ? EXODUS_NORMAL_VARSAYILAN : "");
+export const exodusNormalYok = !EXODUS_NORMAL_DIR || !existsSync(join(EXODUS_NORMAL_DIR, "patch_04.vfx"));
+/** Normal Exodus'un ORİJİNAL dizin dosyası (yama kuruluysa yedekteki). */
+export function exodusNormalOrijinal(ad: string): Buffer {
+  const appdata = process.env.APPDATA ?? join(homedir(), "AppData", "Roaming");
+  const yedekler = join(appdata, "turkcesi-var", "yedekler");
+  const adaylar = existsSync(yedekler)
+    ? readdirSync(yedekler).filter((a) => a === "metroexodus-normal" || a.startsWith("metroexodus-normal@"))
+    : [];
+  const yedek = adaylar.map((a) => join(yedekler, a, "orijinal", ad)).find((y) => existsSync(y));
+  return readFileSync(yedek ?? join(EXODUS_NORMAL_DIR, ad));
+}

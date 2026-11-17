@@ -193,7 +193,7 @@ export function vfxYaz(d: VfxDizin): Buffer {
 export function girdiBul(d: VfxDizin, yolSonu: string): VfxGirdi[] {
   const s = yolSonu.toLowerCase().replaceAll("\\", "/");
   return d.dosyalar.filter((g) => {
-    const y = g.yol.toLowerCase();
+    const y = g.yol.toLowerCase().replaceAll("\\", "/"); // güncelleme dizinlerinde "content\localization/..." da var
     return y === s || y.endsWith("/" + s);
   });
 }

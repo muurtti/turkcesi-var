@@ -8,7 +8,7 @@ import { bosDepo, depoOku, uygulanabilirCeviriler, type CeviriDeposu } from "../
 import { ceviriSorunlari } from "../ceviri/dogrula.js";
 import { paketiDepoyaAl, type CeviriPaketi } from "../ceviri/paket.js";
 import { kaynakOzeti, type CeviriSatiri } from "../ceviri/satirlar.js";
-import type { OyunTanimi } from "../oyunlar/tanim.js";
+import { paketKimligi, type Katman, type OyunTanimi } from "../oyunlar/tanim.js";
 import { DegismisHatasi, geriYukle, uygula, yamaDurumu, yamayiUnut, yedekKlasoruSec } from "../ortak/yedek.js";
 import type { Ilerleme, OyunDurumu } from "./tipler.js";
 
@@ -29,6 +29,26 @@ interface Kaynak {
   satirlar: CeviriSatiri[];
   kullanilabilir: Set<string>;
   vfx: Buffer;
+  /** Güncelleme dizinlerinin orijinalleri (yalnızca tanımda `katmanlar` varsa). */
+  katmanlar: Katman[];
+}
+
+/**
+ * Aynı paketi paylaşan sürüm (ör. Metro Exodus normal ↔ EE): adı paketteki adla tutmayan satır, İngilizce metni
+ * birebir aynı bir satırın çevirisini alır. Paketin kendi oyununda değişiklik yapılmaz.
+ */
+function ozetleEsle(d: CeviriDeposu, satirlar: CeviriSatiri[]): CeviriDeposu {
+  const ozettenSatir = new Map<string, CeviriDeposu["satirlar"][string]>();
+  for (const x of Object.values(d.satirlar)) if (x.tr.trim() !== "" && !ozettenSatir.has(x.kaynakOzeti)) ozettenSatir.set(x.kaynakOzeti, x);
+  const yeni: CeviriDeposu = { ...d, satirlar: { ...d.satirlar } };
+  for (const s of satirlar) {
+    const oz = kaynakOzeti(s.en);
+    const mevcut = yeni.satirlar[s.anahtar];
+    if (mevcut && mevcut.kaynakOzeti === oz && mevcut.tr.trim() !== "") continue;
+    const es = ozettenSatir.get(oz);
+    if (es) yeni.satirlar[s.anahtar] = es;
+  }
+  return yeni;
 }
 
 export class Servis {
@@ -45,29 +65,33 @@ export class Servis {
   /** Uygulamayla gelen hazır paket (yoksa undefined). */
   private hazirPaket(t: OyunTanimi): CeviriPaketi | undefined {
     if (!this.s.paketKlasoru) return undefined;
-    if (!this.paketOnbellegi.has(t.kimlik)) {
-      const y = join(this.s.paketKlasoru, `${t.kimlik}.tr.json`);
+    const kimlik = paketKimligi(t);
+    if (!this.paketOnbellegi.has(kimlik)) {
+      const y = join(this.s.paketKlasoru, `${kimlik}.tr.json`);
       let p: CeviriPaketi | null = null;
       if (existsSync(y)) {
         p = JSON.parse(readFileSync(y, "utf8")) as CeviriPaketi;
-        if (p.oyun !== t.kimlik) p = null;
+        if (p.oyun !== kimlik) p = null;
       }
-      this.paketOnbellegi.set(t.kimlik, p);
+      this.paketOnbellegi.set(kimlik, p);
     }
-    return this.paketOnbellegi.get(t.kimlik) ?? undefined;
+    return this.paketOnbellegi.get(kimlik) ?? undefined;
   }
 
   /**
    * Oyuna konacak çeviriler: hazır paket; bu bilgisayarda geliştiricinin çeviri deposu varsa
    * (`%APPDATA%\turkcesi-var\ceviriler`) oradaki satırlar paketin önüne geçer. Oyuncuda depo yoktur.
    */
-  private kurulacakDepo(t: OyunTanimi): CeviriDeposu {
-    const yerel = depoOku(join(this.s.uygulamaKlasoru, "ceviriler", t.kimlik)) ?? bosDepo(t.kimlik, "");
+  private kurulacakDepo(t: OyunTanimi, satirlar: CeviriSatiri[]): CeviriDeposu {
+    const kimlik = paketKimligi(t);
+    const yerel = depoOku(join(this.s.uygulamaKlasoru, "ceviriler", kimlik)) ?? bosDepo(kimlik, "");
     const p = this.hazirPaket(t);
-    if (!p) return yerel;
-    const d = paketiDepoyaAl(p);
-    for (const [a, x] of Object.entries(yerel.satirlar)) if (x.tr.trim() !== "") d.satirlar[a] = x;
-    return d;
+    let d = yerel;
+    if (p) {
+      d = paketiDepoyaAl(p);
+      for (const [a, x] of Object.entries(yerel.satirlar)) if (x.tr.trim() !== "") d.satirlar[a] = x;
+    }
+    return t.paketKimligi ? ozetleEsle(d, satirlar) : d;
   }
 
   private oyunKapaliOlmali(t: OyunTanimi) {
@@ -76,12 +100,18 @@ export class Servis {
 
   /** Kaynak metin her zaman ORİJİNAL dizinden (yama kuruluysa yedekten) okunur; özetle önbelleğe alınır. */
   private kaynak(t: OyunTanimi, klasor: string): Kaynak {
-    const yedekte = join(this.yedek(t, klasor), "orijinal", "content.vfx");
-    const vfx = readFileSync(existsSync(yedekte) ? yedekte : join(klasor, "content.vfx"));
-    const anahtar = `${t.kimlik}|${klasor}|${sha256(vfx)}`;
+    const orijinal = (ad: string) => {
+      const yedekte = join(this.yedek(t, klasor), "orijinal", ad);
+      return existsSync(yedekte) ? yedekte : join(klasor, ad);
+    };
+    const vfx = readFileSync(orijinal("content.vfx"));
+    const katmanlar: Katman[] = (t.katmanlar ?? [])
+      .filter((ad) => existsSync(orijinal(ad)))
+      .map((ad) => ({ ad, vfx: readFileSync(orijinal(ad)) }));
+    const anahtar = [t.kimlik, klasor, sha256(vfx), ...katmanlar.map((k) => sha256(k.vfx))].join("|");
     let k = this.kaynakOnbellegi.get(anahtar);
     if (!k) {
-      k = { ...t.kaynak(klasor, vfx), vfx };
+      k = { ...t.kaynak(klasor, vfx, katmanlar), vfx, katmanlar };
       this.kaynakOnbellegi.set(anahtar, k);
     }
     return k;
@@ -89,7 +119,7 @@ export class Servis {
 
   oyunDurumu(t: OyunTanimi, klasor: string): OyunDurumu {
     const { satirlar, kullanilabilir } = this.kaynak(t, klasor);
-    const d = this.kurulacakDepo(t);
+    const d = this.kurulacakDepo(t, satirlar);
     const sec = uygulanabilirCeviriler(d, satirlar, kullanilabilir);
     const p = this.hazirPaket(t);
     let cevrili = 0;
@@ -133,11 +163,11 @@ export class Servis {
         await yamayiUnut(klasor, this.yedek(t, klasor)); // Steam yeni dosyaları koymuş: yalnızca yamanın artıkları silinir
       }
     }
-    const { satirlar, kullanilabilir, vfx } = this.kaynak(t, klasor);
-    const sec = uygulanabilirCeviriler(this.kurulacakDepo(t), satirlar, kullanilabilir);
+    const { satirlar, kullanilabilir, vfx, katmanlar } = this.kaynak(t, klasor);
+    const sec = uygulanabilirCeviriler(this.kurulacakDepo(t, satirlar), satirlar, kullanilabilir);
     if (sec.ceviriler.size === 0) throw new Error("Bu oyun için Türkçe çeviri bulunamadı. Uygulamayı güncelleyip tekrar deneyin.");
     ilerleme({ tur: "yuzde", deger: 10, metin: `${sec.ceviriler.size.toLocaleString("tr")} satır hazırlanıyor…` });
-    const y = t.yamaHazirla(klasor, sec.ceviriler, vfx);
+    const y = t.yamaHazirla(klasor, sec.ceviriler, vfx, katmanlar);
     ilerleme({ tur: "yuzde", deger: 80, metin: "Oyun dosyaları yedeklenip yazılıyor…" });
     this.oyunKapaliOlmali(t); // hazırlık birkaç saniye sürdü: oyun bu arada açılmış olabilir
     await uygula(klasor, this.yedek(t, klasor), y.degisecek, y.eklenecek);

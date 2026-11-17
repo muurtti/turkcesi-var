@@ -71,3 +71,21 @@ u32 3   u32 16   u8[16] guid   (content.vfx başlığındaki GUID'in aynısı)
 ```
 
 Yama, değişen dosyaları sıkıştırmadan yeni bir `contentNN.vfs0` (2033'te `content28.vfs0`) paketine koyar; paket tablosuna `content00.vfs0`'ın klasör listesiyle eklenir; kayıtlar ve kopya tablosundaki ilgili satırlar yeni pakete yönlendirilir.
+
+## Metro Exodus normal sürüm (Steam 412020): güncelleme dizinleri
+
+EE'nin aksine normal sürümde `content.vfx`'in üstüne güncelleme dizinleri yüklenir: `patch_00.vfx`, `patch_01.vfx`,
+`patch_01_shared.vfx`, `patch_02.vfx`, `patch_03.vfx`, `patch_04.vfx` (her biri kendi `patch_NN*.vfs*` paketleriyle;
+sürüm 3.1, GUID'leri ayrı). Bir dosyanın birden çok kopyası varsa en yeni dizindeki kullanılır.
+
+- `stable_us.lng`, `config.bin` ve font dokularının en yeni kopyaları `patch_04.vfx`'te (17 Kasım 2026 Steam sürümü,
+  içerik sürümü 521006). `content.vfx`'teki kopyalar eskidir (karakter tablosu bile farklı sıradadır).
+- Güncelleme dizinlerinde klasör adları ters bölü içerebilir: `content\localization/stable_us.lng` (tek klasör kaydı
+  `content\localization`). Yol karşılaştırmaları `\` → `/` sadeleştirilerek yapılır (`girdiBul`, `yolAnahtari`).
+- Paket kaydının son alanı (grup) güncelleme dizinlerinde dosya adındaki sayı değildir (`patch_04.vfs0` → 2).
+  Yama paketi, değişen dosyanın paketiyle aynı grup ve klasörlerle `patch_04_tr.vfs0` adıyla eklenir
+  (`content_NN.vfs0` adları temel dizinle çakışırdı).
+- Karakter tablosu sırası EE'den farklıdır (203 karakter; `\x01`…`\x07` 114–120'de). Türkçe harf yuvaları bu yüzden
+  sabit sayı değil, kontrol karakterlerinin yerinden bulunur (`exodusYuvalari`).
+- Satır adlarının ~%95'i EE ile aynı; adı farklı olanların çoğunun İngilizce metni birebir aynıdır. Servis, ortak
+  paketi kullanan sürümde bunları metin özetinden eşleştirir: 37.413 satırın 37.368'i Türkçe olur.

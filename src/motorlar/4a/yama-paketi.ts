@@ -29,16 +29,31 @@ function exodusPaketi(d: VfxDizin, ilkDegisen: VfxGirdi): { ad: string; grup: nu
   return { ad: `content_${String(grup).padStart(2, "0")}.vfs0`, grup, klasorler: [...(d.paketler[ilkDegisen.paketNo]?.klasorler ?? [])] };
 }
 
+export interface PaketSecenekleri {
+  /**
+   * Exodus güncelleme dizinleri (patch_04.vfx…) için: paket adı ve grubu değişen dosyanın kendi paketininkiyle
+   * aynı olur, ad verilen olur (content_NN adları temel dizinle çakışmasın diye).
+   */
+  ad?: string;
+}
+
+/** Dizindeki yolu karşılaştırma için sadeleştirir (güncelleme dizinlerinde "content\localization/..." da geçer). */
+export const yolAnahtari = (yol: string) => yol.toLowerCase().replaceAll("\\", "/");
+
 /**
  * `degisenler`: dizindeki yol ("content/localization/stable_us.lng") → yeni (açık) içerik.
  * Dosyalar sıkıştırılmadan saklanır (boyut = sıkıştırılmış boyut; oyun küçük dosyaları da böyle okur).
  */
-export function yamaPaketiOlustur(d: VfxDizin, degisenler: Map<string, Buffer>): YamaPaketi {
-  const yollar = new Map(d.dosyalar.map((g) => [g.yol.toLowerCase(), g]));
+export function yamaPaketiOlustur(d: VfxDizin, degisenler: Map<string, Buffer>, secenek: PaketSecenekleri = {}): YamaPaketi {
+  const yollar = new Map(d.dosyalar.map((g) => [yolAnahtari(g.yol), g]));
   const paketNo = d.paketler.length;
   const ilkYol = degisenler.keys().next().value;
-  const ilkDegisen = ilkYol === undefined ? undefined : yollar.get(ilkYol.toLowerCase().replaceAll("\\", "/"));
-  const exodus = d.surum[0] >= 3 && ilkDegisen ? exodusPaketi(d, ilkDegisen) : undefined;
+  const ilkDegisen = ilkYol === undefined ? undefined : yollar.get(yolAnahtari(ilkYol));
+  let exodus = d.surum[0] >= 3 && ilkDegisen ? exodusPaketi(d, ilkDegisen) : undefined;
+  if (exodus && secenek.ad && ilkDegisen) {
+    const kaynak = d.paketler[ilkDegisen.paketNo]!;
+    exodus = { ad: secenek.ad, grup: kaynak.boyut, klasorler: [...kaynak.klasorler] };
+  }
   const paketAdi = exodus?.ad ?? sonrakiPaketAdi(d);
 
   const veri = new IkiliYazici();
@@ -46,7 +61,7 @@ export function yamaPaketiOlustur(d: VfxDizin, degisenler: Map<string, Buffer>):
   veri.u32(0); // veri uzunluğu, sonra doldurulur
   const yeniKonum = new Map<number, { ofset: number; boyut: number }>();
   for (const [yol, icerik] of degisenler) {
-    const g = yollar.get(yol.toLowerCase().replaceAll("\\", "/"));
+    const g = yollar.get(yolAnahtari(yol));
     if (!g) throw new Error(`Yama: dizinde bulunamadı: ${yol}`);
     yeniKonum.set(g.sira, { ofset: veri.konum, boyut: icerik.length });
     veri.bayt(icerik);
