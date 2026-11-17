@@ -45,6 +45,8 @@
 
 ## Türkçesi hazır oyunlar
 
+Güncel liste, oyun içi görüntüler ve hangi sürümlerin desteklendiği: **[turkcesivar.github.io/oyunlar](https://turkcesivar.github.io/oyunlar/)**
+
 | Oyun | Kapsam | Durum |
 |---|---|---|
 | **Metro 2033 Redux** (Steam, Epic) | 21.442 satır: menüler, altyazılar, notlar, ipuçları | ✅ Hazır |
