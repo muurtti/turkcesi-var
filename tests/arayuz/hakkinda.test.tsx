@@ -16,6 +16,10 @@ describe("Hakkında", () => {
     expect(disBaglanti).toHaveBeenCalledWith("https://github.com/turkcesivar/turkcesi-var");
     fireEvent.click(screen.getByRole("button", { name: "Çeviri hatası bildir" }));
     expect(disBaglanti).toHaveBeenLastCalledWith("https://github.com/turkcesivar/turkcesi-var/issues/new?template=ceviri-hatasi.yml");
+    const topluluk = screen.getByRole("region", { name: "Topluluk" });
+    expect(topluluk.textContent).toContain("sıradaki oyunu birlikte seçiyoruz");
+    fireEvent.click(screen.getByRole("button", { name: /Discord'a katıl/ }));
+    expect(disBaglanti).toHaveBeenLastCalledWith("https://discord.gg/nnNUCMUBJx");
     fireEvent.click(screen.getByRole("button", { name: "Kullanım koşulları" }));
     expect(screen.getByRole("dialog", { name: "Kullanım koşulları" })).toBeTruthy();
     expect(screen.getByText(/Ücretsizdir, garanti verilmez/)).toBeTruthy();

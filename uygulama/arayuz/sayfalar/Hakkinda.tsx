@@ -5,7 +5,7 @@ import type { GuncellemeDurumu } from "../../../src/servis/api.js";
 import { Kosullar } from "../bilesenler/Kosullar.js";
 import { Simge } from "../bilesenler/Simge.js";
 import { Dugme } from "../bilesenler/temel.js";
-import { DESTEK_ADRESI, PROJE_ADRESI } from "../sabitler.js";
+import { DESTEK_ADRESI, DISCORD_ADRESI, PROJE_ADRESI } from "../sabitler.js";
 
 /** Güncelleme denetimi başarısız olduğunda nedene göre doğru, sakin bir açıklama. */
 export function guncellemeHatasiMetni(neden: "yayin-yok" | "internet" | "diger"): string {
@@ -103,6 +103,21 @@ export function Hakkinda({
           <li>Oyuna program ya da DLL eklenmez; yalnızca oyunun kendi metin ve yazı tipi dosyaları değişir.</li>
           <li>Açık kaynak: ne yaptığını herkes görebilir.</li>
         </ul>
+      </section>
+
+      <section className="panel hakkinda" aria-label="Topluluk">
+        <div>
+          <h2 className="panel-baslik">
+            <Simge ad="sohbet" /> Topluluk
+          </h2>
+          <p className="soluk">
+            Discord sunucumuzda sıradaki oyunu birlikte seçiyoruz: oyun iste, var olan isteklere 👍 bırak, çeviri hatası bildir
+            ya da kurulumda yardım al. Yeni oyun ve sürüm duyurularını da ilk orada paylaşıyoruz.
+          </p>
+        </div>
+        <Dugme tur="ana" simge="sohbet" onClick={() => void window.tv.disBaglanti(DISCORD_ADRESI)}>
+          Discord&apos;a katıl
+        </Dugme>
       </section>
 
       <section className="panel" aria-label="Lisans">

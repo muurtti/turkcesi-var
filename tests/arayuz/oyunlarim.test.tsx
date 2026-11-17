@@ -54,8 +54,10 @@ describe("Oyunlarım", () => {
     render(<Oyunlarim {...ortak} oyunlar={[METRO, oyun("GodOfWar", "desteklenmiyor")]} durumlar={{}} />);
     const diger = screen.getByRole("region", { name: "Diğer oyunlar" });
     expect(within(diger).getByText(/kendi başına çevirmez/)).toBeTruthy();
-    fireEvent.click(within(diger).getByRole("button", { name: "Oyun iste" }));
-    expect(disBaglanti).toHaveBeenCalledWith("https://github.com/turkcesivar/turkcesi-var/issues/new?template=oyun-istegi.yml");
+    fireEvent.click(within(diger).getByRole("button", { name: /Discord'da oyun iste/ }));
+    expect(disBaglanti).toHaveBeenLastCalledWith("https://discord.gg/nnNUCMUBJx");
+    fireEvent.click(within(diger).getByRole("button", { name: "GitHub'da iste" }));
+    expect(disBaglanti).toHaveBeenLastCalledWith("https://github.com/turkcesivar/turkcesi-var/issues/new?template=oyun-istegi.yml");
   });
 
   it("desteklenen oyun bulunamazsa hangi dosyaların aranacağını gösterir ve klasör seçtirir", () => {
