@@ -12,6 +12,8 @@
   <a href="https://github.com/turkcesivar/turkcesi-var/issues/new?template=oyun-istegi.yml"><b>🎮 Oyun iste</b></a>
   &nbsp;·&nbsp;
   <a href="https://discord.gg/nnNUCMUBJx"><b>💬 Discord</b></a>
+  &nbsp;·&nbsp;
+  <a href="https://turkcesivar.github.io"><b>🌐 Web sitesi</b></a>
 </p>
 
 <p align="center">
