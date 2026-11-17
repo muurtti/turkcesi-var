@@ -50,7 +50,9 @@ Güncel liste, oyun içi görüntüler ve hangi sürümlerin desteklendiği: **[
 | Oyun | Kapsam | Durum |
 |---|---|---|
 | **Metro 2033 Redux** (Steam, Epic) | 21.442 satır: menüler, altyazılar, notlar, ipuçları | ✅ Hazır |
+| **Metro Last Light Redux** (Steam) | 21.442 satır: menüler, altyazılar, görev defteri, ipuçları, silah ekranı | ✅ Hazır |
 | **Metro Exodus Enhanced Edition** (Steam, Epic) | 37.652 satır: menüler, altyazılar, notlar, düşman konuşmaları, iki DLC (The Two Colonels, Sam's Story) | ✅ Hazır |
+| **Metro Exodus** (normal sürüm, Steam) | Enhanced Edition ile aynı çeviri: menüler, altyazılar, notlar, iki DLC | ✅ Hazır |
 
 Yeni oyunlar eklendikçe uygulama kendini günceller; ayrıca bir şey indirmen gerekmez.
 
@@ -73,7 +75,8 @@ olan çevrimiçi oyunlar güvenlik için çevrilmez.)
 
 Oyunu bulamazsa kartındaki **Klasörü seç** ile oyunun klasörünü göster. Uygulama hangi
 dosyaların olduğu klasörü araman gerektiğini yazar (Metro 2033 Redux için `metro.exe`,
-`content.vfx` ve `2033` klasörü; Metro Exodus için `MetroExodus.exe` ve `content.vfx`). Üst klasörü seçersen içinde kendisi arar.
+`content.vfx` ve `2033` klasörü; Metro Last Light Redux için `metro.exe`, `content.vfx` ve `outro_good.ogv`;
+Metro Exodus için `MetroExodus.exe` ve `content.vfx`). Üst klasörü seçersen içinde kendisi arar.
 
 Geri almak için aynı yerde **Türkçeyi kaldır**: oyun birebir eski haline döner.
 

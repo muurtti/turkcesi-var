@@ -9,6 +9,8 @@ body:
       label: Oyun
       options:
         - Metro 2033 Redux
+        - Metro Last Light Redux
+        - Metro Exodus (Enhanced Edition ya da normal sürüm)
     validations:
       required: true
   - type: input
