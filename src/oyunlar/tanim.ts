@@ -5,6 +5,7 @@ import { join } from "node:path";
 import type { CeviriSatiri } from "../ceviri/satirlar.js";
 import type { TurkceYama } from "../motorlar/4a/turkce-yama.js";
 import { METRO_2033_REDUX } from "./metro2033redux.js";
+import { METRO_LAST_LIGHT_REDUX } from "./metrolastlightredux.js";
 import { METRO_EXODUS, METRO_EXODUS_NORMAL } from "./metroexodus.js";
 
 export interface OyunTanimi {
@@ -54,7 +55,7 @@ export function katmanSirala(adlar: string[]): string[] {
 export const paketKimligi = (t: OyunTanimi) => t.paketKimligi ?? t.kimlik;
 
 // Normal Exodus, EE'den önce: elle seçilen klasörde ikisinin de dosyaları var, patch_04.vfx normal sürümü ayırır.
-export const OYUNLAR: OyunTanimi[] = [METRO_2033_REDUX, METRO_EXODUS_NORMAL, METRO_EXODUS];
+export const OYUNLAR: OyunTanimi[] = [METRO_2033_REDUX, METRO_LAST_LIGHT_REDUX, METRO_EXODUS_NORMAL, METRO_EXODUS];
 
 export function tanimBul(appId: number | undefined, klasorAdi: string): OyunTanimi | undefined {
   return OYUNLAR.find((t) => (appId !== undefined && t.steamAppId === appId) || t.klasorAdi.toLowerCase() === klasorAdi.toLowerCase());

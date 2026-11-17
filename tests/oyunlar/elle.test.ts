@@ -75,6 +75,19 @@ describe("elle klasör seçimi", () => {
     expect(klasorTani(n)?.tanim.kimlik).toBe("metroexodus");
   });
 
+  it("Last Light Redux, outro_good.ogv'den tanınır; Metro 2033 ile karışmaz", () => {
+    const ll = join(k, "Oyunlar", "Metro Last Light Redux");
+    mkdirSync(ll, { recursive: true });
+    for (const d of ["metro.exe", "content.vfx", "outro_good.ogv"]) writeFileSync(join(ll, d), "");
+    metroYap(join(k, "Oyunlar", "Metro 2033 Redux"));
+    expect(klasorTani(ll)?.tanim.kimlik).toBe("metrolastlightredux");
+    expect(klasorTani(join(k, "Oyunlar", "Metro 2033 Redux"))?.tanim.kimlik).toBe("metro2033redux");
+    writeFileSync(join(ll, "steam_appid.txt"), "287390");
+    expect(klasorTani(ll)?.tanim.kimlik).toBe("metrolastlightredux");
+    writeFileSync(join(ll, "steam_appid.txt"), "286690");
+    expect(klasorTani(ll)).toBeUndefined();
+  });
+
   it("seçilen klasörler kaydedilir, aynısı iki kez eklenmez", () => {
     const uyg = join(k, "uyg");
     elleKlasorEkle(uyg, { kimlik: "metro2033redux", klasor: "D:/Oyunlar/Metro" });

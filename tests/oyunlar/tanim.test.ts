@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { hileKorumaliMi } from "../../src/oyunlar/hile-korumali.js";
 import { METRO_2033_REDUX } from "../../src/oyunlar/metro2033redux.js";
 import { METRO_EXODUS, METRO_EXODUS_NORMAL } from "../../src/oyunlar/metroexodus.js";
+import { METRO_LAST_LIGHT_REDUX } from "../../src/oyunlar/metrolastlightredux.js";
 import { OYUNLAR, depoKlasoru, katmanSirala, paketKimligi, tanimBul, uygulamaKlasoru, yedekKlasoru } from "../../src/oyunlar/tanim.js";
 import { METRO_DIR, METRO_VFX, metroYok } from "../yardimci.js";
 
@@ -42,6 +43,23 @@ describe("oyun tanımları", () => {
     expect(katmanSirala(adlar.filter((a) => desen.test(a)))).toEqual(
       ["patch_00.vfx", "patch_01.vfx", "patch_01_shared.vfx", "patch_04.vfx", "patch_05.vfx"],
     );
+  });
+
+  it("Metro Last Light Redux (287390): ayrı yedek, Metro 2033 ile ortak paket ve depo", () => {
+    expect(METRO_LAST_LIGHT_REDUX).toMatchObject({
+      kimlik: "metrolastlightredux",
+      ad: "Metro Last Light Redux",
+      steamAppId: 287390,
+      klasorAdi: "Metro Last Light Redux",
+      motor: "4a",
+      surecAdi: "metro.exe",
+    });
+    expect(OYUNLAR.indexOf(METRO_LAST_LIGHT_REDUX)).toBe(OYUNLAR.indexOf(METRO_2033_REDUX) + 1);
+    expect(tanimBul(287390, "x")).toBe(METRO_LAST_LIGHT_REDUX);
+    expect(tanimBul(undefined, "Metro Last Light Redux")).toBe(METRO_LAST_LIGHT_REDUX);
+    expect(paketKimligi(METRO_LAST_LIGHT_REDUX)).toBe("metro2033redux");
+    expect(depoKlasoru(METRO_LAST_LIGHT_REDUX)).toBe(depoKlasoru(METRO_2033_REDUX));
+    expect(yedekKlasoru(METRO_LAST_LIGHT_REDUX)).not.toBe(yedekKlasoru(METRO_2033_REDUX));
   });
 
   it("hile korumalı oyunları tanır", () => {
