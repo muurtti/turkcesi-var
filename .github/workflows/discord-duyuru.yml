@@ -1,0 +1,24 @@
+# Yeni sürüm yayınlanınca Discord #duyurular kanalına Türkçe duyuru kartı gönderir
+# ve 🔔 "Duyuru Bildirimi" rolündekileri etiketler. Webhook adresi depo sırrında: DISCORD_WEBHOOK.
+name: Discord duyurusu
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  duyur:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Duyuru kartını gönder
+        run: node .github/scripts/discord-duyuru.mjs
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_ROL_ID: "1572045814799405197"
