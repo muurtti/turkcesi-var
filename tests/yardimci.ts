@@ -53,3 +53,19 @@ export function exodusNormalOrijinal(ad: string): Buffer {
   const yedek = adaylar.map((a) => join(yedekler, a, "orijinal", ad)).find((y) => existsSync(y));
   return readFileSync(yedek ?? join(EXODUS_NORMAL_DIR, ad));
 }
+
+const LAST_LIGHT_VARSAYILAN = "C:/Program Files (x86)/Steam/steamapps/common/Metro Last Light Redux";
+/** Metro Last Light Redux klasörü; yoksa bu testler atlanır. Testler buraya ASLA yazmaz. */
+export const LAST_LIGHT_DIR = process.env.LAST_LIGHT_DIR ?? (existsSync(LAST_LIGHT_VARSAYILAN) ? LAST_LIGHT_VARSAYILAN : "");
+export const lastLightYok = !LAST_LIGHT_DIR || !existsSync(join(LAST_LIGHT_DIR, "outro_good.ogv"));
+/** Last Light'ın ORİJİNAL content.vfx'i: Türkçe yama kuruluysa yedekteki, değilse oyundaki. */
+export function lastLightVfx(): Buffer {
+  if (lastLightYok) return Buffer.alloc(0);
+  const appdata = process.env.APPDATA ?? join(homedir(), "AppData", "Roaming");
+  const yedekler = join(appdata, "turkcesi-var", "yedekler");
+  const adaylar = existsSync(yedekler)
+    ? readdirSync(yedekler).filter((a) => a === "metrolastlightredux" || a.startsWith("metrolastlightredux@"))
+    : [];
+  const yedek = adaylar.map((a) => join(yedekler, a, "orijinal", "content.vfx")).find((y) => existsSync(y));
+  return readFileSync(yedek ?? join(LAST_LIGHT_DIR, "content.vfx"));
+}

@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { hileKorumaliMi } from "../../src/oyunlar/hile-korumali.js";
@@ -5,7 +6,8 @@ import { METRO_2033_REDUX } from "../../src/oyunlar/metro2033redux.js";
 import { METRO_EXODUS, METRO_EXODUS_NORMAL } from "../../src/oyunlar/metroexodus.js";
 import { METRO_LAST_LIGHT_REDUX } from "../../src/oyunlar/metrolastlightredux.js";
 import { OYUNLAR, depoKlasoru, katmanSirala, paketKimligi, tanimBul, uygulamaKlasoru, yedekKlasoru } from "../../src/oyunlar/tanim.js";
-import { METRO_DIR, METRO_VFX, metroYok } from "../yardimci.js";
+import { kaynakOzeti } from "../../src/ceviri/satirlar.js";
+import { LAST_LIGHT_DIR, METRO_DIR, METRO_VFX, lastLightVfx, lastLightYok, metroYok } from "../yardimci.js";
 
 describe("oyun tanımları", () => {
   it("Metro 2033 Redux tanımı", () => {
@@ -90,5 +92,29 @@ describe.skipIf(metroYok)("Metro tanımı (gerçek oyun)", () => {
     expect(k.satirlar.length).toBe(21442);
     expect(k.kullanilabilir.has("ğ")).toBe(true);
     expect(k.kullanilabilir.has("\u0001")).toBe(false);
+  });
+});
+
+describe.skipIf(lastLightYok)("Last Light tanımı (gerçek oyun, yalnız bellekte; oyuna yazmaz)", () => {
+  const paket = JSON.parse(readFileSync(join(__dirname, "..", "..", "paketler", "metro2033redux.tr.json"), "utf8")) as {
+    satirlar: Record<string, { tr: string; kaynakOzeti: string }>;
+  };
+  const vfx = lastLightVfx();
+
+  it("ortak paket bütün satırları birebir kapsar", () => {
+    const k = METRO_LAST_LIGHT_REDUX.kaynak(LAST_LIGHT_DIR, vfx);
+    expect(k.satirlar.length).toBe(21442);
+    const eslesmeyen = k.satirlar.filter((s) => paket.satirlar[s.anahtar]?.kaynakOzeti !== kaynakOzeti(s.en));
+    expect(eslesmeyen.map((s) => s.anahtar)).toEqual([]);
+  });
+
+  it("yama hazırlanır: font atlanmaz, yalnız content.vfx değişir, tek paket eklenir", () => {
+    const ceviriler = new Map(Object.entries(paket.satirlar).map(([a, s]) => [a, s.tr]));
+    const y = METRO_LAST_LIGHT_REDUX.yamaHazirla(LAST_LIGHT_DIR, ceviriler, vfx);
+    expect(y.atlananFontlar).toEqual([]);
+    expect(y.yamalananFontlar.length).toBeGreaterThanOrEqual(5);
+    expect(Object.keys(y.degisecek)).toEqual(["content.vfx"]);
+    expect(Object.keys(y.eklenecek)).toHaveLength(1);
+    expect(Object.keys(y.eklenecek)[0]).toMatch(/\.vfs0$/);
   });
 });
