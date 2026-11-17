@@ -47,7 +47,7 @@
 
 | Oyun | Kapsam | Durum |
 |---|---|---|
-| **Metro 2033 Redux** (Steam) | 21.442 satır: menüler, altyazılar, notlar, ipuçları | ✅ Hazır |
+| **Metro 2033 Redux** (Steam, Epic) | 21.442 satır: menüler, altyazılar, notlar, ipuçları | ✅ Hazır |
 | **Metro Exodus Enhanced Edition** (Steam, Epic) | 37.652 satır: menüler, altyazılar, notlar, düşman konuşmaları, iki DLC (The Two Colonels, Sam's Story) | ✅ Hazır |
 
 Yeni oyunlar eklendikçe uygulama kendini günceller; ayrıca bir şey indirmen gerekmez.
