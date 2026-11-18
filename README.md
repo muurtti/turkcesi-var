@@ -49,8 +49,8 @@ Güncel liste, oyun içi görüntüler ve hangi sürümlerin desteklendiği: **[
 
 | Oyun | Kapsam | Durum |
 |---|---|---|
-| **Metro 2033 Redux** (Steam, Epic) | 21.442 satır çevrildi (iki Redux oyununun ortak metin tablosu): menüler, altyazılar, notlar, ipuçları | ✅ Hazır |
-| **Metro Last Light Redux** (Steam) | 21.442 satır çevrildi (iki Redux oyununun ortak metin tablosu): menüler, altyazılar, görev defteri, ipuçları, silah ekranı | ✅ Hazır |
+| **Metro 2033 Redux** (Steam, Epic) | 21.442 satır: menüler, altyazılar, notlar, ipuçları | ✅ Hazır |
+| **Metro Last Light Redux** (Steam) | 21.442 satır: menüler, altyazılar, görev defteri, ipuçları, silah ekranı | ✅ Hazır |
 | **Metro Exodus Enhanced Edition** (Steam, Epic) | 37.652 satır: menüler, altyazılar, notlar, düşman konuşmaları, iki DLC (The Two Colonels, Sam's Story) | ✅ Hazır |
 | **Metro Exodus** (normal sürüm, Steam) | Enhanced Edition ile aynı çeviri: menüler, altyazılar, notlar, iki DLC | ✅ Hazır |
 
