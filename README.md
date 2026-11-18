@@ -100,7 +100,7 @@ Resimli anlatım: [Steam rehberi: Metro 2033 Redux'u tamamen Türkçe yapma](htt
 - **Kayıtlarına dokunmaz.** Oyun kayıtların Steam'in kendi klasöründedir; Türkçe kurup
   kaldırmak onları etkilemez.
 - **Açık kaynak.** Uygulamanın ne yaptığını bu depoda satır satır görebilirsin.
-- **Virüs taraması temiz.** 0.6.1 kurulum dosyası [VirusTotal'da 0/66](https://www.virustotal.com/gui/file/11f18389391760e51e58a85116a70d8be100d3905d26c25c22f34769d94961fa): hiçbir antivirüs işaretlemedi.
+- **Virüs taraması temiz.** 0.6.2 kurulum dosyası [VirusTotal'da 0/67](https://www.virustotal.com/gui/file/706b2d51d194b08ff33dd06626072e4ba3e32f411f00c2899a462d6ebeaa475f): hiçbir antivirüs işaretlemedi.
 
 ## Güncellemeler
 
