@@ -10,7 +10,7 @@ import { paketiDepoyaAl, type CeviriPaketi } from "../ceviri/paket.js";
 import { kaynakOzeti, type CeviriSatiri } from "../ceviri/satirlar.js";
 import { uePaketCevirileri, ueYamaHazirla } from "../motorlar/ue/turkce-yama.js";
 import { katmanSirala, paketKimligi, type Katman, type OyunTanimi, type Tanim4A, type TanimUe5 } from "../oyunlar/tanim.js";
-import { DegismisHatasi, geriYukle, uygula, yamaDurumu, yamayiUnut, yedekKlasoruSec } from "../ortak/yedek.js";
+import { DegismisHatasi, geriYukle, sahipsizEklenmisDosyayiSil, uygula, yamaDurumu, yamayiUnut, yedekKlasoruSec } from "../ortak/yedek.js";
 import type { Ilerleme, OyunDurumu } from "./tipler.js";
 
 export interface ServisSecenekleri {
@@ -126,11 +126,19 @@ export class Servis {
     return { p, ceviriler: p ? uePaketCevirileri(p) : new Map() };
   }
 
+  /**
+   * Unreal paketi bize özgü adla eklenir: yedek kaydı kaybolsa da (klasör taşındı, uygulama klasörü silindi)
+   * oyundaki o dosya bizimdir. Kayıt yok ama dosya varsa "sahipsiz".
+   */
+  private ueSahipsiz(t: TanimUe5, klasor: string): boolean {
+    return yamaDurumu(klasor, this.yedek(t, klasor)) === "yok" && existsSync(join(klasor, t.pakYolu));
+  }
+
   oyunDurumu(t: OyunTanimi, klasor: string): OyunDurumu {
     if (t.motor === "ue5") {
       const { p, ceviriler } = this.ueCevirileri(t);
       const n = ceviriler.size;
-      const yama = yamaDurumu(klasor, this.yedek(t, klasor));
+      const yama = this.ueSahipsiz(t, klasor) ? "kurulu" : yamaDurumu(klasor, this.yedek(t, klasor));
       return {
         tanim: { kimlik: t.kimlik, ad: t.ad },
         klasor,
@@ -191,6 +199,7 @@ export class Servis {
       if (ceviriler.size === 0) throw new Error(CEVIRI_YOK);
       ilerleme({ tur: "yuzde", deger: 10, metin: `${ceviriler.size.toLocaleString("tr")} satır hazırlanıyor…` });
       y = ueYamaHazirla(t, ceviriler);
+      if (this.ueSahipsiz(t, klasor)) sahipsizEklenmisDosyayiSil(klasor, this.yedek(t, klasor), t.pakYolu);
     } else {
       const { satirlar, kullanilabilir, vfx, katmanlar } = this.kaynak(t, klasor);
       const sec = uygulanabilirCeviriler(this.kurulacakDepo(t, satirlar), satirlar, kullanilabilir);
@@ -208,6 +217,10 @@ export class Servis {
 
   async kaldir(t: OyunTanimi, klasor: string): Promise<void> {
     this.oyunKapaliOlmali(t);
+    if (t.motor === "ue5" && this.ueSahipsiz(t, klasor)) {
+      sahipsizEklenmisDosyayiSil(klasor, this.yedek(t, klasor), t.pakYolu);
+      return;
+    }
     try {
       await geriYukle(klasor, this.yedek(t, klasor));
     } catch (e) {

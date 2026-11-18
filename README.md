@@ -77,7 +77,7 @@ olan çevrimiçi oyunlar güvenlik için çevrilmez.)
 Oyunu bulamazsa kartındaki **Klasörü seç** ile oyunun klasörünü göster. Uygulama hangi
 dosyaların olduğu klasörü araman gerektiğini yazar (Metro 2033 Redux için `metro.exe`,
 `content.vfx` ve `2033` klasörü; Metro Last Light Redux için `metro.exe`, `content.vfx` ve `outro_good.ogv`;
-Metro Exodus için `MetroExodus.exe` ve `content.vfx`; Mafia: The Old Country için `MafiaTheOldCountry` klasörü). Üst klasörü seçersen içinde kendisi arar.
+Metro Exodus için `MetroExodus.exe` ve `content.vfx`; Mafia: The Old Country için içinde `MafiaTheOldCountry` klasörü olan oyun klasörü). Üst klasörü seçersen içinde kendisi arar.
 
 Geri almak için aynı yerde **Türkçeyi kaldır**: oyun birebir eski haline döner.
 
@@ -106,7 +106,9 @@ Resimli anlatım: [Steam rehberi: Metro 2033 Redux'u tamamen Türkçe yapma](htt
 
 - **Oyun güncellenirse:** Steam bir oyunu güncellediğinde Türkçe yama devre dışı kalır ve oyun
   İngilizce açılır. Türkçesi Var'ı açman yeter; durumu fark eder ve Türkçeyi yeni sürüme
-  kendiliğinden yeniden kurar.
+  kendiliğinden yeniden kurar. Unreal Engine oyunlarında (ör. Mafia: The Old Country) Türkçe
+  güncellemeden sonra da yerinde kalır; yalnızca güncellemeyle İngilizcesi değişen satırlar,
+  düzeltilmiş çeviri gelene kadar İngilizce görünür.
 - **Uygulama güncellenirse:** Yeni sürüm çıktığında uygulama "Güncelleme var" der. Sen *İndir*
   deyince indirir (*Sonra* dersen hiçbir şey inmez); *Yeniden başlat ve güncelle* ile birkaç saniyede kurulur.
 - **Çeviri düzeltilirse:** Yeni sürüm düzeltilmiş çeviriler getirdiyse, uygulamayı açtığında

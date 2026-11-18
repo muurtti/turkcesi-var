@@ -273,6 +273,16 @@ export async function geriYukle(oyunKlasoru: string, yedekKlasoru: string): Prom
 }
 
 /**
+ * Kaydı kaybolmuş (oyun klasörü taşınmış, uygulama klasörü silinmiş) ama adı yalnızca bize ait olan eklenmiş bir
+ * dosyayı siler (Unreal oyunlarındaki `..._TurkcesiVar_P.pak`). Kaydı olan yamada kullanılmaz; oyunun kendi
+ * dosyalarına dokunmaz.
+ */
+export function sahipsizEklenmisDosyayiSil(oyunKlasoru: string, yedekKlasoru: string, rel: string): void {
+  if (kayitOku(yedekKlasoru)) throw new Error("Yama kaydı var; sahipsiz dosya silme yalnızca kayıt kaybolmuşsa kullanılır.");
+  if (existsSync(join(oyunKlasoru, rel))) hepYaDaHic(oyunKlasoru, new Map([[rel, null]]));
+}
+
+/**
  * Oyun dosyaları yamadan sonra başka biçimde değiştiyse (ör. Steam güncellemesi) çıkış yolu:
  * değişen dosyalara DOKUNMAZ; yalnızca yamanın eklediği dosyaları siler ve kaydı/yedeği unutur.
  */

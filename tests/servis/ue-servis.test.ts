@@ -66,6 +66,21 @@ describe("Unreal oyunu servisi", () => {
     expect(servis.oyunDurumu(M, oyun).yama).toBe("yok");
   });
 
+  it("yedek kaydı kayıpken (klasör taşındı / APPDATA silindi) oyundaki paket bizimdir: kurulu görünür, yenilenir, kaldırılır", async () => {
+    paketYaz();
+    const yol = join(oyun, M.pakYolu);
+    writeFileSync(yol, "eski sürümün paketi");
+    expect(servis.oyunDurumu(M, oyun).yama).toBe("kurulu");
+    await servis.turkceYap(M, oyun, sessiz);
+    expect(locresOku(pakOku(readFileSync(yol)).dosyalar[0]!.veri)).toHaveLength(2);
+    await servis.kaldir(M, oyun);
+    expect(existsSync(yol)).toBe(false);
+    expect(readFileSync(join(oyun, OYUN_PAKI), "utf8")).toBe("oyunun kendi paketi v1");
+    writeFileSync(yol, "yine sahipsiz");
+    await servis.kaldir(M, oyun);
+    expect(existsSync(yol)).toBe(false);
+  });
+
   it("paket yoksa Türkçe yap hata verir ve oyun klasörüne bir şey yazmaz", async () => {
     await expect(servis.turkceYap(M, oyun, sessiz)).rejects.toThrow("Bu oyun için Türkçe çeviri bulunamadı");
     expect(readdirSync(join(oyun, "MafiaTheOldCountry", "Content", "Paks"))).toEqual(["pakchunk0-Windows.pak"]);
