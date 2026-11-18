@@ -1,6 +1,6 @@
 {
   "name": "turkcesi-var",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "private": true,
   "description": "Oyunlara güvenli, açık kaynak Türkçe altyazı.",
   "license": "GPL-3.0-only",
@@ -12,7 +12,7 @@
     "uygulama": "electron-vite dev",
     "uygulama:derle": "electron-vite build",
     "uygulama:onizle": "electron-vite preview",
-    "exe": "node scripts/kosullar-txt.mjs && electron-vite build && electron-builder --win nsis --x64 --publish never && node scripts/zip-yap.mjs"
+    "exe": "node scripts/kosullar-txt.mjs && electron-vite build && electron-builder --win nsis --x64 --publish never && node scripts/paket-denetle.mjs && node scripts/zip-yap.mjs"
   },
   "devDependencies": {
     "@testing-library/react": "^16.3.3",
