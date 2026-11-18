@@ -4,7 +4,7 @@
  "dil": "tr",
  "oyunSurumu": "64af06864e2027ca6f406be296b3793cbf239278d3fb23e4b6a00670c13f8fe1",
  "model": "",
- "tarih": "2026-11-18T18:31:54.729Z",
+ "tarih": "2026-11-18T20:20:11.924Z",
  "cevirenler": [
   "Türkçesi Var"
  ],
@@ -248761,7 +248761,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_ACCESSIBILITY": {
-   "tr": "Erişilebilirlik",
+   "tr": "ERİŞİLEBİLİRLİK",
    "kaynakOzeti": "d3368cbffe23c98d",
    "ue": [
     1794465891,
@@ -248770,7 +248770,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_ADVANCED": {
-   "tr": "Gelişmiş",
+   "tr": "GELİŞMİŞ",
    "kaynakOzeti": "9f088dbebd6c3c70",
    "ue": [
     1794465891,
@@ -248779,7 +248779,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_ADVANCEDHUD": {
-   "tr": "Gelişmiş HUD Ayarları",
+   "tr": "GELİŞMİŞ HUD AYARLARI",
    "kaynakOzeti": "8324457dfe9760d5",
    "ue": [
     1794465891,
@@ -248788,7 +248788,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_AIMASSIST": {
-   "tr": "Nişan Yardımı",
+   "tr": "NİŞAN YARDIMI",
    "kaynakOzeti": "0d5264da45766ec0",
    "ue": [
     1794465891,
@@ -248797,7 +248797,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_AUDIO": {
-   "tr": "Ses",
+   "tr": "SES",
    "kaynakOzeti": "bc1b88907d3b748a",
    "ue": [
     1794465891,
@@ -248806,7 +248806,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_CAMERA": {
-   "tr": "Kamera",
+   "tr": "KAMERA",
    "kaynakOzeti": "03494b0d1f803522",
    "ue": [
     1794465891,
@@ -248815,7 +248815,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_CONTROLLER": {
-   "tr": "Kumanda",
+   "tr": "KUMANDA",
    "kaynakOzeti": "31df66dc9f060166",
    "ue": [
     1794465891,
@@ -248824,7 +248824,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_CONTROLLERMAPPING": {
-   "tr": "Kumanda Tuş Atamaları",
+   "tr": "KUMANDA TUŞ ATAMALARI",
    "kaynakOzeti": "6e6fa1079e73cbcc",
    "ue": [
     1794465891,
@@ -248833,7 +248833,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_CONTROLLERMAPPING_PS": {
-   "tr": "Kumanda Tuş Atamaları",
+   "tr": "KUMANDA TUŞ ATAMALARI",
    "kaynakOzeti": "6e6fa1079e73cbcc",
    "ue": [
     1794465891,
@@ -248842,7 +248842,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_CONTROLLER_PS": {
-   "tr": "Kumanda",
+   "tr": "KUMANDA",
    "kaynakOzeti": "31df66dc9f060166",
    "ue": [
     1794465891,
@@ -248851,7 +248851,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_CONTROLS": {
-   "tr": "Kontroller",
+   "tr": "KONTROLLER",
    "kaynakOzeti": "799c269135742a36",
    "ue": [
     1794465891,
@@ -248860,7 +248860,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_DISPLAY": {
-   "tr": "Ekran",
+   "tr": "EKRAN",
    "kaynakOzeti": "34e108c0896d0158",
    "ue": [
     1794465891,
@@ -248869,7 +248869,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_GAMEPLAY": {
-   "tr": "Oynanış",
+   "tr": "OYNANIŞ",
    "kaynakOzeti": "31bcb8940fffb7d1",
    "ue": [
     1794465891,
@@ -248878,7 +248878,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_GRAPHICS": {
-   "tr": "Grafik",
+   "tr": "GRAFİK",
    "kaynakOzeti": "a874fca87cdd5e4e",
    "ue": [
     1794465891,
@@ -248887,7 +248887,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_HDRANDBRIGHTNESS": {
-   "tr": "HDR ve Parlaklık",
+   "tr": "HDR VE PARLAKLIK",
    "kaynakOzeti": "927b7a4ff51623b1",
    "ue": [
     1794465891,
@@ -248905,7 +248905,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_KEYBOARD": {
-   "tr": "Klavye ve Fare",
+   "tr": "KLAVYE VE FARE",
    "kaynakOzeti": "681479ddfc0c3ae7",
    "ue": [
     1794465891,
@@ -248914,7 +248914,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_KEYBOARDMAPPING": {
-   "tr": "Giriş Eşlemesi",
+   "tr": "GİRİŞ EŞLEMESİ",
    "kaynakOzeti": "01cf363e1204e7d9",
    "ue": [
     1794465891,
@@ -248923,7 +248923,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_LANGUAGE": {
-   "tr": "Dil",
+   "tr": "DİL",
    "kaynakOzeti": "a4fe65264ef7dbb3",
    "ue": [
     1794465891,
@@ -248932,7 +248932,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_PCSpec": {
-   "tr": "PC Özellikleri",
+   "tr": "PC ÖZELLİKLERİ",
    "kaynakOzeti": "03447058065acf09",
    "ue": [
     1794465891,
@@ -248941,7 +248941,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_QUALITY": {
-   "tr": "Kalite",
+   "tr": "KALİTE",
    "kaynakOzeti": "1b2c08a8733d7ff1",
    "ue": [
     1794465891,
@@ -248950,7 +248950,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_SCALING": {
-   "tr": "Ölçekleme",
+   "tr": "ÖLÇEKLEME",
    "kaynakOzeti": "f1766cc4ec8d9f77",
    "ue": [
     1794465891,
@@ -248959,7 +248959,7 @@
    ]
   },
   "ST_NeroUI_Texts::Settings_Title_SCREENBORDER": {
-   "tr": "Ekran Kenarlığı Ayarı",
+   "tr": "EKRAN KENARLIĞI AYARI",
    "kaynakOzeti": "374b09b8fe49a56c",
    "ue": [
     1794465891,
@@ -252352,7 +252352,7 @@
    ]
   },
   "ST_Settings_Texts::Accessibility_SimplifiedStruggle_Title": {
-   "tr": "Basitleştirilmiş Boğuşma",
+   "tr": "BASİTLEŞTİRİLMİŞ BOĞUŞMA",
    "kaynakOzeti": "21904005b9987388",
    "ue": [
     489865809,
@@ -252595,7 +252595,7 @@
    ]
   },
   "ST_Settings_Texts::Gameplay_NavigationSignage_Title": {
-   "tr": "Yön Tabelaları",
+   "tr": "YÖN TABELALARI",
    "kaynakOzeti": "26ffadab0c1ed049",
    "ue": [
     489865809,
@@ -252613,7 +252613,7 @@
    ]
   },
   "ST_Settings_Texts::Gameplay_SkipDrive_Title": {
-   "tr": "Sürüş ve Binişi Atla",
+   "tr": "SÜRÜŞ VE BİNİŞİ ATLA",
    "kaynakOzeti": "e60b48bdf782d1fa",
    "ue": [
     489865809,
@@ -252649,7 +252649,7 @@
    ]
   },
   "ST_Settings_Texts::Gameplay_StoryDLC_Title": {
-   "tr": "Man of Honor Bölümlerini Etkinleştir",
+   "tr": "MAN OF HONOR BÖLÜMLERİNİ ETKİNLEŞTİR",
    "kaynakOzeti": "f9c41c6ca96f5b96",
    "ue": [
     489865809,
@@ -253018,7 +253018,7 @@
    ]
   },
   "ST_Settings_Texts::Graphics_Sicilian_Mode_Title": {
-   "tr": "Cinema Siciliano",
+   "tr": "CİNEMA SİCİLİANO",
    "kaynakOzeti": "7ed7486700d7b955",
    "ue": [
     489865809,
@@ -253180,7 +253180,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_ColorBlind_Title": {
-   "tr": "Arayüz için renk körlüğü modu",
+   "tr": "ARAYÜZ İÇİN RENK KÖRLÜĞÜ MODU",
    "kaynakOzeti": "d46e14ee6eb395eb",
    "ue": [
     489865809,
@@ -253198,7 +253198,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_Gameplay_Struggle_Title": {
-   "tr": "Boğuşma Oynanış Girdisi",
+   "tr": "BOĞUŞMA OYNANIŞ GİRDİSİ",
    "kaynakOzeti": "00a77b6b0612bcfd",
    "ue": [
     489865809,
@@ -253216,7 +253216,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_HighContrast_Display_Title": {
-   "tr": "Yüksek Kontrastlı Ekran",
+   "tr": "YÜKSEK KONTRASTLI EKRAN",
    "kaynakOzeti": "724e47ff3e7a9515",
    "ue": [
     489865809,
@@ -253234,7 +253234,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_Minigames_Autocomplete_Title": {
-   "tr": "Mini Oyunu Otomatik Tamamla",
+   "tr": "MİNİ OYUNU OTOMATİK TAMAMLA",
    "kaynakOzeti": "b85f4b8f7af68a8f",
    "ue": [
     489865809,
@@ -253252,7 +253252,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_MouseSmoothing_Menus_Title": {
-   "tr": "Menü Ekranlarında Fare Yumuşatma ve Hassasiyet",
+   "tr": "MENÜ EKRANLARINDA FARE YUMUŞATMA VE HASSASİYET",
    "kaynakOzeti": "4b3cc0302b96b307",
    "ue": [
     489865809,
@@ -253270,7 +253270,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_ReticleColor_Title": {
-   "tr": "Nişangâh Rengi",
+   "tr": "NİŞANGÂH RENGİ",
    "kaynakOzeti": "0f450ffe091050d3",
    "ue": [
     489865809,
@@ -253288,7 +253288,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_ReticleOpacity_Title": {
-   "tr": "Nişangâh Opaklığı",
+   "tr": "NİŞANGÂH OPAKLIĞI",
    "kaynakOzeti": "580dd0a90cbdcbb6",
    "ue": [
     489865809,
@@ -253306,7 +253306,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_SubtitleLetterboxing_Title": {
-   "tr": "Altyazı Arka Plan Opaklığı",
+   "tr": "ALTYAZI ARKA PLAN OPAKLIĞI",
    "kaynakOzeti": "0ccfa744e55339cf",
    "ue": [
     489865809,
@@ -253324,7 +253324,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_SubtitleSize_Title": {
-   "tr": "Altyazı Boyutu",
+   "tr": "ALTYAZI BOYUTU",
    "kaynakOzeti": "427b8cc3fb4b24db",
    "ue": [
     489865809,
@@ -253387,7 +253387,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_SubtitlesColor_Title": {
-   "tr": "Altyazı Rengi",
+   "tr": "ALTYAZI RENGİ",
    "kaynakOzeti": "0aca56cf122d703b",
    "ue": [
     489865809,
@@ -253405,7 +253405,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_Subtitles_Name_Colours_Title": {
-   "tr": "Altyazı İsim Rengi",
+   "tr": "ALTYAZI İSİM RENGİ",
    "kaynakOzeti": "5af0637f4985cef2",
    "ue": [
     489865809,
@@ -253423,7 +253423,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_Subtitles_Text_Colour_Title": {
-   "tr": "Altyazı Metin Rengi",
+   "tr": "ALTYAZI METİN RENGİ",
    "kaynakOzeti": "31a250fa63cf3718",
    "ue": [
     489865809,
@@ -253450,7 +253450,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_SwitchSticks_Title": {
-   "tr": "Çubukları Değiştir",
+   "tr": "ÇUBUKLARI DEĞİŞTİR",
    "kaynakOzeti": "6cc2b2bd9b475811",
    "ue": [
     489865809,
@@ -253459,7 +253459,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_SwitchSticks_Title_PS": {
-   "tr": "Çubukları Değiştir",
+   "tr": "ÇUBUKLARI DEĞİŞTİR",
    "kaynakOzeti": "6cc2b2bd9b475811",
    "ue": [
     489865809,
@@ -253477,7 +253477,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_ThrowingArcColor_Title": {
-   "tr": "Atış Yayı Rengi",
+   "tr": "ATIŞ YAYI RENGİ",
    "kaynakOzeti": "36a7686fd5250b71",
    "ue": [
     489865809,
@@ -253495,7 +253495,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Accessibility_ThrowingArcOpacity_Title": {
-   "tr": "Atış Yayı Opaklığı",
+   "tr": "ATIŞ YAYI OPAKLIĞI",
    "kaynakOzeti": "a3d021ce3ab909da",
    "ue": [
     489865809,
@@ -253513,7 +253513,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_AimAssist_CenterDot_Title": {
-   "tr": "Kalıcı Merkez Noktası",
+   "tr": "KALICI MERKEZ NOKTASI",
    "kaynakOzeti": "058f279cf92a7c9c",
    "ue": [
     489865809,
@@ -253540,7 +253540,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Audio_ControllerAudio_Title": {
-   "tr": "Kontrolcü Sesi (Hoparlör)",
+   "tr": "KONTROLCÜ SESİ (HOPARLÖR)",
    "kaynakOzeti": "38dac45d0ab0cc28",
    "ue": [
     489865809,
@@ -253549,7 +253549,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Audio_ControllerAudio_Title_PS": {
-   "tr": "Kontrolcü Sesi (Hoparlör)",
+   "tr": "KONTROLCÜ SESİ (HOPARLÖR)",
    "kaynakOzeti": "38dac45d0ab0cc28",
    "ue": [
     489865809,
@@ -253567,7 +253567,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Audio_Dialogue_Volume_Title": {
-   "tr": "Diyalog Ses Seviyesi",
+   "tr": "DİYALOG SES SEVİYESİ",
    "kaynakOzeti": "fb23fec1c3e2639e",
    "ue": [
     489865809,
@@ -253585,7 +253585,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Audio_Dynamic_Range_Title": {
-   "tr": "Dinamik Aralık",
+   "tr": "DİNAMİK ARALIK",
    "kaynakOzeti": "ebbc76eca09aad08",
    "ue": [
     489865809,
@@ -253603,7 +253603,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Audio_Master_Volume_Title": {
-   "tr": "Ana Ses Seviyesi",
+   "tr": "ANA SES SEVİYESİ",
    "kaynakOzeti": "682377ad30b77f57",
    "ue": [
     489865809,
@@ -253621,7 +253621,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Audio_Music_Volume_Title": {
-   "tr": "Müzik Ses Seviyesi",
+   "tr": "MÜZİK SES SEVİYESİ",
    "kaynakOzeti": "b3f848c2a09aa9ed",
    "ue": [
     489865809,
@@ -253639,7 +253639,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Audio_Preset_Home_Theatre_Title": {
-   "tr": "Ev Sineması",
+   "tr": "EV SİNEMASI",
    "kaynakOzeti": "a486c36a535479de",
    "ue": [
     489865809,
@@ -253657,7 +253657,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Audio_Preset_Night_Mode_Title": {
-   "tr": "Gece Modu",
+   "tr": "GECE MODU",
    "kaynakOzeti": "01aac6e13b23a1ad",
    "ue": [
     489865809,
@@ -253675,7 +253675,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Audio_Preset_TV_Title": {
-   "tr": "Televizyon",
+   "tr": "TELEVİZYON",
    "kaynakOzeti": "7e7536a95dcfb769",
    "ue": [
     489865809,
@@ -253684,7 +253684,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Audio_Preset_Title": {
-   "tr": "Ses Ön Ayarı",
+   "tr": "SES ÖN AYARI",
    "kaynakOzeti": "35dd0d3ef4ddf477",
    "ue": [
     489865809,
@@ -253702,7 +253702,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Audio_SFX_Volume_Title": {
-   "tr": "Efekt Ses Seviyesi",
+   "tr": "EFEKT SES SEVİYESİ",
    "kaynakOzeti": "fe7a222aa9556f91",
    "ue": [
     489865809,
@@ -253720,7 +253720,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Audio_Window_Focus_Title": {
-   "tr": "Ses Pencere Odağı",
+   "tr": "SES PENCERE ODAĞI",
    "kaynakOzeti": "1e5bf021e6aee887",
    "ue": [
     489865809,
@@ -253738,7 +253738,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Camera_CameraShake_Title": {
-   "tr": "Kamera Sarsıntısı",
+   "tr": "KAMERA SARSINTISI",
    "kaynakOzeti": "c9bb685b2a7df98e",
    "ue": [
     489865809,
@@ -253756,7 +253756,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Camera_ExploreCamera_Title": {
-   "tr": "Kamera Takibi - Yaya",
+   "tr": "KAMERA TAKİBİ - YAYA",
    "kaynakOzeti": "dfee18f8f3a868fe",
    "ue": [
     489865809,
@@ -253774,7 +253774,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Camera_HorseCamera_Title": {
-   "tr": "Kamera Takibi - At",
+   "tr": "KAMERA TAKİBİ - AT",
    "kaynakOzeti": "2746aca683e8eee1",
    "ue": [
     489865809,
@@ -253792,7 +253792,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Camera_OrbitCoverCamera_Title": {
-   "tr": "Kamera Takibi - Yörünge Siperi",
+   "tr": "KAMERA TAKİBİ - YÖRÜNGE SİPERİ",
    "kaynakOzeti": "ffa1e60317fd8d1b",
    "ue": [
     489865809,
@@ -253810,7 +253810,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Camera_VehicleCamera_Title": {
-   "tr": "Kamera Takibi - Araç",
+   "tr": "KAMERA TAKİBİ - ARAÇ",
    "kaynakOzeti": "8c7d0bcfa0a3aabb",
    "ue": [
     489865809,
@@ -253837,7 +253837,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controller_ControllerSensitivityX_Title": {
-   "tr": "Kontrolcü Hassasiyeti - X Ekseni",
+   "tr": "KONTROLCÜ HASSASİYETİ - X EKSENİ",
    "kaynakOzeti": "0b6beadd95aeadef",
    "ue": [
     489865809,
@@ -253846,7 +253846,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controller_ControllerSensitivityX_Title_PS": {
-   "tr": "Kontrolcü Hassasiyeti - X Ekseni",
+   "tr": "KONTROLCÜ HASSASİYETİ - X EKSENİ",
    "kaynakOzeti": "0b6beadd95aeadef",
    "ue": [
     489865809,
@@ -253873,7 +253873,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controller_ControllerSensitivityY_Title": {
-   "tr": "Kontrolcü Hassasiyeti - Y Ekseni",
+   "tr": "KONTROLCÜ HASSASİYETİ - Y EKSENİ",
    "kaynakOzeti": "53c05aaad38153a6",
    "ue": [
     489865809,
@@ -253882,7 +253882,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controller_ControllerSensitivityY_Title_PS": {
-   "tr": "Kontrolcü Hassasiyeti - Y Ekseni",
+   "tr": "KONTROLCÜ HASSASİYETİ - Y EKSENİ",
    "kaynakOzeti": "53c05aaad38153a6",
    "ue": [
     489865809,
@@ -253891,7 +253891,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controller_ControllerSensitivity_Title": {
-   "tr": "Kontrolcü Hassasiyeti",
+   "tr": "KONTROLCÜ HASSASİYETİ",
    "kaynakOzeti": "839a5abdfa467436",
    "ue": [
     489865809,
@@ -253900,7 +253900,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controller_ControllerSensitivity_Title_PS": {
-   "tr": "Kontrolcü Hassasiyeti",
+   "tr": "KONTROLCÜ HASSASİYETİ",
    "kaynakOzeti": "839a5abdfa467436",
    "ue": [
     489865809,
@@ -253927,7 +253927,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controller_ControllerVibration_Title": {
-   "tr": "Kontrolcü Titreşimi",
+   "tr": "KONTROLCÜ TİTREŞİMİ",
    "kaynakOzeti": "bdbfd5ddd759d506",
    "ue": [
     489865809,
@@ -253936,7 +253936,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controller_ControllerVibration_Title_PS": {
-   "tr": "Kontrolcü Titreşimi",
+   "tr": "KONTROLCÜ TİTREŞİMİ",
    "kaynakOzeti": "bdbfd5ddd759d506",
    "ue": [
     489865809,
@@ -253954,7 +253954,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_AimAssist_Title": {
-   "tr": "Nişan Yardımı",
+   "tr": "NİŞAN YARDIMI",
    "kaynakOzeti": "0d5264da45766ec0",
    "ue": [
     489865809,
@@ -253972,7 +253972,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_AimSnapType_Title": {
-   "tr": "Nişan Kilitleme Türü",
+   "tr": "NİŞAN KİLİTLEME TÜRÜ",
    "kaynakOzeti": "e4c7563dbebf84fc",
    "ue": [
     489865809,
@@ -253990,7 +253990,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_Camera_Y-axis_Title": {
-   "tr": "Kamera Y Eksenini Ters Çevir",
+   "tr": "KAMERA Y EKSENİNİ TERS ÇEVİR",
    "kaynakOzeti": "7e26cb7405895b49",
    "ue": [
     489865809,
@@ -254008,7 +254008,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_Difficulty_Title": {
-   "tr": "Zorluk",
+   "tr": "ZORLUK",
    "kaynakOzeti": "be44133ed57f9e44",
    "ue": [
     489865809,
@@ -254026,7 +254026,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_Gamepad_Adaptive_Triggers_Title": {
-   "tr": "Uyarlanabilir Tetikleyiciler",
+   "tr": "UYARLANABİLİR TETİKLEYİCİLER",
    "kaynakOzeti": "f9faab09b21b5d28",
    "ue": [
     489865809,
@@ -254044,7 +254044,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_Gamepad_Focus_Inactive_Title": {
-   "tr": "Uygulama Odakta Değilken Denetleyiciye İzin Ver",
+   "tr": "UYGULAMA ODAKTA DEĞİLKEN DENETLEYİCİYE İZİN VER",
    "kaynakOzeti": "88f72a3908fca105",
    "ue": [
     489865809,
@@ -254071,7 +254071,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_Gamepad_InnerDeadZone_Title": {
-   "tr": "Kontrolcü İç Ölü Bölgesi",
+   "tr": "KONTROLCÜ İÇ ÖLÜ BÖLGESİ",
    "kaynakOzeti": "18294794d89b509f",
    "ue": [
     489865809,
@@ -254098,7 +254098,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_Gamepad_OuterDeadZone_Title": {
-   "tr": "Kontrolcü Dış Ölü Bölgesi",
+   "tr": "KONTROLCÜ DIŞ ÖLÜ BÖLGESİ",
    "kaynakOzeti": "08abd3e27b45a990",
    "ue": [
     489865809,
@@ -254116,7 +254116,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_HorseCameraRelativeInput_Title": {
-   "tr": "At Kamerasına Göre Hareket",
+   "tr": "AT KAMERASINA GÖRE HAREKET",
    "kaynakOzeti": "bed3a3de1cf1c034",
    "ue": [
     489865809,
@@ -254143,7 +254143,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_InvertYAxis_Controller_Title": {
-   "tr": "Kumanda Y Eksenini Ters Çevir",
+   "tr": "KUMANDA Y EKSENİNİ TERS ÇEVİR",
    "kaynakOzeti": "329beef179680c9b",
    "ue": [
     489865809,
@@ -254152,7 +254152,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_InvertYAxis_Controller_Title_PS": {
-   "tr": "Kumanda Y Eksenini Ters Çevir",
+   "tr": "KUMANDA Y EKSENİNİ TERS ÇEVİR",
    "kaynakOzeti": "329beef179680c9b",
    "ue": [
     489865809,
@@ -254179,7 +254179,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_InvertYAxis_KBM_Title": {
-   "tr": "Fare Y Eksenini Ters Çevir",
+   "tr": "FARE Y EKSENİNİ TERS ÇEVİR",
    "kaynakOzeti": "3f04ef728acd6a16",
    "ue": [
     489865809,
@@ -254188,7 +254188,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_InvertYAxis_Title": {
-   "tr": "Kumanda Y Eksenini Ters Çevir",
+   "tr": "KUMANDA Y EKSENİNİ TERS ÇEVİR",
    "kaynakOzeti": "329beef179680c9b",
    "ue": [
     489865809,
@@ -254197,7 +254197,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_InvertYAxis_Title_PS": {
-   "tr": "Kumanda Y Eksenini Ters Çevir",
+   "tr": "KUMANDA Y EKSENİNİ TERS ÇEVİR",
    "kaynakOzeti": "329beef179680c9b",
    "ue": [
     489865809,
@@ -254215,7 +254215,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_Keyboard_Remapping_Title": {
-   "tr": "Klavye Tuş Atama",
+   "tr": "KLAVYE TUŞ ATAMA",
    "kaynakOzeti": "a08b291182b11ed9",
    "ue": [
     489865809,
@@ -254233,7 +254233,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_Keyboard_WindowKey_Enabled_Title": {
-   "tr": "Windows Tuşu Etkin",
+   "tr": "WİNDOWS TUŞU ETKİN",
    "kaynakOzeti": "21a33877b12ce36a",
    "ue": [
     489865809,
@@ -254251,7 +254251,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Controls_Sprint_Title": {
-   "tr": "Koş",
+   "tr": "KOŞ",
    "kaynakOzeti": "fd04788626e5f87b",
    "ue": [
     489865809,
@@ -254278,7 +254278,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Display_Brightness_HUD_Title": {
-   "tr": "HUD Parlaklığı",
+   "tr": "HUD PARLAKLIĞI",
    "kaynakOzeti": "488b0cbc3d8b66cb",
    "ue": [
     489865809,
@@ -254287,7 +254287,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Display_Brightness_Title": {
-   "tr": "Parlaklık",
+   "tr": "PARLAKLIK",
    "kaynakOzeti": "ec811d30a89ce96d",
    "ue": [
     489865809,
@@ -254314,7 +254314,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Display_CinematicsFramerate_Title": {
-   "tr": "Sinematik Kare Hızı",
+   "tr": "SİNEMATİK KARE HIZI",
    "kaynakOzeti": "2a9472aaa6ea3488",
    "ue": [
     489865809,
@@ -254341,7 +254341,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Display_DisplaySelection_Title": {
-   "tr": "Ekran Seçimi",
+   "tr": "EKRAN SEÇİMİ",
    "kaynakOzeti": "dd0187dabed57bad",
    "ue": [
     489865809,
@@ -254359,7 +254359,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Display_GPUSelection_Title": {
-   "tr": "GPU Seçimi",
+   "tr": "GPU SEÇİMİ",
    "kaynakOzeti": "0f824b47a3855866",
    "ue": [
     489865809,
@@ -254377,7 +254377,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Display_Gamma_Title": {
-   "tr": "Gama",
+   "tr": "GAMA",
    "kaynakOzeti": "a8ab3d5805c9214b",
    "ue": [
     489865809,
@@ -254395,7 +254395,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Display_UiPlacement_Title": {
-   "tr": "Arayüz Yerleşimi",
+   "tr": "ARAYÜZ YERLEŞİMİ",
    "kaynakOzeti": "16a47a7e2d5f47e7",
    "ue": [
     489865809,
@@ -254413,7 +254413,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Gameplay_AimAssist_AimPullStrength_Title": {
-   "tr": "Nişan Çekme Gücü",
+   "tr": "NİŞAN ÇEKME GÜCÜ",
    "kaynakOzeti": "d20a2d9a8ff032e6",
    "ue": [
     489865809,
@@ -254431,7 +254431,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Gameplay_AimAssist_AimPull_FollowStrength_Title": {
-   "tr": "Nişan Çekme Takip Gücü",
+   "tr": "NİŞAN ÇEKME TAKİP GÜCÜ",
    "kaynakOzeti": "560cdaeba37d4230",
    "ue": [
     489865809,
@@ -254449,7 +254449,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Gameplay_AimAssist_AimPull_MovementStrength_Title": {
-   "tr": "Nişan Çekme Hareket Gücü",
+   "tr": "NİŞAN ÇEKME HAREKET GÜCÜ",
    "kaynakOzeti": "9185a975475a379a",
    "ue": [
     489865809,
@@ -254467,7 +254467,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Gameplay_AimAssist_AimSlowStrength_Title": {
-   "tr": "Nişan Yavaşlatma Gücü",
+   "tr": "NİŞAN YAVAŞLATMA GÜCÜ",
    "kaynakOzeti": "9f2795a5a5723291",
    "ue": [
     489865809,
@@ -254485,7 +254485,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Gameplay_Camera_FOV_Title": {
-   "tr": "Kamera Görüş Alanı",
+   "tr": "KAMERA GÖRÜŞ ALANI",
    "kaynakOzeti": "6a3041fb3ecba173",
    "ue": [
     489865809,
@@ -254503,7 +254503,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Gameplay_Camera_Vehicle_Pitch_Title": {
-   "tr": "Araç Kamera Eğimi",
+   "tr": "ARAÇ KAMERA EĞİMİ",
    "kaynakOzeti": "7695f2d66bb3e15a",
    "ue": [
     489865809,
@@ -254521,7 +254521,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Gameplay_Camera_Vehicle_View_Title": {
-   "tr": "Araç Kamera Görünümü",
+   "tr": "ARAÇ KAMERA GÖRÜNÜMÜ",
    "kaynakOzeti": "20e02bd1d673f94e",
    "ue": [
     489865809,
@@ -254548,7 +254548,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Gameplay_DuelsCameraRelative_Title": {
-   "tr": "Düellolarda Kameraya Göre Hareket",
+   "tr": "DÜELLOLARDA KAMERAYA GÖRE HAREKET",
    "kaynakOzeti": "b17c37e44503c980",
    "ue": [
     489865809,
@@ -254566,7 +254566,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Gameplay_ManualShifting_Title": {
-   "tr": "Manuel Vites",
+   "tr": "MANUEL VİTES",
    "kaynakOzeti": "4b5794eb7d071895",
    "ue": [
     489865809,
@@ -254584,7 +254584,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Gameplay_Signage_Title": {
-   "tr": "Yön Tabelaları",
+   "tr": "YÖN TABELALARI",
    "kaynakOzeti": "26ffadab0c1ed049",
    "ue": [
     489865809,
@@ -254602,7 +254602,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Gameplay_SimulationDriving_Title": {
-   "tr": "Simülasyon Sürüşü",
+   "tr": "SİMÜLASYON SÜRÜŞÜ",
    "kaynakOzeti": "4b38251d256a3efa",
    "ue": [
     489865809,
@@ -254620,7 +254620,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Gameplay_StanceOnExitCover_Title": {
-   "tr": "Siperde Duruş",
+   "tr": "SİPERDE DURUŞ",
    "kaynakOzeti": "9d192bf022c5c49b",
    "ue": [
     489865809,
@@ -254638,7 +254638,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Gameplay_ThrowingArc_Title": {
-   "tr": "Atış Yayı",
+   "tr": "ATIŞ YAYI",
    "kaynakOzeti": "dc137a45ab36ccfa",
    "ue": [
     489865809,
@@ -254674,7 +254674,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_AntiAliasing_Title": {
-   "tr": "Kenar Yumuşatma",
+   "tr": "KENAR YUMUŞATMA",
    "kaynakOzeti": "10cb6b2c15729325",
    "ue": [
     489865809,
@@ -254701,7 +254701,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_DynamicResolution_Title": {
-   "tr": "Dinamik Çözünürlük",
+   "tr": "DİNAMİK ÇÖZÜNÜRLÜK",
    "kaynakOzeti": "282d5f501a7b6019",
    "ue": [
     489865809,
@@ -254719,7 +254719,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_Effects_Title": {
-   "tr": "Efektler",
+   "tr": "EFEKTLER",
    "kaynakOzeti": "358511c8c09805c9",
    "ue": [
     489865809,
@@ -254737,7 +254737,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_Foliage_Title": {
-   "tr": "Bitki Örtüsü",
+   "tr": "BİTKİ ÖRTÜSÜ",
    "kaynakOzeti": "8debf51b693d063b",
    "ue": [
     489865809,
@@ -254755,7 +254755,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_FrameGeneration_Title": {
-   "tr": "Kare Üretimi",
+   "tr": "KARE ÜRETİMİ",
    "kaynakOzeti": "4a5d7f645dab89a8",
    "ue": [
     489865809,
@@ -254773,7 +254773,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_FullScreenResolution_Title": {
-   "tr": "Render Çözünürlüğü",
+   "tr": "RENDER ÇÖZÜNÜRLÜĞÜ",
    "kaynakOzeti": "5e47681be8631843",
    "ue": [
     489865809,
@@ -254791,7 +254791,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_GameplayFramerate_Title": {
-   "tr": "Oyun İçi Kare Hızı",
+   "tr": "OYUN İÇİ KARE HIZI",
    "kaynakOzeti": "2d0318c12ff47c5d",
    "ue": [
     489865809,
@@ -254809,7 +254809,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_GlobalIllumination_Title": {
-   "tr": "Global Aydınlatma",
+   "tr": "GLOBAL AYDINLATMA",
    "kaynakOzeti": "5384a41101057219",
    "ue": [
     489865809,
@@ -254818,7 +254818,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_MotionBlur_Title": {
-   "tr": "Hareket Bulanıklığı",
+   "tr": "HAREKET BULANIKLIĞI",
    "kaynakOzeti": "9c2bac199e65ded7",
    "ue": [
     489865809,
@@ -254836,7 +254836,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_PCSpecification_Title": {
-   "tr": "PC Özellikleri",
+   "tr": "PC ÖZELLİKLERİ",
    "kaynakOzeti": "03447058065acf09",
    "ue": [
     489865809,
@@ -254854,7 +254854,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_PostProcessing_Title": {
-   "tr": "Son İşleme",
+   "tr": "SON İŞLEME",
    "kaynakOzeti": "62919d0173b3fe78",
    "ue": [
     489865809,
@@ -254872,7 +254872,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_QualityPreset_Title": {
-   "tr": "Kalite Ön Ayarı",
+   "tr": "KALİTE ÖN AYARI",
    "kaynakOzeti": "d730f56026c68ded",
    "ue": [
     489865809,
@@ -254890,7 +254890,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_Reflections_Title": {
-   "tr": "Yansımalar",
+   "tr": "YANSIMALAR",
    "kaynakOzeti": "9e676ed4a2c9d570",
    "ue": [
     489865809,
@@ -254908,7 +254908,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_ScreenMode_Title": {
-   "tr": "Ekran Modu",
+   "tr": "EKRAN MODU",
    "kaynakOzeti": "10ba8e4199b7806a",
    "ue": [
     489865809,
@@ -254926,7 +254926,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_Shading_Title": {
-   "tr": "Gölgelendirme",
+   "tr": "GÖLGELENDİRME",
    "kaynakOzeti": "495acbf9ec2c90cb",
    "ue": [
     489865809,
@@ -254944,7 +254944,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_Shadows_Title": {
-   "tr": "Gölgeler",
+   "tr": "GÖLGELER",
    "kaynakOzeti": "2a19bdc09aa3bd9d",
    "ue": [
     489865809,
@@ -254962,7 +254962,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_Textures_Title": {
-   "tr": "Dokular",
+   "tr": "DOKULAR",
    "kaynakOzeti": "b5779457b3993ccc",
    "ue": [
     489865809,
@@ -254980,7 +254980,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_UpscaleMode_Title": {
-   "tr": "Ölçeklendirme Modu",
+   "tr": "ÖLÇEKLENDİRME MODU",
    "kaynakOzeti": "f35a8bc5423c0e9a",
    "ue": [
     489865809,
@@ -255376,7 +255376,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_Upscaling_Sharpness_Title": {
-   "tr": "Keskinlik",
+   "tr": "KESKİNLİK",
    "kaynakOzeti": "6a4c00af2dbfd09a",
    "ue": [
     489865809,
@@ -255385,7 +255385,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_Upscaling_Title": {
-   "tr": "Kenar Yumuşatma ve Büyütme",
+   "tr": "KENAR YUMUŞATMA VE BÜYÜTME",
    "kaynakOzeti": "00f20126cb355daf",
    "ue": [
     489865809,
@@ -255457,7 +255457,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_VSync_Title": {
-   "tr": "V-Sync",
+   "tr": "V-SYNC",
    "kaynakOzeti": "784de207526e7b9e",
    "ue": [
     489865809,
@@ -255475,7 +255475,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_ViewDistance_Title": {
-   "tr": "Görüş Mesafesi",
+   "tr": "GÖRÜŞ MESAFESİ",
    "kaynakOzeti": "becb7c27ee7d7905",
    "ue": [
     489865809,
@@ -255493,7 +255493,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Graphics_WindowResolution_Title": {
-   "tr": "Pencere Çözünürlüğü",
+   "tr": "PENCERE ÇÖZÜNÜRLÜĞÜ",
    "kaynakOzeti": "655bd46817bcf885",
    "ue": [
     489865809,
@@ -255511,7 +255511,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HDRSetup_HDRBrightness_Title": {
-   "tr": "Parlaklık",
+   "tr": "PARLAKLIK",
    "kaynakOzeti": "ec811d30a89ce96d",
    "ue": [
     489865809,
@@ -255529,7 +255529,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HDRSetup_HDRHUDBrightness_Title": {
-   "tr": "HUD Parlaklığı",
+   "tr": "HUD PARLAKLIĞI",
    "kaynakOzeti": "488b0cbc3d8b66cb",
    "ue": [
     489865809,
@@ -255547,7 +255547,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HDRSetup_HDRMaxLuminance_Title": {
-   "tr": "Maksimum Parlaklık",
+   "tr": "MAKSİMUM PARLAKLIK",
    "kaynakOzeti": "f0ff4487ee0135ed",
    "ue": [
     489865809,
@@ -255583,7 +255583,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HDRSetup_SDRBrightness_Title": {
-   "tr": "Parlaklık",
+   "tr": "PARLAKLIK",
    "kaynakOzeti": "ec811d30a89ce96d",
    "ue": [
     489865809,
@@ -255601,7 +255601,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HDRSetup_Shadows_Title": {
-   "tr": "Siyah Nokta",
+   "tr": "SİYAH NOKTA",
    "kaynakOzeti": "aab1d634928fc58e",
    "ue": [
     489865809,
@@ -255646,7 +255646,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_AwarenessIndicators_Title": {
-   "tr": "Düşman Farkındalık Göstergeleri",
+   "tr": "DÜŞMAN FARKINDALIK GÖSTERGELERİ",
    "kaynakOzeti": "509cda1fc1e19bba",
    "ue": [
     489865809,
@@ -255664,7 +255664,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_Button_Prompts_Title": {
-   "tr": "Kontrol İpuçları",
+   "tr": "KONTROL İPUÇLARI",
    "kaynakOzeti": "2eba607392931dd0",
    "ue": [
     489865809,
@@ -255682,7 +255682,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_ContextualHUD_Title": {
-   "tr": "Bağlamsal HUD",
+   "tr": "BAĞLAMSAL HUD",
    "kaynakOzeti": "813ce2a730436987",
    "ue": [
     489865809,
@@ -255700,7 +255700,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_ContextualObjectiveHUD_Title": {
-   "tr": "Bağlamsal Görev HUD'u",
+   "tr": "BAĞLAMSAL GÖREV HUD'U",
    "kaynakOzeti": "bcd9f4a2f561c194",
    "ue": [
     489865809,
@@ -255718,7 +255718,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_DamageEffects_Title": {
-   "tr": "Ekranda Hasar Efektleri",
+   "tr": "EKRANDA HASAR EFEKTLERİ",
    "kaynakOzeti": "cd466995016a43ab",
    "ue": [
     489865809,
@@ -255736,7 +255736,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_DrivingHUD_Title": {
-   "tr": "Sürüş HUD'u",
+   "tr": "SÜRÜŞ HUD'U",
    "kaynakOzeti": "e8718abf7e3f4001",
    "ue": [
     489865809,
@@ -255754,7 +255754,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_DuelHUD_Title": {
-   "tr": "Düello HUD'u",
+   "tr": "DÜELLO HUD'U",
    "kaynakOzeti": "52c5531c3968bfd1",
    "ue": [
     489865809,
@@ -255772,7 +255772,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_Hints_Title": {
-   "tr": "İpuçları",
+   "tr": "İPUÇLARI",
    "kaynakOzeti": "6f3951c42d1eee16",
    "ue": [
     489865809,
@@ -255790,7 +255790,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_HitMarkers_Title": {
-   "tr": "Vuruş İşaretçileri",
+   "tr": "VURUŞ İŞARETÇİLERİ",
    "kaynakOzeti": "53a6691a40f27809",
    "ue": [
     489865809,
@@ -255808,7 +255808,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_HorseStamina_Title": {
-   "tr": "At Mahmuzu",
+   "tr": "AT MAHMUZU",
    "kaynakOzeti": "e9643d9d8169e414",
    "ue": [
     489865809,
@@ -255826,7 +255826,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_InstructionPanel_Title": {
-   "tr": "Kontrol İpuçları",
+   "tr": "KONTROL İPUÇLARI",
    "kaynakOzeti": "0e1dd70337fb13e7",
    "ue": [
     489865809,
@@ -255844,7 +255844,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_InteractionPrompts_Title": {
-   "tr": "Uzaktaki Etkileşim İpuçları",
+   "tr": "UZAKTAKİ ETKİLEŞİM İPUÇLARI",
    "kaynakOzeti": "3c09d63a3404423a",
    "ue": [
     489865809,
@@ -255862,7 +255862,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_ItemSelect_Title": {
-   "tr": "Eşya Seçimi",
+   "tr": "EŞYA SEÇİMİ",
    "kaynakOzeti": "3f5a8a84869b2a55",
    "ue": [
     489865809,
@@ -255880,7 +255880,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_Looting_Title": {
-   "tr": "Yağmalama",
+   "tr": "YAĞMALAMA",
    "kaynakOzeti": "6de1e0ba18fffe85",
    "ue": [
     489865809,
@@ -255898,7 +255898,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_MissionTimer_Title": {
-   "tr": "Görev Zamanlayıcıları",
+   "tr": "GÖREV ZAMANLAYICILARI",
    "kaynakOzeti": "602a0a94d1c212f2",
    "ue": [
     489865809,
@@ -255916,7 +255916,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_ObjectiveMarkers_Title": {
-   "tr": "Görev İkonu",
+   "tr": "GÖREV İKONU",
    "kaynakOzeti": "40dea4679b007f1c",
    "ue": [
     489865809,
@@ -255961,7 +255961,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_ObjectiveVisibility_Title": {
-   "tr": "Görev Hedefi Görünürlüğü",
+   "tr": "GÖREV HEDEFİ GÖRÜNÜRLÜĞÜ",
    "kaynakOzeti": "647138176da44c7c",
    "ue": [
     489865809,
@@ -255979,7 +255979,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_Objective_Title": {
-   "tr": "Görev Metni",
+   "tr": "GÖREV METNİ",
    "kaynakOzeti": "dcf71a555de17262",
    "ue": [
     489865809,
@@ -255997,7 +255997,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_PlayerHud_Title": {
-   "tr": "Silahlar, Eşyalar ve Sağlık Göstergesi",
+   "tr": "SİLAHLAR, EŞYALAR VE SAĞLIK GÖSTERGESİ",
    "kaynakOzeti": "178a5b4f03f3fbcc",
    "ue": [
     489865809,
@@ -256015,7 +256015,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_RacingHUD_Title": {
-   "tr": "Yarış HUD'u",
+   "tr": "YARIŞ HUD'U",
    "kaynakOzeti": "3aec06499fad7ef1",
    "ue": [
     489865809,
@@ -256033,7 +256033,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_Reticle_Title": {
-   "tr": "Nişangâh",
+   "tr": "NİŞANGÂH",
    "kaynakOzeti": "45679780a3c25c00",
    "ue": [
     489865809,
@@ -256051,7 +256051,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_Scale_Title": {
-   "tr": "HUD Öğeleri Ölçeği",
+   "tr": "HUD ÖĞELERİ ÖLÇEĞİ",
    "kaynakOzeti": "87a3b248322600fc",
    "ue": [
     489865809,
@@ -256069,7 +256069,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_Stealth_Message_Title": {
-   "tr": "Zorunlu Gizlilik Mesajları",
+   "tr": "ZORUNLU GİZLİLİK MESAJLARI",
    "kaynakOzeti": "0842e5f65793f96a",
    "ue": [
     489865809,
@@ -256087,7 +256087,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_TrespassHUD_Title": {
-   "tr": "Trespass HUD",
+   "tr": "TRESPASS HUD",
    "kaynakOzeti": "437c23f2b73d7284",
    "ue": [
     489865809,
@@ -256105,7 +256105,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_Tutorials_Title": {
-   "tr": "Eğitimler",
+   "tr": "EĞİTİMLER",
    "kaynakOzeti": "8d9f66992dd4373c",
    "ue": [
     489865809,
@@ -256123,7 +256123,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_HUD_UI_Size_Title": {
-   "tr": "HUD Arayüz Boyutu",
+   "tr": "HUD ARAYÜZ BOYUTU",
    "kaynakOzeti": "589999e426fe025d",
    "ue": [
     489865809,
@@ -256141,7 +256141,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Keyboard_MouseSensitivity_Title": {
-   "tr": "Fare Hassasiyeti",
+   "tr": "FARE HASSASİYETİ",
    "kaynakOzeti": "4571896d8a4d4162",
    "ue": [
     489865809,
@@ -256159,7 +256159,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Language_SpeechLanguage_Title": {
-   "tr": "Konuşma Dili",
+   "tr": "KONUŞMA DİLİ",
    "kaynakOzeti": "d656760dc6e47c88",
    "ue": [
     489865809,
@@ -256177,7 +256177,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Language_Subtitles_Title": {
-   "tr": "Altyazılar",
+   "tr": "ALTYAZILAR",
    "kaynakOzeti": "0ee695bdeb26a296",
    "ue": [
     489865809,
@@ -256195,7 +256195,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Language_TextLanguage_Title": {
-   "tr": "Metin Dili",
+   "tr": "METİN DİLİ",
    "kaynakOzeti": "3154589716aa8ce9",
    "ue": [
     489865809,
