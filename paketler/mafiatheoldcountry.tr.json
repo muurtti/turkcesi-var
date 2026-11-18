@@ -4,7 +4,7 @@
  "dil": "tr",
  "oyunSurumu": "64af06864e2027ca6f406be296b3793cbf239278d3fb23e4b6a00670c13f8fe1",
  "model": "",
- "tarih": "2026-11-18T20:20:11.924Z",
+ "tarih": "2026-11-18T21:13:00.479Z",
  "cevirenler": [
   "Türkçesi Var"
  ],
@@ -1504,7 +1504,7 @@
    ]
   },
   "ST_Achievements_Texts::achievement_35_name": {
-   "tr": "Şeref Adamı",
+   "tr": "Man of Honor",
    "kaynakOzeti": "deb41fb0860280ae",
    "ue": [
     3493409590,
@@ -1873,7 +1873,7 @@
    ]
   },
   "ST_Achievements_Texts::achievement_59_description": {
-   "tr": "Onurlu Adam Tamamlandı",
+   "tr": "Man of Honor Tamamlandı",
    "kaynakOzeti": "a43fc2bf0b1775a2",
    "ue": [
     3493409590,
@@ -1891,7 +1891,7 @@
    ]
   },
   "ST_Achievements_Texts::achievement_60_description": {
-   "tr": "Onurlu Adam'ı Klasik zorlukta tamamladı",
+   "tr": "Man of Honor'ı Klasik zorlukta tamamladı",
    "kaynakOzeti": "5baa586b2a970e31",
    "ue": [
     3493409590,
@@ -1963,7 +1963,7 @@
    ]
   },
   "ST_Achievements_Texts::achievement_64_description": {
-   "tr": "Free Ride modundaki tüm gösteri atlayışlarını tamamladı",
+   "tr": "Serbest Sürüş modundaki tüm gösteri atlayışlarını tamamladı",
    "kaynakOzeti": "3785efc827d281ed",
    "ue": [
     3493409590,
@@ -2134,7 +2134,7 @@
    ]
   },
   "ST_BonusContent_Texts::Artbook_04_Artboard_Enzo_car_Subheader": {
-   "tr": "ONURLU ADAM",
+   "tr": "MAN OF HONOR",
    "kaynakOzeti": "2c956ab6c9122826",
    "ue": [
     3754267583,
@@ -3547,7 +3547,7 @@
    ]
   },
   "ST_BonusContent_Texts::Artbook_57_Artboard_Salieri_Subheader": {
-   "tr": "ONURLU ADAM",
+   "tr": "MAN OF HONOR",
    "kaynakOzeti": "2c956ab6c9122826",
    "ue": [
     3754267583,
@@ -4420,7 +4420,7 @@
    ]
   },
   "ST_Bootflow_Texts::Entitlement_FreeRide_BigTitle": {
-   "tr": "<b>ÜCRETSİZ SÜRÜŞ</>",
+   "tr": "<b>SERBEST SÜRÜŞ</>",
    "kaynakOzeti": "6d94665b69da8ab8",
    "ue": [
     1772375637,
@@ -4492,7 +4492,7 @@
    ]
   },
   "ST_Bootflow_Texts::Entitlement_FreeRide_SubHeader_2": {
-   "tr": "Hem Hikâye hem de Free Ride modlarında tüm yeni içerikler artık kullanılabilir:",
+   "tr": "Hem Hikâye hem de Serbest Sürüş modlarında tüm yeni içerikler artık kullanılabilir:",
    "kaynakOzeti": "0a4c3bf9fa7b24d9",
    "ue": [
     1772375637,
@@ -4501,7 +4501,7 @@
    ]
   },
   "ST_Bootflow_Texts::Entitlement_FreeRide_Title": {
-   "tr": "<h><b>FREE RIDE'A HOŞ GELDİNİZ!</></>",
+   "tr": "<h><b>SERBEST SÜRÜŞ'E HOŞ GELDİNİZ!</></>",
    "kaynakOzeti": "3905b90198577d32",
    "ue": [
     1772375637,
@@ -4591,7 +4591,7 @@
    ]
   },
   "ST_Bootflow_Texts::Entitlement_ManofHonor_Free_Ride_Content": {
-   "tr": "<h><b>ÖZEL FREE RIDE İÇERİĞİ</></>",
+   "tr": "<h><b>ÖZEL SERBEST SÜRÜŞ İÇERİĞİ</></>",
    "kaynakOzeti": "43c358276344248a",
    "ue": [
     1772375637,
@@ -4600,7 +4600,7 @@
    ]
   },
   "ST_Bootflow_Texts::Entitlement_ManofHonor_Free_Ride_Title": {
-   "tr": "<b>ONURLU ADAM - ÜCRETSİZ SÜRÜŞ</>",
+   "tr": "<b>MAN OF HONOR - SERBEST SÜRÜŞ</>",
    "kaynakOzeti": "63d47e730a570e86",
    "ue": [
     1772375637,
@@ -4654,7 +4654,7 @@
    ]
   },
   "ST_Bootflow_Texts::Entitlement_ManofHonor_New_Waypoint": {
-   "tr": "<h><b>FREE RIDE'DA İĞNE SİMGELİ YOL NOKTALARI</></>",
+   "tr": "<h><b>SERBEST SÜRÜŞ'TE İĞNE SİMGELİ YOL NOKTALARI</></>",
    "kaynakOzeti": "0a7ac090386cffe7",
    "ue": [
     1772375637,
@@ -4681,7 +4681,7 @@
    ]
   },
   "ST_Bootflow_Texts::Entitlement_ManofHonor_Title": {
-   "tr": "<b>ŞEREF ADAMI'NA HOŞ GELDİNİZ</>",
+   "tr": "<b>MAN OF HONOR'A HOŞ GELDİNİZ</>",
    "kaynakOzeti": "5b77737f865ee6ad",
    "ue": [
     1772375637,
@@ -5320,7 +5320,7 @@
    ]
   },
   "ST_Bootflow_Texts::Free_Ride": {
-   "tr": "<b>Free Ride'a Hoş Geldin!</>\r\n\r\n2. Bölümün sonunda açılan bu mod, şu heyecan verici yenilikleri sunar:\r\n\r\n<b>Yarış ve Dövüş Meydan Okumaları</>\r\n\r\n<b>Hazine Avı</>\r\n\r\n<b>Yeni Silahlar, Bıçaklar ve Tılsımlar</>\r\n\r\n<b>Özel Arabalar</>\r\n\r\n<b>Genişletilmiş Kıyafet Dolabı</>\r\n\r\n\r\nTüm yeni içerikler artık hem Hikâye hem Free Ride modlarında mevcut:\r\n\r\n<b>Klasik Zorluk</>\r\n\r\n<b>Cinema Siciliano</>\r\n\r\n<b>Fotoğraf Modu</>\r\n\r\n<b>Birinci Şahıs Sürüş</>",
+   "tr": "<b>Serbest Sürüş'e Hoş Geldin!</>\r\n\r\n2. Bölümün sonunda açılan bu mod, şu heyecan verici yenilikleri sunar:\r\n\r\n<b>Yarış ve Dövüş Meydan Okumaları</>\r\n\r\n<b>Hazine Avı</>\r\n\r\n<b>Yeni Silahlar, Bıçaklar ve Tılsımlar</>\r\n\r\n<b>Özel Arabalar</>\r\n\r\n<b>Genişletilmiş Kıyafet Dolabı</>\r\n\r\n\r\nTüm yeni içerikler artık hem Hikâye hem Serbest Sürüş modlarında mevcut:\r\n\r\n<b>Klasik Zorluk</>\r\n\r\n<b>Cinema Siciliano</>\r\n\r\n<b>Fotoğraf Modu</>\r\n\r\n<b>Birinci Şahıs Sürüş</>",
    "kaynakOzeti": "e580adb0673416e6",
    "ue": [
     1772375637,
@@ -5329,7 +5329,7 @@
    ]
   },
   "ST_Bootflow_Texts::ManOfHonor_Free_Ride": {
-   "tr": "Free Ride'da Man of Honor'a ait tüm yeni özellikler artık kullanılabilir:",
+   "tr": "Serbest Sürüş'te Man of Honor'a ait tüm yeni özellikler artık kullanılabilir:",
    "kaynakOzeti": "f1bbdb998fbe9dbc",
    "ue": [
     1772375637,
@@ -5338,7 +5338,7 @@
    ]
   },
   "ST_Bootflow_Texts::ManOfHonor_Updates": {
-   "tr": "Hikâye Modu ve Free Ride'da yeni özellikler ve iyileştirmeler artık kullanılabilir:",
+   "tr": "Hikâye Modu ve Serbest Sürüş'te yeni özellikler ve iyileştirmeler artık kullanılabilir:",
    "kaynakOzeti": "9a58834a4db48fa2",
    "ue": [
     1772375637,
@@ -249040,7 +249040,7 @@
    ]
   },
   "ST_NeroUI_Texts::SplashScreen_PressToStart": {
-   "tr": "HERHANGİ BİR TUŞA BASIN",
+   "tr": "HERHANGİ BİR TUŞA BASIN - TÜRKÇE: TÜRKÇESİ VAR",
    "kaynakOzeti": "cd656a5505bed5cd",
    "ue": [
     1794465891,
@@ -249049,7 +249049,7 @@
    ]
   },
   "ST_NeroUI_Texts::SplashScreen_PressToStart_PS": {
-   "tr": "HERHANGİ BİR TUŞA BASIN",
+   "tr": "HERHANGİ BİR TUŞA BASIN - TÜRKÇE: TÜRKÇESİ VAR",
    "kaynakOzeti": "cd656a5505bed5cd",
    "ue": [
     1794465891,
@@ -249058,7 +249058,7 @@
    ]
   },
   "ST_NeroUI_Texts::SplashScreen_PressToStart_XBOX": {
-   "tr": "HERHANGİ BİR TUŞA BASIN",
+   "tr": "HERHANGİ BİR TUŞA BASIN - TÜRKÇE: TÜRKÇESİ VAR",
    "kaynakOzeti": "cd656a5505bed5cd",
    "ue": [
     1794465891,
@@ -250012,7 +250012,7 @@
    ]
   },
   "ST_NeroUI_TutorialText::TutorialComplex_FreeRide_Combat_Intro": {
-   "tr": "Serbest Gezinti'deki Savaş Meydan Okumaları tanıtım eğitimi metni için yer tutucu.",
+   "tr": "Serbest Sürüş'teki Savaş Meydan Okumaları tanıtım eğitimi metni için yer tutucu.",
    "kaynakOzeti": "a0b74c8528e1713c",
    "ue": [
     1689491002,
@@ -250021,7 +250021,7 @@
    ]
   },
   "ST_NeroUI_TutorialText::TutorialComplex_FreeRide_Combat_Intro1": {
-   "tr": "Free Ride'ın yepyeni <ImportantText><BoldText>STANDOFF</></> <icon key='HordeMode' height='20' color='#E8E8E8'/> ve <ImportantText><BoldText>SUİKAST</></> <icon key='ChallengeStealth' height='20' color='#E8E8E8'/> meydan okumalarında savaş ve gizlilik becerilerini test et. <br/><br/>Bu meydan okumalarda tamamladığın her karşılaşma serideki bir sonrakinin kilidini açar. Pasquale'nin Dükkânı'nda yeni eşya satın almak için Dinari kazanacaksın.",
+   "tr": "Serbest Sürüş'ün yepyeni <ImportantText><BoldText>STANDOFF</></> <icon key='HordeMode' height='20' color='#E8E8E8'/> ve <ImportantText><BoldText>SUİKAST</></> <icon key='ChallengeStealth' height='20' color='#E8E8E8'/> meydan okumalarında savaş ve gizlilik becerilerini test et. <br/><br/>Bu meydan okumalarda tamamladığın her karşılaşma serideki bir sonrakinin kilidini açar. Pasquale'nin Dükkânı'nda yeni eşya satın almak için Dinari kazanacaksın.",
    "kaynakOzeti": "f44b55da3a410b9e",
    "ue": [
     1689491002,
@@ -250093,7 +250093,7 @@
    ]
   },
   "ST_NeroUI_TutorialText::TutorialComplex_FreeRide_Horse_Race": {
-   "tr": "Serbest Gezinti'deki At Yarışı eğitimi metni için yer tutucu.",
+   "tr": "Serbest Sürüş'teki At Yarışı eğitimi metni için yer tutucu.",
    "kaynakOzeti": "b7303f65c49c7374",
    "ue": [
     1689491002,
@@ -250147,7 +250147,7 @@
    ]
   },
   "ST_NeroUI_TutorialText::TutorialComplex_FreeRide_Intro1": {
-   "tr": "Hikâyede ilerleyerek Serbest Gezinti'de bir dizi Savaş, Gizlilik ve Yarış meydan okumasının kilidini aç. Bunlara Haritadan ulaşabilirsin.<br/>Meydan okumaları tamamlayarak ödül kazan ve Valle Dorata'da başka neler olduğunu keşfetmek için dünyayı keşfet.",
+   "tr": "Hikâyede ilerleyerek Serbest Sürüş'te bir dizi Savaş, Gizlilik ve Yarış meydan okumasının kilidini aç. Bunlara Haritadan ulaşabilirsin.<br/>Meydan okumaları tamamlayarak ödül kazan ve Valle Dorata'da başka neler olduğunu keşfetmek için dünyayı keşfet.",
    "kaynakOzeti": "430b36dc008818e0",
    "ue": [
     1689491002,
@@ -250156,7 +250156,7 @@
    ]
   },
   "ST_NeroUI_TutorialText::TutorialComplex_FreeRide_Intro2": {
-   "tr": "Oyuna yeni eklenen özellikler arasında Birinci Şahıs Araç Sürüşü, Fotoğraf Modu ve deneyimli oyuncular için Klasik Zorluk var. Cinema Siciliano, cesur yeni bir sinematik sunum sunuyor.<br/>Serbest Gezinti'de araba yakıt ikmali <icon key='Refuel' height='22' color='#E8E8E8'/> eklendi ve gün zamanı <icon key='TimeOfDay' height='22' color='#E8E8E8'/> oyuncu merkezlerinde ayarlanabilir.",
+   "tr": "Oyuna yeni eklenen özellikler arasında Birinci Şahıs Araç Sürüşü, Fotoğraf Modu ve deneyimli oyuncular için Klasik Zorluk var. Cinema Siciliano, cesur yeni bir sinematik sunum sunuyor.<br/>Serbest Sürüş'te araba yakıt ikmali <icon key='Refuel' height='22' color='#E8E8E8'/> eklendi ve gün zamanı <icon key='TimeOfDay' height='22' color='#E8E8E8'/> oyuncu merkezlerinde ayarlanabilir.",
    "kaynakOzeti": "056a6603732c27d6",
    "ue": [
     1689491002,
@@ -250165,7 +250165,7 @@
    ]
   },
   "ST_NeroUI_TutorialText::TutorialComplex_FreeRide_Intro3": {
-   "tr": "Yeni silahlar, bıçaklar, Tılsım Madalyaları ve kıyafetler hem Hikâye hem Serbest Gezinti modlarında satın alınabilir ve kullanılabilir. Dinari azaldı mı? Serbest Gezinti Meydan Okumalarında madalya kazanarak daha fazla Dinari kazanabilirsin.",
+   "tr": "Yeni silahlar, bıçaklar, Tılsım Madalyaları ve kıyafetler hem Hikâye hem Serbest Sürüş modlarında satın alınabilir ve kullanılabilir. Dinari azaldı mı? Serbest Sürüş Meydan Okumalarında madalya kazanarak daha fazla Dinari kazanabilirsin.",
    "kaynakOzeti": "46d0b89353e36b84",
    "ue": [
     1689491002,
@@ -250516,7 +250516,7 @@
    ]
   },
   "ST_NeroUI_TutorialText::TutorialComplex_ManOfHonor_Intro_1": {
-   "tr": "Man of Honor'a özel Free Ride'ın en yeni genişlemesine hoş geldin. Vadi boyunca yeni etkinlikler var; Dinari kazanmanın ve Pasquale'nin Dükkânı'nda yeni eşyaların kilidini açmanın daha fazla yolu sunuluyor. Cesur gösteri atlayışlarına girebilir, gizli koleksiyonları avlayabilir ya da yeni iş için Salieri'ye uğrayabilirsin.",
+   "tr": "Man of Honor'a özel Serbest Sürüş'ün en yeni genişlemesine hoş geldin. Vadi boyunca yeni etkinlikler var; Dinari kazanmanın ve Pasquale'nin Dükkânı'nda yeni eşyaların kilidini açmanın daha fazla yolu sunuluyor. Cesur gösteri atlayışlarına girebilir, gizli koleksiyonları avlayabilir ya da yeni iş için Salieri'ye uğrayabilirsin.",
    "kaynakOzeti": "864b6e0f2d33d2c2",
    "ue": [
     1689491002,
@@ -250615,7 +250615,7 @@
    ]
   },
   "ST_NeroUI_TutorialText::TutorialComplex_ManOfHonor_WhatsNew_Journal": {
-   "tr": "FREE RIDE'DA YENİLİKLER",
+   "tr": "SERBEST SÜRÜŞ'TE YENİLİKLER",
    "kaynakOzeti": "99b4cd136ed0046b",
    "ue": [
     1689491002,
@@ -256186,7 +256186,7 @@
    ]
   },
   "ST_Settings_Texts::Settings_Language_TextLanguage_Description": {
-   "tr": "Menülerin, oynanışın ve altyazıların metin dilini ayarlar.",
+   "tr": "Menülerin, oynanışın ve altyazıların metin dilini ayarlar. Türkçe için İngilizce seçili kalsın. Türkçe çeviri: Türkçesi Var (turkcesivar.com)",
    "kaynakOzeti": "b1b38c3969bbf8ba",
    "ue": [
     489865809,
@@ -257185,7 +257185,7 @@
    ]
   },
   "ST_TimeSkip::TimeSkip_INTM_Credits_Name": {
-   "tr": "ONURLU ADAM",
+   "tr": "MAN OF HONOR",
    "kaynakOzeti": "2c956ab6c9122826",
    "ue": [
     1425542566,
@@ -259264,7 +259264,7 @@
    ]
   },
   "ST_Wardrobe_Texts::outfit_mademan_no_jacket_a_name": {
-   "tr": "Şeref Adamı",
+   "tr": "Man of Honor",
    "kaynakOzeti": "deb41fb0860280ae",
    "ue": [
     1732087456,
@@ -259273,7 +259273,7 @@
    ]
   },
   "ST_Wardrobe_Texts::outfit_mademan_no_jacket_b_name": {
-   "tr": "Namus Adamı - Zeytin Yeşili",
+   "tr": "Man of Honor - Zeytin Yeşili",
    "kaynakOzeti": "8798779e4decc12c",
    "ue": [
     1732087456,
@@ -259282,7 +259282,7 @@
    ]
   },
   "ST_Wardrobe_Texts::outfit_mademan_no_jacket_c_name": {
-   "tr": "Namus Adamı - Alacakaranlık Altını",
+   "tr": "Man of Honor - Alacakaranlık Altını",
    "kaynakOzeti": "601c9aeae829f84c",
    "ue": [
     1732087456,
@@ -259291,7 +259291,7 @@
    ]
   },
   "ST_Wardrobe_Texts::outfit_mademan_no_jacket_d_name": {
-   "tr": "Namus Adamı - Buz Mavisi",
+   "tr": "Man of Honor - Buz Mavisi",
    "kaynakOzeti": "62b994a1ebd30869",
    "ue": [
     1732087456,
@@ -259300,7 +259300,7 @@
    ]
   },
   "ST_Wardrobe_Texts::outfit_mademan_no_jacket_e_name": {
-   "tr": "Namus Adamı - Benekli Krem",
+   "tr": "Man of Honor - Benekli Krem",
    "kaynakOzeti": "3280ce3f9047f60e",
    "ue": [
     1732087456,
@@ -259309,7 +259309,7 @@
    ]
   },
   "ST_Wardrobe_Texts::outfit_mademan_no_jacket_f_name": {
-   "tr": "Namus Adamı - Karbon Çizgili",
+   "tr": "Man of Honor - Karbon Çizgili",
    "kaynakOzeti": "d98e4fee76f3c6f4",
    "ue": [
     1732087456,
