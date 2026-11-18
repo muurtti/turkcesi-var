@@ -13,7 +13,7 @@
   &nbsp;·&nbsp;
   <a href="https://discord.gg/nnNUCMUBJx"><b>💬 Discord</b></a>
   &nbsp;·&nbsp;
-  <a href="https://turkcesivar.github.io"><b>🌐 Web sitesi</b></a>
+  <a href="https://turkcesivar.com"><b>🌐 Web sitesi</b></a>
 </p>
 
 <p align="center">
@@ -45,7 +45,7 @@
 
 ## Türkçesi hazır oyunlar
 
-Güncel liste, oyun içi görüntüler ve hangi sürümlerin desteklendiği: **[turkcesivar.github.io/oyunlar](https://turkcesivar.github.io/oyunlar/)**
+Güncel liste, oyun içi görüntüler ve hangi sürümlerin desteklendiği: **[turkcesivar.com/oyunlar](https://turkcesivar.com/oyunlar/)**
 
 | Oyun | Kapsam | Durum |
 |---|---|---|
@@ -53,6 +53,7 @@ Güncel liste, oyun içi görüntüler ve hangi sürümlerin desteklendiği: **[
 | **Metro Last Light Redux** (Steam) | 21.442 satır: menüler, altyazılar, görev defteri, ipuçları, silah ekranı | ✅ Hazır |
 | **Metro Exodus Enhanced Edition** (Steam, Epic) | 37.652 satır: menüler, altyazılar, notlar, düşman konuşmaları, iki DLC (The Two Colonels, Sam's Story) | ✅ Hazır |
 | **Metro Exodus** (normal sürüm, Steam) | Enhanced Edition ile aynı çeviri: menüler, altyazılar, notlar, iki DLC | ✅ Hazır |
+| **Mafia: The Old Country** (Steam) | 29.097 satır: menüler, ara sahneler, altyazılar, düşman ve yaya konuşmaları, notlar, mektuplar, aranan posterleri, Intermezzo bölümü | ✅ Hazır |
 
 Yeni oyunlar eklendikçe uygulama kendini günceller; ayrıca bir şey indirmen gerekmez.
 
@@ -76,7 +77,7 @@ olan çevrimiçi oyunlar güvenlik için çevrilmez.)
 Oyunu bulamazsa kartındaki **Klasörü seç** ile oyunun klasörünü göster. Uygulama hangi
 dosyaların olduğu klasörü araman gerektiğini yazar (Metro 2033 Redux için `metro.exe`,
 `content.vfx` ve `2033` klasörü; Metro Last Light Redux için `metro.exe`, `content.vfx` ve `outro_good.ogv`;
-Metro Exodus için `MetroExodus.exe` ve `content.vfx`). Üst klasörü seçersen içinde kendisi arar.
+Metro Exodus için `MetroExodus.exe` ve `content.vfx`; Mafia: The Old Country için `MafiaTheOldCountry` klasörü). Üst klasörü seçersen içinde kendisi arar.
 
 Geri almak için aynı yerde **Türkçeyi kaldır**: oyun birebir eski haline döner.
 
@@ -92,7 +93,8 @@ Resimli anlatım: [Steam rehberi: Metro 2033 Redux'u tamamen Türkçe yapma](htt
 - **Yedek alır.** Kurmadan önce değişecek oyun dosyalarının orijinallerini
   `%APPDATA%\turkcesi-var\yedekler` klasörüne kopyalar. Kaldırınca bunlar geri konur.
 - **Program eklemez.** Oyuna DLL, enjektör ya da arka planda çalışan bir şey eklenmez;
-  yalnızca oyunun kendi metin ve yazı tipi dosyaları değişir.
+  yalnızca oyunun kendi metin ve yazı tipi dosyaları değişir. Unreal Engine oyunlarında
+  (ör. Mafia: The Old Country) oyunun dosyalarına hiç dokunulmaz, yanına küçük bir Türkçe paket eklenir.
 - **Hile korumalı oyunlara dokunmaz.** Çevrimiçi, hile korumalı oyunlarda dosya değiştirmek
   hesap yasağına yol açabileceği için bu oyunlar hiçbir zaman değiştirilmez.
 - **Kayıtlarına dokunmaz.** Oyun kayıtların Steam'in kendi klasöründedir; Türkçe kurup

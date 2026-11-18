@@ -12,7 +12,8 @@ Kısaca:
 - ✘ Ticari amaçla kullanamazsın.
 
 Paketlerde oyunun kendi dosyaları ya da İngilizce metni **yoktur**; yalnızca satır anahtarları
-ve Türkçe karşılıkları bulunur. Oyunlar ve orijinal metinleri yapımcılarına aittir.
+ve Türkçe karşılıkları bulunur (Unreal Engine oyunlarında ayrıca satırların sayısal kimlikleri).
+Oyunlar ve orijinal metinleri yapımcılarına aittir.
 
 Çeviri hatası gördüysen GitHub'da Issue aç: satırın oyundaki yerini ve önerini yaz.
 Düzeltmeler bir sonraki sürümle herkese gelir.

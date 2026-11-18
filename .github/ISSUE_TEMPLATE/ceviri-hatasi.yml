@@ -11,6 +11,7 @@ body:
         - Metro 2033 Redux
         - Metro Last Light Redux
         - Metro Exodus (Enhanced Edition ya da normal sürüm)
+        - Mafia: The Old Country
     validations:
       required: true
   - type: input
