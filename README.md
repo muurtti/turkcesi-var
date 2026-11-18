@@ -49,8 +49,8 @@ Güncel liste, oyun içi görüntüler ve hangi sürümlerin desteklendiği: **[
 
 | Oyun | Kapsam | Durum |
 |---|---|---|
-| **Metro 2033 Redux** (Steam, Epic) | 21.442 satır: menüler, altyazılar, notlar, ipuçları | ✅ Hazır |
-| **Metro Last Light Redux** (Steam) | 21.442 satır: menüler, altyazılar, görev defteri, ipuçları, silah ekranı | ✅ Hazır |
+| **Metro 2033 Redux** (Steam, Epic) | 21.442 satır çevrildi (iki Redux oyununun ortak metin tablosu): menüler, altyazılar, notlar, ipuçları | ✅ Hazır |
+| **Metro Last Light Redux** (Steam) | 21.442 satır çevrildi (iki Redux oyununun ortak metin tablosu): menüler, altyazılar, görev defteri, ipuçları, silah ekranı | ✅ Hazır |
 | **Metro Exodus Enhanced Edition** (Steam, Epic) | 37.652 satır: menüler, altyazılar, notlar, düşman konuşmaları, iki DLC (The Two Colonels, Sam's Story) | ✅ Hazır |
 | **Metro Exodus** (normal sürüm, Steam) | Enhanced Edition ile aynı çeviri: menüler, altyazılar, notlar, iki DLC | ✅ Hazır |
 
@@ -98,7 +98,7 @@ Resimli anlatım: [Steam rehberi: Metro 2033 Redux'u tamamen Türkçe yapma](htt
 - **Kayıtlarına dokunmaz.** Oyun kayıtların Steam'in kendi klasöründedir; Türkçe kurup
   kaldırmak onları etkilemez.
 - **Açık kaynak.** Uygulamanın ne yaptığını bu depoda satır satır görebilirsin.
-- **Virüs taraması temiz.** 0.5.0 kurulum dosyası [VirusTotal'da 0/68](https://www.virustotal.com/gui/file/c836873409c6987be6fc971728d1b76b75614df4c11c503016fd50beeba957be): hiçbir antivirüs işaretlemedi.
+- **Virüs taraması temiz.** 0.6.1 kurulum dosyası [VirusTotal'da 0/66](https://www.virustotal.com/gui/file/11f18389391760e51e58a85116a70d8be100d3905d26c25c22f34769d94961fa): hiçbir antivirüs işaretlemedi.
 
 ## Güncellemeler
 
