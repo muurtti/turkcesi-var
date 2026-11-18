@@ -12,6 +12,14 @@ import { METRO_DIR, METRO_VFX, metroYok } from "../yardimci.js";
 const HER_SEY = new Set([..." abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?'<>[]{}%\\_#$-:", ...TURKCE_HARFLER]);
 const satir = (en: string, tur: CeviriSatiri["tur"] = "altyazi"): CeviriSatiri => ({ anahtar: "k", en, tur, grup: "g", sira: 0 });
 
+describe("köşeli parantezli açıklamalar (Unreal oyunları)", () => {
+  it("[Coughing] gibi düz kelimeler çevrilebilir; [E], [a-z], [delay:1.9] korunur", () => {
+    expect(korunacakIsaretler("<i>[Coughing]</i> wait [delay:1.9] press [E] [a-z] [Cinematic] [OUTDATED]")).toEqual(["<i>", "</i>", "[delay:1.9]", "[E]", "[a-z]"]);
+    expect(ceviriSorunlari(satir("<i>[Coughing]</i> Where is she?!"), "<i>[Öksürük]</i> Nerede o?!", new Set([...HER_SEY, "/"]))).toEqual([]);
+    expect(ceviriSorunlari(satir("For your loyalty, [delay:1.9]this family owes you."), "Sadakatin için bu aile sana borçlu.", HER_SEY)).toEqual(["isaret-bozuk"]);
+  });
+});
+
 describe("korunacak işaretler", () => {
   it("işaretleri metindeki sırasıyla bulur", () => {
     expect(korunacakIsaretler("Press [E] to %s\\n<b>x</b> {0}")).toEqual(["[E]", "%s", "\\n", "<b>", "</b>", "{0}"]);

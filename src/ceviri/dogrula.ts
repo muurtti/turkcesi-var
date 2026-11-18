@@ -3,10 +3,12 @@
 import type { CeviriSatiri } from "./satirlar.js";
 
 /**
- * Korunması gereken işaretler (oyunda gerçekten görülenler: <use>, <#crouch_toggle>, <br>, $ed_adv_5, [a-z]).
- * Sırayla: printf (%s, %d), {0}, <...>, boşluksuz [..], kaçışlı \n, gerçek satır sonu, $değişken.
+ * Korunması gereken işaretler (oyunda gerçekten görülenler: <use>, <#crouch_toggle>, <br>, $ed_adv_5, [a-z], [E],
+ * [delay:1.9]). Sırayla: printf (%s, %d), {0}, <...>, boşluksuz [..], kaçışlı \n, gerçek satır sonu, $değişken.
+ * Köşeli parantez içi yalnızca 3+ harfli düz bir kelimeyse ([Coughing], [Cinematic]) işaret değildir: oyuncunun
+ * okuduğu ses/sahne açıklamasıdır ve çevrilir.
  */
-const ISARET = /%[-+0-9.]*[sdif%]|\{[^}]*\}|<[^>]*>|\[[^\]\s]*\]|\\n|\n|\$[a-z][a-z0-9_]*/g;
+const ISARET = /%[-+0-9.]*[sdif%]|\{[^}]*\}|<[^>]*>|\[(?!\p{L}{3,}\])[^\]\s]*\]|\\n|\n|\$[a-z][a-z0-9_]*/gu;
 
 export function korunacakIsaretler(metin: string): string[] {
   return metin.match(ISARET) ?? [];
