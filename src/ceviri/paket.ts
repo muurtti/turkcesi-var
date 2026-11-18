@@ -11,15 +11,29 @@ export interface CeviriPaketi {
   model: string;
   tarih: string;
   cevirenler: string[];
-  satirlar: Record<string, { tr: string; kaynakOzeti: string }>;
+  /** Unreal oyunlarında `ue`: [ad alanı hash'i, anahtar hash'i, İngilizce kaynak hash'i] (metin tablosu için). */
+  satirlar: Record<string, { tr: string; kaynakOzeti: string; ue?: [number, number, number] }>;
 }
 
-export function paketOlustur(d: CeviriDeposu, oyunSurumu: string, cevirenler: string[]): CeviriPaketi {
+/** Unreal metin tablosundaki bir satırın kimliği (oyunun İngilizce tablosundan alınır). */
+export interface UeKimligi {
+  adAlaniHash: number;
+  anahtarHash: number;
+  kaynakHash: number;
+}
+
+/** `ue` verilirse (Unreal oyunu) yalnızca kimliği bilinen satırlar pakete girer. */
+export function paketOlustur(d: CeviriDeposu, oyunSurumu: string, cevirenler: string[], ue?: Map<string, UeKimligi>): CeviriPaketi {
   const satirlar: CeviriPaketi["satirlar"] = {};
   for (const anahtar of Object.keys(d.satirlar).sort()) {
     const s = d.satirlar[anahtar]!;
     if (s.tr.trim() === "") continue;
-    satirlar[anahtar] = { tr: s.tr, kaynakOzeti: s.kaynakOzeti };
+    if (!ue) {
+      satirlar[anahtar] = { tr: s.tr, kaynakOzeti: s.kaynakOzeti };
+      continue;
+    }
+    const k = ue.get(anahtar);
+    if (k) satirlar[anahtar] = { tr: s.tr, kaynakOzeti: s.kaynakOzeti, ue: [k.adAlaniHash, k.anahtarHash, k.kaynakHash] };
   }
   return { bicim: 1, oyun: d.oyun, dil: "tr", oyunSurumu, model: "", tarih: new Date().toISOString(), cevirenler, satirlar };
 }
