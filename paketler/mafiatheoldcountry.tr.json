@@ -4,7 +4,7 @@
  "dil": "tr",
  "oyunSurumu": "64af06864e2027ca6f406be296b3793cbf239278d3fb23e4b6a00670c13f8fe1",
  "model": "",
- "tarih": "2026-11-18T21:13:00.479Z",
+ "tarih": "2026-11-18T21:15:33.596Z",
  "cevirenler": [
   "Türkçesi Var"
  ],
@@ -253018,7 +253018,7 @@
    ]
   },
   "ST_Settings_Texts::Graphics_Sicilian_Mode_Title": {
-   "tr": "CİNEMA SİCİLİANO",
+   "tr": "CINEMA SICILIANO",
    "kaynakOzeti": "7ed7486700d7b955",
    "ue": [
     489865809,
