@@ -121,7 +121,7 @@ Oyun Türkçesi hazır oyunlardan biriyse **Klasörü seç** ile klasörünü g�
 dosyaları bulursa kurar.
 
 **Çeviriler nasıl yapıldı?**
-Yapay zekâ yardımıyla, oyundaki seslendirmeyle uyumlu olacak biçimde
+Anthropic'in **Claude** yapay zekâ modeliyle, oyundaki seslendirmeyle uyumlu olacak biçimde
 çevrildi; özel adlar ve terimler için ortak bir sözlük kullanıldı. Hatalı ya da garip bir
 satır görürsen lütfen bildir.
 
