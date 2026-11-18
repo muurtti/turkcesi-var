@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { kaynakOzeti, type CeviriSatiri } from "../../src/ceviri/satirlar.js";
-import type { OyunTanimi } from "../../src/oyunlar/tanim.js";
+import type { Tanim4A } from "../../src/oyunlar/tanim.js";
 import { Servis } from "../../src/servis/servis.js";
 
 const SATIRLAR: CeviriSatiri[] = [
@@ -13,7 +13,7 @@ const SATIRLAR: CeviriSatiri[] = [
 ];
 
 /** Sahte oyun: dizin = content.vfx; yama = dizinin sonuna çevirileri ekler + content28.vfs0. */
-const SAHTE: OyunTanimi = {
+const SAHTE: Tanim4A = {
   kimlik: "sahteoyun",
   ad: "Sahte Oyun",
   steamAppId: 1,

@@ -7,11 +7,11 @@ import { join } from "node:path";
 import { METRO_2033_REDUX } from "../src/oyunlar/metro2033redux.js";
 import { METRO_LAST_LIGHT_REDUX } from "../src/oyunlar/metrolastlightredux.js";
 import { METRO_EXODUS } from "../src/oyunlar/metroexodus.js";
-import { depoKlasoru, ortakBellekYolu, yedekKlasoru, type OyunTanimi } from "../src/oyunlar/tanim.js";
+import { depoKlasoru, ortakBellekYolu, yedekKlasoru, type Tanim4A } from "../src/oyunlar/tanim.js";
 import { yedekKlasoruSec } from "../src/ortak/yedek.js";
 
 /** Oyun seçimi: OYUN_KIMLIK=metroexodus (varsayılan metro2033redux). Klasör: OYUN_DIR (eski adı METRO_DIR). */
-const TANIMLAR: Record<string, OyunTanimi> = { metro2033redux: METRO_2033_REDUX, metrolastlightredux: METRO_LAST_LIGHT_REDUX, metroexodus: METRO_EXODUS };
+const TANIMLAR: Record<string, Tanim4A> = { metro2033redux: METRO_2033_REDUX, metrolastlightredux: METRO_LAST_LIGHT_REDUX, metroexodus: METRO_EXODUS };
 const kimlik = process.env.OYUN_KIMLIK ?? "metro2033redux";
 if (!TANIMLAR[kimlik]) throw new Error(`Bilinmeyen OYUN_KIMLIK: ${kimlik} (seçenekler: ${Object.keys(TANIMLAR).join(", ")})`);
 export const TANIM = TANIMLAR[kimlik];

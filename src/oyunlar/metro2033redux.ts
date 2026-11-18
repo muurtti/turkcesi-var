@@ -6,9 +6,9 @@ import { turkceYamaHazirla } from "../motorlar/4a/turkce-yama.js";
 import { dosyaCikar } from "../motorlar/4a/vfs.js";
 import { girdiBul, vfxOku } from "../motorlar/4a/vfx.js";
 import { TURKCE_HARFLER } from "../ortak/turkce.js";
-import type { OyunTanimi } from "./tanim.js";
+import type { Tanim4A } from "./tanim.js";
 
-export const METRO_2033_REDUX: OyunTanimi = {
+export const METRO_2033_REDUX: Tanim4A = {
   kimlik: "metro2033redux",
   ad: "Metro 2033 Redux",
   steamAppId: 286690,

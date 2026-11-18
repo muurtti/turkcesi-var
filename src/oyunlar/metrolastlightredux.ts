@@ -3,9 +3,9 @@
 // aynı), bu yüzden okuma/yamalama Metro 2033 Redux'unkiyle aynıdır ve çeviri paketi ortaktır. Yedek ayrıdır.
 
 import { METRO_2033_REDUX } from "./metro2033redux.js";
-import type { OyunTanimi } from "./tanim.js";
+import type { Tanim4A } from "./tanim.js";
 
-export const METRO_LAST_LIGHT_REDUX: OyunTanimi = {
+export const METRO_LAST_LIGHT_REDUX: Tanim4A = {
   ...METRO_2033_REDUX,
   kimlik: "metrolastlightredux",
   ad: "Metro Last Light Redux",

@@ -8,7 +8,8 @@ import { bosDepo, depoOku, uygulanabilirCeviriler, type CeviriDeposu } from "../
 import { ceviriSorunlari } from "../ceviri/dogrula.js";
 import { paketiDepoyaAl, type CeviriPaketi } from "../ceviri/paket.js";
 import { kaynakOzeti, type CeviriSatiri } from "../ceviri/satirlar.js";
-import { katmanSirala, paketKimligi, type Katman, type OyunTanimi } from "../oyunlar/tanim.js";
+import { uePaketCevirileri, ueYamaHazirla } from "../motorlar/ue/turkce-yama.js";
+import { katmanSirala, paketKimligi, type Katman, type OyunTanimi, type Tanim4A, type TanimUe5 } from "../oyunlar/tanim.js";
 import { DegismisHatasi, geriYukle, uygula, yamaDurumu, yamayiUnut, yedekKlasoruSec } from "../ortak/yedek.js";
 import type { Ilerleme, OyunDurumu } from "./tipler.js";
 
@@ -22,6 +23,7 @@ export interface ServisSecenekleri {
 
 const sha256 = (b: Buffer) => createHash("sha256").update(b).digest("hex");
 const OYUN_ACIK = "Oyun şu an açık. Lütfen önce oyunu kapatın, sonra tekrar deneyin.";
+const CEVIRI_YOK = "Bu oyun için Türkçe çeviri bulunamadı. Uygulamayı güncelleyip tekrar deneyin.";
 /** Yedek klasöründe, oyuna en son hangi hazır paketin kurulduğunu tutan not. */
 const KURULU_PAKET = "kurulu-paket.json";
 
@@ -82,7 +84,7 @@ export class Servis {
    * Oyuna konacak çeviriler: hazır paket; bu bilgisayarda geliştiricinin çeviri deposu varsa
    * (`%APPDATA%\turkcesi-var\ceviriler`) oradaki satırlar paketin önüne geçer. Oyuncuda depo yoktur.
    */
-  private kurulacakDepo(t: OyunTanimi, satirlar: CeviriSatiri[]): CeviriDeposu {
+  private kurulacakDepo(t: Tanim4A, satirlar: CeviriSatiri[]): CeviriDeposu {
     const kimlik = paketKimligi(t);
     const yerel = depoOku(join(this.s.uygulamaKlasoru, "ceviriler", kimlik)) ?? bosDepo(kimlik, "");
     const p = this.hazirPaket(t);
@@ -99,7 +101,7 @@ export class Servis {
   }
 
   /** Kaynak metin her zaman ORİJİNAL dizinden (yama kuruluysa yedekten) okunur; özetle önbelleğe alınır. */
-  private kaynak(t: OyunTanimi, klasor: string): Kaynak {
+  private kaynak(t: Tanim4A, klasor: string): Kaynak {
     const orijinal = (ad: string) => {
       const yedekte = join(this.yedek(t, klasor), "orijinal", ad);
       return existsSync(yedekte) ? yedekte : join(klasor, ad);
@@ -118,7 +120,26 @@ export class Servis {
     return k;
   }
 
+  /** Unreal oyunu: kaç satır kurulabilir (oyunun dosyaları okunmaz; satırlar hazır paketten). */
+  private ueCevirileri(t: TanimUe5) {
+    const p = this.hazirPaket(t);
+    return { p, ceviriler: p ? uePaketCevirileri(p) : new Map() };
+  }
+
   oyunDurumu(t: OyunTanimi, klasor: string): OyunDurumu {
+    if (t.motor === "ue5") {
+      const { p, ceviriler } = this.ueCevirileri(t);
+      const n = ceviriler.size;
+      const yama = yamaDurumu(klasor, this.yedek(t, klasor));
+      return {
+        tanim: { kimlik: t.kimlik, ad: t.ad },
+        klasor,
+        yama,
+        ceviri: { toplam: n, cevrili: n, sorunlu: 0, uygulanabilir: n },
+        ...(p ? { paket: { tarih: p.tarih, satir: Object.keys(p.satirlar).length } } : {}),
+        ...(p && yama === "kurulu" && this.kuruluPaketTarihi(t, klasor) !== p.tarih ? { ceviriEski: true } : {}),
+      };
+    }
     const { satirlar, kullanilabilir } = this.kaynak(t, klasor);
     const d = this.kurulacakDepo(t, satirlar);
     const sec = uygulanabilirCeviriler(d, satirlar, kullanilabilir);
@@ -164,11 +185,19 @@ export class Servis {
         await yamayiUnut(klasor, this.yedek(t, klasor)); // Steam yeni dosyaları koymuş: yalnızca yamanın artıkları silinir
       }
     }
-    const { satirlar, kullanilabilir, vfx, katmanlar } = this.kaynak(t, klasor);
-    const sec = uygulanabilirCeviriler(this.kurulacakDepo(t, satirlar), satirlar, kullanilabilir);
-    if (sec.ceviriler.size === 0) throw new Error("Bu oyun için Türkçe çeviri bulunamadı. Uygulamayı güncelleyip tekrar deneyin.");
-    ilerleme({ tur: "yuzde", deger: 10, metin: `${sec.ceviriler.size.toLocaleString("tr")} satır hazırlanıyor…` });
-    const y = t.yamaHazirla(klasor, sec.ceviriler, vfx, katmanlar);
+    let y: { degisecek: Record<string, Buffer>; eklenecek: Record<string, Buffer> };
+    if (t.motor === "ue5") {
+      const { ceviriler } = this.ueCevirileri(t);
+      if (ceviriler.size === 0) throw new Error(CEVIRI_YOK);
+      ilerleme({ tur: "yuzde", deger: 10, metin: `${ceviriler.size.toLocaleString("tr")} satır hazırlanıyor…` });
+      y = ueYamaHazirla(t, ceviriler);
+    } else {
+      const { satirlar, kullanilabilir, vfx, katmanlar } = this.kaynak(t, klasor);
+      const sec = uygulanabilirCeviriler(this.kurulacakDepo(t, satirlar), satirlar, kullanilabilir);
+      if (sec.ceviriler.size === 0) throw new Error(CEVIRI_YOK);
+      ilerleme({ tur: "yuzde", deger: 10, metin: `${sec.ceviriler.size.toLocaleString("tr")} satır hazırlanıyor…` });
+      y = t.yamaHazirla(klasor, sec.ceviriler, vfx, katmanlar);
+    }
     ilerleme({ tur: "yuzde", deger: 80, metin: "Oyun dosyaları yedeklenip yazılıyor…" });
     this.oyunKapaliOlmali(t); // hazırlık birkaç saniye sürdü: oyun bu arada açılmış olabilir
     await uygula(klasor, this.yedek(t, klasor), y.degisecek, y.eklenecek);

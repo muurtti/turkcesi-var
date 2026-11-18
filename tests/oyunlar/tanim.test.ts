@@ -5,6 +5,7 @@ import { hileKorumaliMi } from "../../src/oyunlar/hile-korumali.js";
 import { METRO_2033_REDUX } from "../../src/oyunlar/metro2033redux.js";
 import { METRO_EXODUS, METRO_EXODUS_NORMAL } from "../../src/oyunlar/metroexodus.js";
 import { METRO_LAST_LIGHT_REDUX } from "../../src/oyunlar/metrolastlightredux.js";
+import { MAFIA_THE_OLD_COUNTRY } from "../../src/oyunlar/mafiatheoldcountry.js";
 import { OYUNLAR, depoKlasoru, katmanSirala, paketKimligi, tanimBul, uygulamaKlasoru, yedekKlasoru } from "../../src/oyunlar/tanim.js";
 import { kaynakOzeti } from "../../src/ceviri/satirlar.js";
 import { LAST_LIGHT_DIR, METRO_DIR, METRO_VFX, lastLightVfx, lastLightYok, metroYok } from "../yardimci.js";
@@ -62,6 +63,24 @@ describe("oyun tanımları", () => {
     expect(paketKimligi(METRO_LAST_LIGHT_REDUX)).toBe("metro2033redux");
     expect(depoKlasoru(METRO_LAST_LIGHT_REDUX)).toBe(depoKlasoru(METRO_2033_REDUX));
     expect(yedekKlasoru(METRO_LAST_LIGHT_REDUX)).not.toBe(yedekKlasoru(METRO_2033_REDUX));
+  });
+
+  it("Mafia: The Old Country (1941540): Unreal paketi tanımı", () => {
+    expect(MAFIA_THE_OLD_COUNTRY).toMatchObject({
+      kimlik: "mafiatheoldcountry",
+      ad: "Mafia: The Old Country",
+      steamAppId: 1941540,
+      klasorAdi: "Mafia The Old Country",
+      motor: "ue5",
+      surecAdi: "MafiaTheOldCountry.exe",
+      pakYolu: "MafiaTheOldCountry/Content/Paks/pakchunk0-Windows_TurkcesiVar_P.pak",
+      mount: "../../../MafiaTheOldCountry/Content/Localization/Game/en/",
+    });
+    expect(OYUNLAR).toContain(MAFIA_THE_OLD_COUNTRY);
+    expect(tanimBul(1941540, "x")).toBe(MAFIA_THE_OLD_COUNTRY);
+    expect(tanimBul(undefined, "Mafia The Old Country")).toBe(MAFIA_THE_OLD_COUNTRY);
+    expect(yedekKlasoru(MAFIA_THE_OLD_COUNTRY)).toContain("mafiatheoldcountry");
+    expect(depoKlasoru(MAFIA_THE_OLD_COUNTRY)).toContain("mafiatheoldcountry");
   });
 
   it("hile korumalı oyunları tanır", () => {

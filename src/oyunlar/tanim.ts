@@ -7,19 +7,40 @@ import type { TurkceYama } from "../motorlar/4a/turkce-yama.js";
 import { METRO_2033_REDUX } from "./metro2033redux.js";
 import { METRO_LAST_LIGHT_REDUX } from "./metrolastlightredux.js";
 import { METRO_EXODUS, METRO_EXODUS_NORMAL } from "./metroexodus.js";
+import { MAFIA_THE_OLD_COUNTRY } from "./mafiatheoldcountry.js";
 
-export interface OyunTanimi {
+/** Bütün oyun tanımlarında ortak alanlar. */
+export interface OrtakTanim {
   /** Dosya ve klasör adlarında kullanılan kimlik ("metro2033redux"). */
   kimlik: string;
   ad: string;
   steamAppId: number;
   /** Steam'deki kurulum klasörünün adı. */
   klasorAdi: string;
-  motor: "4a";
-  /** Klasörü elle seçerken oyunu tanımak için bulunması gereken dosya/klasörler. */
+  /** Klasörü elle seçerken oyunu tanımak için bulunması gereken dosya/klasörler (oyun köküne göre). */
   tanimaDosyalari: string[];
   /** Oyun açıkken yazmayı engellemek için süreç adı. */
   surecAdi: string;
+  /** Hazır çeviri paketi başka bir tanımınkiyse onun kimliği (aynı oyunun farklı sürümleri tek paketi paylaşır). */
+  paketKimligi?: string;
+}
+
+/**
+ * Unreal Engine oyunu: Türkçe, oyunun paketlerine dokunmadan tek bir ek pak olarak kurulur. Uygulama oyunun
+ * (şifreli) dosyalarını okumaz; satırların kimliği hazır pakette gelir (bkz. src/motorlar/ue/turkce-yama.ts).
+ */
+export interface TanimUe5 extends OrtakTanim {
+  motor: "ue5";
+  /** Eklenen paketin oyun köküne göre yolu (adı "_P" ile biter: oyunun paketlerinden sonra yüklenir). */
+  pakYolu: string;
+  /** Paketin içindeki metin tablosunun bağlama noktası (İngilizce tablonun klasörü). */
+  mount: string;
+}
+
+export type OyunTanimi = Tanim4A | TanimUe5;
+
+export interface Tanim4A extends OrtakTanim {
+  motor: "4a";
   /** Steam'deki temiz content.vfx özeti (bilgi amaçlı). */
   temizDizinOzeti?: string;
   /**
@@ -28,8 +49,6 @@ export interface OyunTanimi {
    * eklerse kendiliğinden hesaba katılır), orijinallerini (kuruluysa yedekten) okuyup tanıma verir.
    */
   katmanDeseni?: RegExp;
-  /** Hazır çeviri paketi başka bir tanımınkiyse onun kimliği (aynı oyunun farklı sürümleri tek paketi paylaşır). */
-  paketKimligi?: string;
   /** Çevrilecek satırlar ve oyunun gösterebildiği karakterler (orijinal dizinden). */
   kaynak(oyunKlasoru: string, orijinalVfx: Buffer, katmanlar?: Katman[]): { satirlar: CeviriSatiri[]; kullanilabilir: Set<string> };
   /** Verilen çevirilerle Türkçe yamayı bellekte hazırlar (oyuna yazmaz). */
@@ -55,7 +74,7 @@ export function katmanSirala(adlar: string[]): string[] {
 export const paketKimligi = (t: OyunTanimi) => t.paketKimligi ?? t.kimlik;
 
 // Normal Exodus, EE'den önce: elle seçilen klasörde ikisinin de dosyaları var, patch_04.vfx normal sürümü ayırır.
-export const OYUNLAR: OyunTanimi[] = [METRO_2033_REDUX, METRO_LAST_LIGHT_REDUX, METRO_EXODUS_NORMAL, METRO_EXODUS];
+export const OYUNLAR: OyunTanimi[] = [METRO_2033_REDUX, METRO_LAST_LIGHT_REDUX, METRO_EXODUS_NORMAL, METRO_EXODUS, MAFIA_THE_OLD_COUNTRY];
 
 export function tanimBul(appId: number | undefined, klasorAdi: string): OyunTanimi | undefined {
   return OYUNLAR.find((t) => (appId !== undefined && t.steamAppId === appId) || t.klasorAdi.toLowerCase() === klasorAdi.toLowerCase());

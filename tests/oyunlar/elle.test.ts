@@ -12,6 +12,13 @@ const metroYap = (yol: string, appId?: string) => {
   writeFileSync(join(yol, "content.vfx"), "");
   if (appId) writeFileSync(join(yol, "steam_appid.txt"), appId);
 };
+const mafiaYap = (yol: string, eksik?: string) => {
+  for (const d of ["MafiaTheOldCountry/Binaries/Win64/MafiaTheOldCountry.exe", "MafiaTheOldCountry/Content/Paks/pakchunk0-Windows.pak"]) {
+    if (d === eksik) continue;
+    mkdirSync(join(yol, d, ".."), { recursive: true });
+    writeFileSync(join(yol, d), "");
+  }
+};
 beforeEach(() => (k = mkdtempSync(join(tmpdir(), "tv-elle-"))));
 afterEach(() => rmSync(k, { recursive: true, force: true }));
 
@@ -19,6 +26,13 @@ describe("elle klasör seçimi", () => {
   it("doğru klasörü tanır", () => {
     metroYap(join(k, "Metro 2033 Redux"), "286690");
     expect(klasorTani(join(k, "Metro 2033 Redux"))).toMatchObject({ tanim: { kimlik: "metro2033redux" }, klasor: join(k, "Metro 2033 Redux") });
+  });
+
+  it("Mafia: The Old Country klasörünü alt klasördeki dosyalarından tanır; biri eksikse tanımaz", () => {
+    mafiaYap(join(k, "Mafia The Old Country"));
+    expect(klasorTani(join(k, "Mafia The Old Country"))).toMatchObject({ tanim: { kimlik: "mafiatheoldcountry" } });
+    mafiaYap(join(k, "Yarim"), "MafiaTheOldCountry/Content/Paks/pakchunk0-Windows.pak");
+    expect(klasorTani(join(k, "Yarim"))).toBeUndefined();
   });
 
   it("üst klasör (ör. Steam kütüphanesi) seçilirse içinde arar", () => {

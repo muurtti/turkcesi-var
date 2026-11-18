@@ -12,7 +12,7 @@ import { turkceYamaHazirla } from "../motorlar/4a/turkce-yama.js";
 import { dosyaCikar } from "../motorlar/4a/vfs.js";
 import { girdiBul, vfxOku } from "../motorlar/4a/vfx.js";
 import { TURKCE_HARFLER } from "../ortak/turkce.js";
-import type { Katman, OyunTanimi } from "./tanim.js";
+import type { Katman, Tanim4A } from "./tanim.js";
 
 /** Metin tablolarını en yeni kopyalarından (son katmandan geriye) okur. */
 function kaynakOku(oyunKlasoru: string, orijinalVfx: Buffer, katmanlar: Katman[] = []) {
@@ -31,7 +31,7 @@ function kaynakOku(oyunKlasoru: string, orijinalVfx: Buffer, katmanlar: Katman[]
   return { satirlar: cevrilecekSatirlar(us, ru), kullanilabilir };
 }
 
-export const METRO_EXODUS: OyunTanimi = {
+export const METRO_EXODUS: Tanim4A = {
   kimlik: "metroexodus",
   ad: "Metro Exodus Enhanced Edition",
   steamAppId: 1449560,
@@ -50,7 +50,7 @@ export const METRO_EXODUS: OyunTanimi = {
 };
 
 
-export const METRO_EXODUS_NORMAL: OyunTanimi = {
+export const METRO_EXODUS_NORMAL: Tanim4A = {
   kimlik: "metroexodus-normal",
   paketKimligi: "metroexodus",
   ad: "Metro Exodus",
